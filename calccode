@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sexual Harassment Cost Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 700px;
+      margin: auto;
+      padding: 2rem;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+    }
+    input {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.25rem;
+    }
+    button {
+      margin-top: 1.5rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #005a9c;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .results {
+      margin-top: 2rem;
+      border-top: 1px solid #ccc;
+      padding-top: 1rem;
+    }
+    .result-block {
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Sexual Harassment Cost Calculator</h1>
+
+  <label for="numWomen">Number of Women in Organisation:</label>
+  <input type="number" id="numWomen" />
+
+  <label for="numMen">Number of Men in Organisation:</label>
+  <input type="number" id="numMen" />
+
+  <label for="avgSalary">Average Gross Salary Per Month (R):</label>
+  <input type="number" id="avgSalary" />
+
+  <button onclick="calculateCosts()">Calculate</button>
+
+  <div class="results" id="results"></div>
+
+  <script>
+    function calculateCosts() {
+      const numWomen = parseInt(document.getElementById("numWomen").value) || 0;
+      const numMen = parseInt(document.getElementById("numMen").value) || 0;
+      const avgSalary = parseFloat(document.getElementById("avgSalary").value) || 0;
+
+      const annualSalary = avgSalary * 12;
+
+      const femaleIncidence = 0.03;
+      const maleIncidence = 0.01;
+
+      const totalCases = (numWomen * femaleIncidence) + (numMen * maleIncidence);
+      const lowCases = totalCases * 0.75;
+      const medCases = totalCases * 0.20;
+      const highCases = totalCases * 0.05;
+
+      const costLow = 9492.25;
+      const costMed = 170961.24;
+      const costHigh = 959844.96;
+
+      const totalCostLow = lowCases * costLow;
+      const totalCostMed = medCases * costMed;
+      const totalCostHigh = highCases * costHigh;
+
+      const totalCost = totalCostLow + totalCostMed + totalCostHigh;
+
+      document.getElementById("results").innerHTML = `
+        <h2>Estimated Annual Cost Breakdown</h2>
+        <div class="result-block">Total Expected Cases: <strong>${totalCases.toFixed(2)}</strong></div>
+        <div class="result-block">Low Severity (75%): <strong>${lowCases.toFixed(2)} cases</strong> = R${totalCostLow.toLocaleString()}</div>
+        <div class="result-block">Medium Severity (20%): <strong>${medCases.toFixed(2)} cases</strong> = R${totalCostMed.toLocaleString()}</div>
+        <div class="result-block">High Severity (5%): <strong>${highCases.toFixed(2)} cases</strong> = R${totalCostHigh.toLocaleString()}</div>
+        <div class="result-block"><strong>Total Annual Cost:</strong> R${totalCost.toLocaleString()}</div>
+      `;
+    }
+  </script>
+</body>
+</html>
