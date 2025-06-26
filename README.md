@@ -191,9 +191,9 @@
 
     <button class="advanced-toggle" id="toggleBtn" onclick="toggleAdvanced()">Show/Hide Assumptions</button>
     <div class="advanced-settings" id="advancedSettings">
-      <p><strong>Female Incidence Rate:</strong><span>3% <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="Untitled design.png" alt="info icon" /></span></p>
-      <p><strong>Male Incidence Rate:</strong><span>1% <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="Untitled design.png" alt="info icon" /></span></p>
-      <p><strong>Severity of Cases Split:</strong></p>
+      <p><strong>Female Incidence Rate:</strong><span>3% <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="Untitled design.png" alt="info icon" /></span>
+      <p><strong>Male Incidence Rate:</strong><span>1% <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="Untitled design.png" alt="info icon" /></span>
+      <p><strong>Severity of Cases Split:</strong>
       <ul>
         <li>Low = 75% <span class="tooltip" data-tooltip="Unreported and minor cases"><img src="Untitled design.png" alt="info icon" /></span></li>
         <li>Medium = 20% <span class="tooltip" data-tooltip="Internally reported and resolved"><img src="Untitled design.png" alt="info icon" /></span></li>
