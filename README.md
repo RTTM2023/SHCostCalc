@@ -191,19 +191,18 @@
 
     <button class="advanced-toggle" id="toggleBtn" onclick="toggleAdvanced()">Show/Hide Assumptions</button>
     <div class="advanced-settings" id="advancedSettings">
-      <p><strong>Female Incidence Rate:</strong><span>3% <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks">?</span></span></p>
-      <p><strong>Male Incidence Rate:</strong><span>1% <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks">?</span></span></p>
+      <p><strong>Female Incidence Rate:</strong><span>3% <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="Untitled design.png" alt="info icon" /></span></labe
+      <p><strong>Male Incidence Rate:</strong><span>1% <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="Untitled design.png" alt="info icon" /></span></labe
       <p><strong>Severity of Cases Split:</strong></p>
       <ul>
         <li>Low = 75% <span class="tooltip" data-tooltip="Unreported and minor cases"><img src="Untitled design.png" alt="info icon" /></span></li>
-        <li>Medium = 20% <span class="tooltip" data-tooltip="Internally reported and resolved">?</span></li>
-        <li>High = 5% <span class="tooltip" data-tooltip="Escalated and potential legal cases">?</span></li>
-      </ul>
+        <li>Medium = 20% <span class="tooltip" data-tooltip="Internally reported and resolved"><img src="Untitled design.png" alt="info icon" /></span></labe
+        <li>High = 5% <span class="tooltip" data-tooltip="Escalated and potential legal cases"><img src="Untitled design.png" alt="info icon" /></span></labe
       <p><strong>Cost to Company per Case Type:</strong></p>
       <ul>
-        <li>Low = 0.33 × average gross salary <span class="tooltip" data-tooltip="absenteeism, presenteeism, minor team disruption">?</span></li>
-        <li>Medium = 1.43 × average gross salary <span class="tooltip" data-tooltip="HR case involvement, exit risk, longer disruption">?</span></li>
-        <li>High = 6.43 × average gross salary <span class="tooltip" data-tooltip="legal risk, reputational damage, settlement costs">?</span></li>
+        <li>Low = 0.33 × average gross salary <span class="tooltip" data-tooltip="absenteeism, presenteeism, minor team disruption"><img src="Untitled design.png" alt="info icon" /></span></labe
+        <li>Medium = 1.43 × average gross salary <span class="tooltip" data-tooltip="HR case involvement, exit risk, longer disruption"><img src="Untitled design.png" alt="info icon" /></span></labe
+        <li>High = 6.43 × average gross salary <span class="tooltip" data-tooltip="legal risk, reputational damage, settlement costs"><img src="Untitled design.png" alt="info icon" /></span></labe
       </ul>
     </div>
 
