@@ -195,7 +195,7 @@
       <p><strong>Male Incidence Rate:</strong><span>1% <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks">?</span></span></p>
       <p><strong>Severity of Cases Split:</strong></p>
       <ul>
-        <li>Low = 75% <span class="tooltip" data-tooltip="Unreported and minor cases">?</span></li>
+        <li>Low = 75% <span class="tooltip" data-tooltip="Unreported and minor cases"><img src="Untitled design.png" alt="info icon" /></span></li>
         <li>Medium = 20% <span class="tooltip" data-tooltip="Internally reported and resolved">?</span></li>
         <li>High = 5% <span class="tooltip" data-tooltip="Escalated and potential legal cases">?</span></li>
       </ul>
@@ -237,7 +237,7 @@
 
     document.getElementById('resultsContent').innerHTML = `
       <div class='results-line-item bold'><span>Estimated Cases:</span><span>${Math.round(totalCases)}</span></div>
-      <div class='results-line-item'><span>Low Severity Cases (75% of ${Math.round(totalCases)}):<span class="tooltip" data-tooltip="Unreported and minor cases">?</span></span><span>${Math.round(low)}</span></div>
+      <div class='results-line-item'><span>Low Severity Cases (75% of ${Math.round(totalCases)}):<span class="tooltip" data-tooltip="Unreported and minor cases"><img src="Untitled design.png" alt="info icon" /></span></span><span>${Math.round(low)}</span></div>
       <div class='results-line-item'><span>Medium Severity Cases (20% of ${Math.round(totalCases)}):<span class="tooltip" data-tooltip="Internally reported and resolved">?</span></span><span>${Math.round(med)}</span></div>
       <div class='results-line-item'><span>High Severity Cases (5% of ${Math.round(totalCases)}):<span class="tooltip" data-tooltip="Escalated and potential legal cases">?</span></span><span>${Math.round(high)}</span></div>
       <div class="half-line"></div>
