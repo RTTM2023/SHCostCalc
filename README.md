@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -88,10 +87,11 @@
     .tooltip {
       position: relative;
       cursor: pointer;
-      font-weight: bold;
-      color: #ffb002;
-      font-size: 0.8rem;
       vertical-align: super;
+    }
+    .tooltip img {
+      width: 16px;
+      height: 16px;
     }
     .tooltip:hover::after {
       content: attr(data-tooltip);
