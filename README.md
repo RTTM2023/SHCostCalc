@@ -33,7 +33,7 @@
     .calculator {
       flex: 1;
       margin-right: 2rem;
-      border: 2px solid #F75C36;
+      border: 2px solid #f10178;
     }
     .results-box {
       flex: 1;
@@ -123,19 +123,36 @@
       background: #5b01fa;
       color: white;
     }
+    .advanced-toggle {
+      margin-top: 2rem;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      text-align: left;
+      padding: 0;
+    }
+    .advanced-settings {
+      display: none;
+      margin-top: 1rem;
+      background: rgba(255,255,255,0.1);
+      padding: 1rem;
+      border-radius: 15px;
+    }
   </style>
 </head>
 <body>
 <div class="container">
   <div class="calculator">
     <h2>Sexual Harassment Cost Calculator</h2>
-    <label for="women">Number of Women in Organisation:</label>
+    <label for="women">Number of Women in Organisation: <span class="tooltip" data-tooltip="Used to estimate female incidence rate (3%)">?</span></label>
     <input type="number" id="women" />
 
-    <label for="men">Number of Men in Organisation:</label>
+    <label for="men">Number of Men in Organisation: <span class="tooltip" data-tooltip="Used to estimate male incidence rate (1%)">?</span></label>
     <input type="number" id="men" />
 
-    <label for="salary">Average Gross Monthly Salary (R):</label>
+    <label for="salary">Average Gross Monthly Salary (R): <span class="tooltip" data-tooltip="Used to estimate cost impact of each case">?</span></label>
     <input type="number" id="salary" />
 
     <button onclick="calculateCost()">Calculate</button>
@@ -144,6 +161,15 @@
   <div class="results-box">
     <h2>Estimated Sexual Harassment Cost</h2>
     <div id="resultsContent"></div>
+
+    <button class="advanced-toggle" onclick="toggleAdvanced()">Show/Hide Assumptions</button>
+    <div class="advanced-settings" id="advancedSettings">
+      <p><strong>Female Incidence Rate:</strong> 3%</p>
+      <p><strong>Male Incidence Rate:</strong> 1%</p>
+      <p><strong>Severity Split:</strong> 75% low, 20% medium, 5% high</p>
+      <p><strong>Cost per Case:</strong> Low = 0.33 × salary, Medium = 1.43 × salary, High = 6.43 × salary</p>
+    </div>
+
     <div class="button-group">
       <button class="download-btn" onclick="downloadPDF()">Download as PDF</button>
       <button class="reset-btn" onclick="window.location.reload()">Reset Calculator</button>
@@ -191,6 +217,11 @@
       jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
     };
     html2pdf().set(opt).from(element).save();
+  }
+
+  function toggleAdvanced() {
+    const section = document.getElementById('advancedSettings');
+    section.style.display = section.style.display === 'none' || section.style.display === '' ? 'block' : 'none';
   }
 </script>
 </body>
