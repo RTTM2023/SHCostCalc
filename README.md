@@ -86,8 +86,9 @@
       position: relative;
       cursor: pointer;
       font-weight: bold;
-      margin-left: 0.5rem;
-      color: #f10178;
+      color: #5b01fa;
+      font-size: 0.8rem;
+      vertical-align: super;
     }
     .tooltip:hover::after {
       content: attr(data-tooltip);
@@ -109,7 +110,7 @@
       gap: 0.5rem;
       margin-top: 1.5rem;
     }
-    .download-btn, .reset-btn {
+    .download-btn, .reset-btn, .source-btn {
       background: white;
       color: #f10178;
       border: 1px dashed #5b01fa;
@@ -136,6 +137,7 @@
       text-align: left;
       padding: 0;
       display: none;
+      text-decoration: underline;
     }
     .advanced-settings {
       display: none;
@@ -150,13 +152,13 @@
 <div class="container">
   <div class="calculator">
     <h2>Sexual Harassment Cost Calculator</h2>
-    <label for="women">Number of Women in Organisation: <span class="tooltip" data-tooltip="Used to estimate female incidence rate (3%)">?</span></label>
+    <label for="women">Number of Women in Organisation <span class="tooltip" data-tooltip="Used to estimate female incidence rate (3%)">&#x3f;</span></label>
     <input type="number" id="women" />
 
-    <label for="men">Number of Men in Organisation: <span class="tooltip" data-tooltip="Used to estimate male incidence rate (1%)">?</span></label>
+    <label for="men">Number of Men in Organisation <span class="tooltip" data-tooltip="Used to estimate male incidence rate (1%)">&#x3f;</span></label>
     <input type="number" id="men" />
 
-    <label for="salary">Average Gross Monthly Salary (R): <span class="tooltip" data-tooltip="Used to estimate cost impact of each case">?</span></label>
+    <label for="salary">Average Gross Monthly Salary (R) <span class="tooltip" data-tooltip="Used to estimate cost impact of each case">&#x3f;</span></label>
     <input type="number" id="salary" />
 
     <button onclick="calculateCost()">Calculate</button>
@@ -176,6 +178,7 @@
 
     <div class="button-group" id="resultButtons">
       <button class="download-btn" onclick="downloadPDF()">Download as PDF</button>
+      <button class="source-btn">View Research Sources</button>
       <button class="reset-btn" onclick="window.location.reload()">Reset Calculator</button>
     </div>
   </div>
@@ -204,9 +207,9 @@
 
     document.getElementById('resultsContent').innerHTML = `
       <div class='results-line-item bold'><span>Estimated Cases:</span><span>${totalCases.toFixed(1)}</span></div>
-      <div class='results-line-item'><span>Low Severity Cost (75% of ${totalCases.toFixed(1)}):</span><span>R${lowCost.toLocaleString()}</span></div>
-      <div class='results-line-item'><span>Medium Severity Cost (20% of ${totalCases.toFixed(1)}):</span><span>R${medCost.toLocaleString()}</span></div>
-      <div class='results-line-item'><span>High Severity Cost (5% of ${totalCases.toFixed(1)}):</span><span>R${highCost.toLocaleString()}</span></div>
+      <div class='results-line-item'><span>Low Severity Cost (75% of ${totalCases.toFixed(1)}) <span class="tooltip" data-tooltip="Low = absenteeism, presenteeism, minor team disruption">&#x3f;</span>:</span><span>R${lowCost.toLocaleString()}</span></div>
+      <div class='results-line-item'><span>Medium Severity Cost (20% of ${totalCases.toFixed(1)}) <span class="tooltip" data-tooltip="Medium = HR case involvement, exit risk, longer disruption">&#x3f;</span>:</span><span>R${medCost.toLocaleString()}</span></div>
+      <div class='results-line-item'><span>High Severity Cost (5% of ${totalCases.toFixed(1)}) <span class="tooltip" data-tooltip="High = legal risk, reputational damage, settlement costs">&#x3f;</span>:</span><span>R${highCost.toLocaleString()}</span></div>
       <div class="total-line"><span>Total Annual Cost:</span><span>R${totalCost.toLocaleString()}</span></div>
     `;
 
