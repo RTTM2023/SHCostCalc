@@ -4,60 +4,59 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sexual Harassment Cost Calculator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     body {
-      background-color: transparent;
       font-family: 'Montserrat', sans-serif;
       margin: 0;
-      padding: 0;
-      overflow-x: hidden;
+      background-color: #f8f8f8;
     }
     .container {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      width: 100%;
+      padding: 2rem;
       max-width: 1600px;
       margin: 0 auto;
-      gap: 2rem;
-      padding: 2rem;
-      box-sizing: border-box;
+    }
+    @media (min-width: 1024px) {
+      .container {
+        flex-direction: row;
+        justify-content: space-between;
+      }
     }
     .calculator, .results-box {
-      background-color: #ffffff;
-      border: 2px solid #F75C36;
-      border-radius: 20px;
+      background-color: white;
       padding: 2rem;
-      box-sizing: border-box;
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
     .calculator {
-      width: 100%;
-      max-width: 800px;
+      flex: 1;
+      margin-right: 2rem;
+      border: 2px solid #F75C36;
     }
     .results-box {
+      flex: 1;
       background-color: #F75D36;
       color: white;
-      width: 100%;
-      max-width: 600px;
     }
     label {
-      display: block;
       font-weight: bold;
-      margin-top: 1rem;
+      display: block;
+      margin-top: 1.5rem;
     }
     input[type="number"] {
       width: 100%;
       padding: 0.6rem;
       font-size: 1rem;
-      border: 1px dashed #F87171;
       border-radius: 30px;
-      margin-top: 0.3rem;
+      border: 1px dashed #F87171;
       font-family: 'Montserrat', sans-serif;
     }
     button {
       margin-top: 2rem;
-      padding: 1rem;
       width: 100%;
+      padding: 1rem;
       font-size: 1.2rem;
       background-color: #F75D36;
       color: white;
@@ -70,69 +69,74 @@
       display: flex;
       justify-content: space-between;
       margin: 0.5rem 0;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
     }
     .total-line {
       font-size: 1.2rem;
       font-weight: bold;
+      margin-top: 1rem;
       display: flex;
       justify-content: space-between;
-      margin-top: 1rem;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="calculator">
-      <h1>Sexual Harassment Cost Calculator</h1>
-      <label for="women">Number of Women in the Organisation:</label>
-      <input type="number" id="women" placeholder="e.g. 525" />
+<div class="container">
+  <div class="calculator">
+    <h2>Sexual Harassment Cost Calculator</h2>
+    <label for="women">Number of Women in Organisation:</label>
+    <input type="number" id="women" />
 
-      <label for="men">Number of Men in the Organisation:</label>
-      <input type="number" id="men" placeholder="e.g. 525" />
+    <label for="men">Number of Men in Organisation:</label>
+    <input type="number" id="men" />
 
-      <label for="salary">Average Gross Monthly Salary (ZAR):</label>
-      <input type="number" id="salary" placeholder="e.g. 96666.67" />
+    <label for="salary">Average Gross Monthly Salary (R):</label>
+    <input type="number" id="salary" />
 
-      <button onclick="calculateCost()">Calculate</button>
-    </div>
-
-    <div class="results-box">
-      <h2>Estimated Annual Cost of Sexual Harassment</h2>
-      <div id="resultsContent"></div>
-    </div>
+    <button onclick="calculateCost()">Calculate</button>
   </div>
 
-  <script>
-    function calculateCost() {
-      const numWomen = parseInt(document.getElementById("women").value) || 0;
-      const numMen = parseInt(document.getElementById("men").value) || 0;
-      const salary = parseFloat(document.getElementById("salary").value) || 0;
+  <div class="results-box">
+    <h2>Estimated SH Cost</h2>
+    <div id="resultsContent"></div>
+  </div>
+</div>
 
-      const femaleRate = 0.03;
-      const maleRate = 0.01;
+<script>
+  function calculateCost() {
+    const women = parseInt(document.getElementById('women').value) || 0;
+    const men = parseInt(document.getElementById('men').value) || 0;
+    const salary = parseFloat(document.getElementById('salary').value) || 0;
 
-      const totalCases = (numWomen * femaleRate) + (numMen * maleRate);
-      const low = totalCases * 0.75;
-      const medium = totalCases * 0.20;
-      const high = totalCases * 0.05;
+    const totalEmployees = women + men;
 
-      const lowCost = low * 9492;
-      const mediumCost = medium * 40705;
-      const highCost = high * 182828;
+    // Incidence assumptions
+    const femaleRate = 0.03;
+    const maleRate = 0.01;
+    const totalCases = (women * femaleRate) + (men * maleRate);
 
-      const totalCost = lowCost + mediumCost + highCost;
+    const low = totalCases * 0.75;
+    const med = totalCases * 0.2;
+    const high = totalCases * 0.05;
 
-      const results = `
-        <div class='results-line-item'><span>Estimated Cases Per Year:</span><span>${totalCases.toFixed(2)}</span></div>
-        <div class='results-line-item'><span>Low Severity Cost:</span><span>R${lowCost.toLocaleString()}</span></div>
-        <div class='results-line-item'><span>Medium Severity Cost:</span><span>R${mediumCost.toLocaleString()}</span></div>
-        <div class='results-line-item'><span>High Severity Cost:</span><span>R${highCost.toLocaleString()}</span></div>
-        <div class="total-line"><span>Total Cost:</span><span>R${totalCost.toLocaleString()}</span></div>
-      `;
+    // Costs per case based on salary multiple (conservative)
+    const lowCost = low * 0.33 * salary;     // ~1/3 month salary
+    const medCost = med * 1.43 * salary;     // ~1.43 months
+    const highCost = high * 6.43 * salary;   // ~6.43 months
 
-      document.getElementById("resultsContent").innerHTML = results;
-    }
-  </script>
+    const totalCost = lowCost + medCost + highCost;
+
+    document.getElementById('resultsContent').innerHTML = `
+      <div class='results-line-item'><span>Estimated Cases:</span><span>${totalCases.toFixed(1)}</span></div>
+      <div class='results-line-item'><span>Low Severity (75%):</span><span>${low.toFixed(1)} cases</span></div>
+      <div class='results-line-item'><span>Medium Severity (20%):</span><span>${med.toFixed(1)} cases</span></div>
+      <div class='results-line-item'><span>High Severity (5%):</span><span>${high.toFixed(1)} cases</span></div>
+      <div class='results-line-item'><span>Cost of Low Severity:</span><span>R${lowCost.toLocaleString()}</span></div>
+      <div class='results-line-item'><span>Cost of Medium Severity:</span><span>R${medCost.toLocaleString()}</span></div>
+      <div class='results-line-item'><span>Cost of High Severity:</span><span>R${highCost.toLocaleString()}</span></div>
+      <div class="total-line"><span>Total Annual Cost:</span><span>R${totalCost.toLocaleString()}</span></div>
+    `;
+  }
+</script>
 </body>
 </html>
