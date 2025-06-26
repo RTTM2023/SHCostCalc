@@ -42,6 +42,10 @@
     .results-box h2 {
       font-size: 22px;
     }
+    .results-divider {
+      border-top: 1px solid white;
+      margin: 1rem 0;
+    }
     label {
       font-weight: bold;
       display: block;
@@ -155,7 +159,7 @@
       align-items: center;
     }
     .advanced-settings ul {
-      padding-left: 1rem;
+      padding-left: 2rem;
       margin-top: 0.25rem;
     }
     .advanced-settings li {
