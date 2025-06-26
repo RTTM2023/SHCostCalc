@@ -86,7 +86,7 @@
       position: relative;
       cursor: pointer;
       font-weight: bold;
-      color: #5b01fa;
+      color: #ffb002;
       font-size: 0.8rem;
       vertical-align: super;
     }
@@ -146,19 +146,27 @@
       padding: 1rem;
       border-radius: 15px;
     }
+    .advanced-settings p {
+      display: flex;
+      justify-content: space-between;
+    }
+    .advanced-settings ul {
+      padding-left: 1rem;
+      margin-top: 0.25rem;
+    }
   </style>
 </head>
 <body>
 <div class="container">
   <div class="calculator">
     <h2>Sexual Harassment Cost Calculator</h2>
-    <label for="women">Number of Women in Organisation <span class="tooltip" data-tooltip="Used to estimate female incidence rate (3%)">&#x3f;</span></label>
+    <label for="women">Number of Women in Organisation <span class="tooltip" data-tooltip="Used to estimate female incidence rate (3%)">?</span></label>
     <input type="number" id="women" />
 
-    <label for="men">Number of Men in Organisation <span class="tooltip" data-tooltip="Used to estimate male incidence rate (1%)">&#x3f;</span></label>
+    <label for="men">Number of Men in Organisation <span class="tooltip" data-tooltip="Used to estimate male incidence rate (1%)">?</span></label>
     <input type="number" id="men" />
 
-    <label for="salary">Average Gross Monthly Salary (R) <span class="tooltip" data-tooltip="Used to estimate cost impact of each case">&#x3f;</span></label>
+    <label for="salary">Average Gross Monthly Salary (R) <span class="tooltip" data-tooltip="Used to estimate cost impact of each case">?</span></label>
     <input type="number" id="salary" />
 
     <button onclick="calculateCost()">Calculate</button>
@@ -170,10 +178,22 @@
 
     <button class="advanced-toggle" id="toggleBtn" onclick="toggleAdvanced()">Show/Hide Assumptions</button>
     <div class="advanced-settings" id="advancedSettings">
-      <p><strong>Female Incidence Rate:</strong> 3%</p>
-      <p><strong>Male Incidence Rate:</strong> 1%</p>
-      <p><strong>Severity Split:</strong> 75% low, 20% medium, 5% high</p>
-      <p><strong>Cost per Case:</strong> Low = 0.33 × salary, Medium = 1.43 × salary, High = 6.43 × salary</p>
+      <p><strong>Female Incidence Rate<span class="tooltip" data-tooltip="Rate based on international benchmarks">?</span>:</strong><span>3%</span></p>
+      <p><strong>Male Incidence Rate<span class="tooltip" data-tooltip="Rate based on international benchmarks">?</span>:</strong><span>1%</span></p>
+      <p><strong>Severity Split:</strong> based on the likelihood of cases within a year
+        <ul>
+          <li>Low = 75%</li>
+          <li>Medium = 20%</li>
+          <li>High = 5%</li>
+        </ul>
+      </p>
+      <p><strong>Cost per Case:</strong>
+        <ul>
+          <li>Low = 0.33 × salary</li>
+          <li>Medium = 1.43 × salary</li>
+          <li>High = 6.43 × salary</li>
+        </ul>
+      </p>
     </div>
 
     <div class="button-group" id="resultButtons">
@@ -207,9 +227,9 @@
 
     document.getElementById('resultsContent').innerHTML = `
       <div class='results-line-item bold'><span>Estimated Cases:</span><span>${totalCases.toFixed(1)}</span></div>
-      <div class='results-line-item'><span>Low Severity Cost (75% of ${totalCases.toFixed(1)}) <span class="tooltip" data-tooltip="Low = absenteeism, presenteeism, minor team disruption">&#x3f;</span>:</span><span>R${lowCost.toLocaleString()}</span></div>
-      <div class='results-line-item'><span>Medium Severity Cost (20% of ${totalCases.toFixed(1)}) <span class="tooltip" data-tooltip="Medium = HR case involvement, exit risk, longer disruption">&#x3f;</span>:</span><span>R${medCost.toLocaleString()}</span></div>
-      <div class='results-line-item'><span>High Severity Cost (5% of ${totalCases.toFixed(1)}) <span class="tooltip" data-tooltip="High = legal risk, reputational damage, settlement costs">&#x3f;</span>:</span><span>R${highCost.toLocaleString()}</span></div>
+      <div class='results-line-item'><span>Low Severity Cost (75% of ${totalCases.toFixed(1)}):<span class="tooltip" data-tooltip="Low = absenteeism, presenteeism, minor team disruption">?</span></span><span>R${lowCost.toLocaleString()}</span></div>
+      <div class='results-line-item'><span>Medium Severity Cost (20% of ${totalCases.toFixed(1)}):<span class="tooltip" data-tooltip="Medium = HR case involvement, exit risk, longer disruption">?</span></span><span>R${medCost.toLocaleString()}</span></div>
+      <div class='results-line-item'><span>High Severity Cost (5% of ${totalCases.toFixed(1)}):<span class="tooltip" data-tooltip="High = legal risk, reputational damage, settlement costs">?</span></span><span>R${highCost.toLocaleString()}</span></div>
       <div class="total-line"><span>Total Annual Cost:</span><span>R${totalCost.toLocaleString()}</span></div>
     `;
 
