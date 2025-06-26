@@ -240,8 +240,8 @@
       <div class='results-line-item'><span>Medium Severity Cases (20% of ${Math.round(totalCases)}):<span class="tooltip" data-tooltip="Internally reported and resolved">?</span></span><span>${Math.round(med)}</span></div>
       <div class='results-line-item'><span>High Severity Cases (5% of ${Math.round(totalCases)}):<span class="tooltip" data-tooltip="Escalated and potential legal cases">?</span></span><span>${Math.round(high)}</span></div>
       <div class="half-line"></div>
-      <div class='results-line-item'><span>Low Severity Cost:<span class="tooltip" data-tooltip="absenteeism, presenteeism, minor team disruption">?</span></span><span>R${Math.round(lowCost).toLocaleString()}</span></div>
-      <div class='results-line-item'><span>Medium Severity Cost:<span class="tooltip" data-tooltip="HR case involvement, exit risk, longer disruption">?</span></span><span>R${Math.round(medCost).toLocaleString()}</span></div>
+      <div class='results-line-item'><span>Low Severity Cost:<span class="tooltip" data-tooltip="absenteeism, presenteeism, minor team disruption">?</span></span><span>R${lowCost.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span></div>
+      <div class='results-line-item'><span>Medium Severity Cost:<span class="tooltip" data-tooltip="HR case involvement, exit risk, longer disruption">?</span></span><span>R${medCost.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span></div>
       <div class='results-line-item'><span>High Severity Cost:<span class="tooltip" data-tooltip="legal risk, reputational damage, settlement costs">?</span></span><span>R${Math.round(highCost).toLocaleString()}</span></div>
       <div class="total-line"><span>Total Annual Cost:</span><span>R${Math.round(totalCost).toLocaleString()}</span></div>
     `;
