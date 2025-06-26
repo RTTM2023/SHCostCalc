@@ -78,6 +78,25 @@
       display: flex;
       justify-content: space-between;
     }
+    .tooltip {
+      position: relative;
+      cursor: help;
+      text-decoration: underline dotted white;
+    }
+    .tooltip:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      padding: 0.5rem;
+      border-radius: 5px;
+      top: 100%;
+      left: 0;
+      white-space: nowrap;
+      font-size: 0.8rem;
+      margin-top: 0.25rem;
+      z-index: 10;
+    }
   </style>
 </head>
 <body>
@@ -99,9 +118,11 @@
   <div class="results-box">
     <h2>Estimated SH Cost</h2>
     <div id="resultsContent"></div>
+    <button onclick="downloadPDF()">Download as PDF</button>
   </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
   function calculateCost() {
     const women = parseInt(document.getElementById('women').value) || 0;
@@ -109,8 +130,6 @@
     const salary = parseFloat(document.getElementById('salary').value) || 0;
 
     const totalEmployees = women + men;
-
-    // Incidence assumptions
     const femaleRate = 0.03;
     const maleRate = 0.01;
     const totalCases = (women * femaleRate) + (men * maleRate);
@@ -119,23 +138,30 @@
     const med = totalCases * 0.2;
     const high = totalCases * 0.05;
 
-    // Costs per case based on salary multiple (conservative)
-    const lowCost = low * 0.33 * salary;     // ~1/3 month salary
-    const medCost = med * 1.43 * salary;     // ~1.43 months
-    const highCost = high * 6.43 * salary;   // ~6.43 months
-
+    const lowCost = low * 0.33 * salary;
+    const medCost = med * 1.43 * salary;
+    const highCost = high * 6.43 * salary;
     const totalCost = lowCost + medCost + highCost;
 
     document.getElementById('resultsContent').innerHTML = `
       <div class='results-line-item'><span>Estimated Cases:</span><span>${totalCases.toFixed(1)}</span></div>
-      <div class='results-line-item'><span>Low Severity (75%):</span><span>${low.toFixed(1)} cases</span></div>
-      <div class='results-line-item'><span>Medium Severity (20%):</span><span>${med.toFixed(1)} cases</span></div>
-      <div class='results-line-item'><span>High Severity (5%):</span><span>${high.toFixed(1)} cases</span></div>
-      <div class='results-line-item'><span>Cost of Low Severity:</span><span>R${lowCost.toLocaleString()}</span></div>
-      <div class='results-line-item'><span>Cost of Medium Severity:</span><span>R${medCost.toLocaleString()}</span></div>
-      <div class='results-line-item'><span>Cost of High Severity:</span><span>R${highCost.toLocaleString()}</span></div>
+      <div class='results-line-item'><span>Low Severity Cost (75% of ${totalCases.toFixed(1)}):</span><span>R${lowCost.toLocaleString()}</span></div>
+      <div class='results-line-item'><span>Medium Severity Cost (20% of ${totalCases.toFixed(1)}):</span><span>R${medCost.toLocaleString()}</span></div>
+      <div class='results-line-item'><span>High Severity Cost (5% of ${totalCases.toFixed(1)}):</span><span>R${highCost.toLocaleString()}</span></div>
       <div class="total-line"><span>Total Annual Cost:</span><span>R${totalCost.toLocaleString()}</span></div>
     `;
+  }
+
+  function downloadPDF() {
+    const element = document.querySelector('.container');
+    const opt = {
+      margin: 0.5,
+      filename: 'Sexual_Harassment_Cost_Estimate.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 3, useCORS: true },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
+    };
+    html2pdf().set(opt).from(element).save();
   }
 </script>
 </body>
