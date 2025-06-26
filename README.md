@@ -87,7 +87,7 @@
       cursor: pointer;
       font-weight: bold;
       margin-left: 0.5rem;
-      color: #fff;
+      color: #f10178;
     }
     .tooltip:hover::after {
       content: attr(data-tooltip);
@@ -135,6 +135,7 @@
       cursor: pointer;
       text-align: left;
       padding: 0;
+      display: none;
     }
     .advanced-settings {
       display: none;
@@ -143,26 +144,19 @@
       padding: 1rem;
       border-radius: 15px;
     }
-    .more-info {
-      font-size: 0.8rem;
-      margin-bottom: 0.5rem;
-      background: rgba(255,255,255,0.2);
-      padding: 0.5rem;
-      border-radius: 10px;
-    }
   </style>
 </head>
 <body>
 <div class="container">
   <div class="calculator">
     <h2>Sexual Harassment Cost Calculator</h2>
-    <label for="women">Number of Women in Organisation: <span class="tooltip" data-tooltip="Used to estimate female incidence rate (3%)">i</span></label>
+    <label for="women">Number of Women in Organisation: <span class="tooltip" data-tooltip="Used to estimate female incidence rate (3%)">?</span></label>
     <input type="number" id="women" />
 
-    <label for="men">Number of Men in Organisation: <span class="tooltip" data-tooltip="Used to estimate male incidence rate (1%)">i</span></label>
+    <label for="men">Number of Men in Organisation: <span class="tooltip" data-tooltip="Used to estimate male incidence rate (1%)">?</span></label>
     <input type="number" id="men" />
 
-    <label for="salary">Average Gross Monthly Salary (R): <span class="tooltip" data-tooltip="Used to estimate cost impact of each case">i</span></label>
+    <label for="salary">Average Gross Monthly Salary (R): <span class="tooltip" data-tooltip="Used to estimate cost impact of each case">?</span></label>
     <input type="number" id="salary" />
 
     <button onclick="calculateCost()">Calculate</button>
@@ -172,7 +166,7 @@
     <h2>Estimated Sexual Harassment Cost</h2>
     <div id="resultsContent"></div>
 
-    <button class="advanced-toggle" onclick="toggleAdvanced()">Show/Hide Assumptions</button>
+    <button class="advanced-toggle" id="toggleBtn" onclick="toggleAdvanced()">Show/Hide Assumptions</button>
     <div class="advanced-settings" id="advancedSettings">
       <p><strong>Female Incidence Rate:</strong> 3%</p>
       <p><strong>Male Incidence Rate:</strong> 1%</p>
@@ -210,16 +204,14 @@
 
     document.getElementById('resultsContent').innerHTML = `
       <div class='results-line-item bold'><span>Estimated Cases:</span><span>${totalCases.toFixed(1)}</span></div>
-      <div class="more-info">Low severity is defined as...</div>
       <div class='results-line-item'><span>Low Severity Cost (75% of ${totalCases.toFixed(1)}):</span><span>R${lowCost.toLocaleString()}</span></div>
-      <div class="more-info">Medium severity is defined as...</div>
       <div class='results-line-item'><span>Medium Severity Cost (20% of ${totalCases.toFixed(1)}):</span><span>R${medCost.toLocaleString()}</span></div>
-      <div class="more-info">High severity is defined as...</div>
       <div class='results-line-item'><span>High Severity Cost (5% of ${totalCases.toFixed(1)}):</span><span>R${highCost.toLocaleString()}</span></div>
       <div class="total-line"><span>Total Annual Cost:</span><span>R${totalCost.toLocaleString()}</span></div>
     `;
 
     document.getElementById('resultButtons').style.display = 'flex';
+    document.getElementById('toggleBtn').style.display = 'inline-block';
   }
 
   function downloadPDF() {
