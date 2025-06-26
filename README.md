@@ -196,14 +196,14 @@
       <p><strong>Severity of Cases Split:</strong></p>
       <ul>
         <li>Low = 75% <span class="tooltip" data-tooltip="Unreported and minor cases"><img src="Untitled design.png" alt="info icon" /></span></li>
-        <li>Medium = 20% <span class="tooltip" data-tooltip="Internally reported and resolved">?</span></li>
-        <li>High = 5% <span class="tooltip" data-tooltip="Escalated and potential legal cases">?</span></li>
+        <li>Medium = 20% <span class="tooltip" data-tooltip="Internally reported and resolved"><img src="Untitled design.png" alt="info icon" /></span></li>
+        <li>High = 5% <span class="tooltip" data-tooltip="Escalated and potential legal cases"><img src="Untitled design.png" alt="info icon" /></span></li>
       </ul>
       <p><strong>Cost to Company per Case Type:</strong></p>
       <ul>
-        <li>Low = 0.33 × average gross salary <span class="tooltip" data-tooltip="absenteeism, presenteeism, minor team disruption">?</span></li>
-        <li>Medium = 1.43 × average gross salary <span class="tooltip" data-tooltip="HR case involvement, exit risk, longer disruption">?</span></li>
-        <li>High = 6.43 × average gross salary <span class="tooltip" data-tooltip="legal risk, reputational damage, settlement costs">?</span></li>
+        <li>Low = 0.33 × average gross salary <span class="tooltip" data-tooltip="absenteeism, presenteeism, minor team disruption"><img src="Untitled design.png" alt="info icon" /></span></li>
+        <li>Medium = 1.43 × average gross salary <span class="tooltip" data-tooltip="HR case involvement, exit risk, longer disruption"><img src="Untitled design.png" alt="info icon" /></span></li>
+        <li>High = 6.43 × average gross salary <span class="tooltip" data-tooltip="legal risk, reputational damage, settlement costs"><img src="Untitled design.png" alt="info icon" /></span></li>
       </ul>
     </div>
 
