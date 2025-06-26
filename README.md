@@ -50,11 +50,11 @@
       padding: 0.6rem;
       font-size: 1rem;
       border-radius: 30px;
-      border: 1px dashed #F87171;
+      border: 1px dashed #5b01fa;
       font-family: 'Montserrat', sans-serif;
     }
     button {
-      margin-top: 2rem;
+      margin-top: 1rem;
       width: 100%;
       padding: 1rem;
       font-size: 1.2rem;
@@ -70,6 +70,10 @@
       justify-content: space-between;
       margin: 0.5rem 0;
       font-size: 0.9rem;
+    }
+    .results-line-item.bold {
+      font-size: 1.1rem;
+      font-weight: bold;
     }
     .total-line {
       font-size: 1.2rem;
@@ -97,6 +101,28 @@
       margin-top: 0.25rem;
       z-index: 10;
     }
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    .download-btn, .reset-btn {
+      background: white;
+      color: #f10178;
+      border: 1px dashed #5b01fa;
+      font-size: 1rem;
+      font-weight: 500;
+      font-family: 'Montserrat', sans-serif;
+      padding: 0.6rem 1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      text-align: center;
+    }
+    .reset-btn {
+      background: #5b01fa;
+      color: white;
+    }
   </style>
 </head>
 <body>
@@ -116,9 +142,12 @@
   </div>
 
   <div class="results-box">
-    <h2>Estimated SH Cost</h2>
+    <h2>Estimated Sexual Harassment Cost</h2>
     <div id="resultsContent"></div>
-    <button onclick="downloadPDF()">Download as PDF</button>
+    <div class="button-group">
+      <button class="download-btn" onclick="downloadPDF()">Download as PDF</button>
+      <button class="reset-btn" onclick="window.location.reload()">Reset Calculator</button>
+    </div>
   </div>
 </div>
 
@@ -144,7 +173,7 @@
     const totalCost = lowCost + medCost + highCost;
 
     document.getElementById('resultsContent').innerHTML = `
-      <div class='results-line-item'><span>Estimated Cases:</span><span>${totalCases.toFixed(1)}</span></div>
+      <div class='results-line-item bold'><span>Estimated Cases:</span><span>${totalCases.toFixed(1)}</span></div>
       <div class='results-line-item'><span>Low Severity Cost (75% of ${totalCases.toFixed(1)}):</span><span>R${lowCost.toLocaleString()}</span></div>
       <div class='results-line-item'><span>Medium Severity Cost (20% of ${totalCases.toFixed(1)}):</span><span>R${medCost.toLocaleString()}</span></div>
       <div class='results-line-item'><span>High Severity Cost (5% of ${totalCases.toFixed(1)}):</span><span>R${highCost.toLocaleString()}</span></div>
