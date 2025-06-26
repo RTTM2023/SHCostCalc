@@ -167,6 +167,9 @@
     .advanced-settings li {
       margin-bottom: 0.25rem;
     }
+    .tooltip img {
+  background-color: transparent !important;
+}
   </style>
 </head>
 <body>
