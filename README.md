@@ -97,6 +97,8 @@
     .tooltip img {
       width: 16px;
       height: 16px;
+      vertical-align: middle;
+      margin-left: 4px;
     }
     .tooltip:hover::after {
       content: attr(data-tooltip);
@@ -172,13 +174,13 @@
 <div class="container">
   <div class="calculator">
     <h2>Sexual Harassment Cost Calculator</h2>
-    <label for="women">Number of Women in Organisation <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks">?</span></label>
+    <label for="women">Number of Women in Organisation <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="Untitled design.png" alt="info icon" /></span></label>
     <input type="number" id="women" />
 
-    <label for="men">Number of Men in Organisation <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks">?</span></label>
+    <label for="men">Number of Men in Organisation <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="Untitled design.png" alt="info icon" /></span></label>
     <input type="number" id="men" />
 
-    <label for="salary">Average Gross Monthly Salary (R) <span class="tooltip" data-tooltip="Used to estimate cost impact of each case">?</span></label>
+    <label for="salary">Average Gross Monthly Salary (R) <span class="tooltip" data-tooltip="Used to estimate cost impact of each case"><img src="Untitled design.png" alt="info icon" /></span></label>
     <input type="number" id="salary" />
 
     <button onclick="calculateCost()">Calculate</button>
