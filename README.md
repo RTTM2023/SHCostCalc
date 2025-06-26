@@ -82,13 +82,6 @@
       font-size: 1.1rem;
       font-weight: bold;
     }
-    .total-line {
-      font-size: 1.2rem;
-      font-weight: bold;
-      margin-top: 1rem;
-      display: flex;
-      justify-content: space-between;
-    }
     .tooltip {
       position: relative;
       cursor: pointer;
@@ -112,97 +105,86 @@
       margin-top: 0.25rem;
       z-index: 10;
     }
-    .button-group {
-      display: none;
-      flex-direction: column;
-      gap: 0.5rem;
-      margin-top: 1.5rem;
-    }
-    .download-btn, .reset-btn, .source-btn {
-      background: white;
-      color: #f10178;
-      border: 1px dashed #5b01fa;
-      font-size: 1rem;
-      font-weight: 500;
-      font-family: 'Montserrat', sans-serif;
-      padding: 0.6rem 1rem;
-      border-radius: 30px;
-      cursor: pointer;
-      text-align: center;
-    }
-    .reset-btn {
-      background: #5b01fa;
-      color: white;
-    }
-    .advanced-toggle {
-      margin-top: 2rem;
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      text-align: left;
-      padding: 0;
-      display: none;
-      text-decoration: underline;
-    }
-    .advanced-settings {
-      display: none;
-      margin-top: 1rem;
-      background: rgba(255,255,255,0.1);
-      padding: 1rem;
-      border-radius: 15px;
-    }
-    .advanced-settings p {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .advanced-settings ul {
-      padding-left: 2rem;
-      margin-top: 0.25rem;
-    }
-    .advanced-settings li {
-      margin-left: 1rem;
-      margin-bottom: 0.25rem;
-    }
   </style>
 </head>
 <body>
-  <div class="results-box">
-    <h2>Estimated Sexual Harassment Cost</h2>
+  <div class="container">
+    <div class="calculator">
+      <h2>SH Cost Calculator</h2>
+      <label for="numEmployees">Number of Employees</label>
+      <input type="number" id="numEmployees" placeholder="e.g. 100" />
 
-    <div class="results-line-item bold">Estimated Cases:</div>
-    <div class="results-line-item">Low Severity Cases (75% of X): <span class="tooltip" data-tooltip="Unreported and minor cases"><img src="assets/images/Untitled design.png" alt="?" /></span> <span id="lowCases">0</span></div>
-    <div class="results-line-item">Medium Severity Cases (20% of X): <span class="tooltip" data-tooltip="Internally reported and resolved"><img src="assets/images/Untitled design.png" alt="?" /></span> <span id="mediumCases">0</span></div>
-    <div class="results-line-item">High Severity Cases (5% of X): <span class="tooltip" data-tooltip="Escalated and potential legal cases"><img src="assets/images/Untitled design.png" alt="?" /></span> <span id="highCases">0</span></div>
+      <label for="percentWomen">% Women in the Organisation</label>
+      <input type="number" id="percentWomen" placeholder="e.g. 60" />
 
-    <div class="results-divider"></div>
+      <label for="avgSalary">Average Monthly Gross Salary</label>
+      <input type="number" id="avgSalary" placeholder="e.g. 25000" />
 
-    <div class="results-line-item bold">Estimated Costs:</div>
-    <div class="results-line-item">Low Severity Cost (75% of Y): <span class="tooltip" data-tooltip="Low = 0.33 × average gross salary"><img src="assets/images/Untitled design.png" alt="?" /></span> <span id="lowCost">R0</span></div>
-    <div class="results-line-item">Medium Severity Cost (20% of Y): <span class="tooltip" data-tooltip="Medium = 1.0 × average gross salary"><img src="assets/images/Untitled design.png" alt="?" /></span> <span id="mediumCost">R0</span></div>
-    <div class="results-line-item">High Severity Cost (5% of Y): <span class="tooltip" data-tooltip="High = 3.0 × average gross salary"><img src="assets/images/Untitled design.png" alt="?" /></span> <span id="highCost">R0</span></div>
+      <button id="calculateBtn">Calculate</button>
+      <button id="resetBtn" class="reset-btn">Reset Calculator</button>
+    </div>
+
+    <div class="results-box">
+      <h2>Estimated Sexual Harassment Cost</h2>
+
+      <div class="results-line-item bold">Estimated Cases:</div>
+      <div class="results-line-item">Low Severity Cases (75% of X): <span class="tooltip" data-tooltip="Unreported and minor cases"><img src="Untitled design.png" alt="?" /></span> <span id="lowCases">0</span></div>
+      <div class="results-line-item">Medium Severity Cases (20% of X): <span class="tooltip" data-tooltip="Internally reported and resolved"><img src="Untitled design.png" alt="?" /></span> <span id="mediumCases">0</span></div>
+      <div class="results-line-item">High Severity Cases (5% of X): <span class="tooltip" data-tooltip="Escalated and potential legal cases"><img src="Untitled design.png" alt="?" /></span> <span id="highCases">0</span></div>
+
+      <div class="results-divider"></div>
+
+      <div class="results-line-item bold">Estimated Costs:</div>
+      <div class="results-line-item">Low Severity Cost (75% of Y): <span class="tooltip" data-tooltip="Low = 0.33 × average gross salary"><img src="Untitled design.png" alt="?" /></span> <span id="lowCost">R0</span></div>
+      <div class="results-line-item">Medium Severity Cost (20% of Y): <span class="tooltip" data-tooltip="Medium = 1.0 × average gross salary"><img src="Untitled design.png" alt="?" /></span> <span id="mediumCost">R0</span></div>
+      <div class="results-line-item">High Severity Cost (5% of Y): <span class="tooltip" data-tooltip="High = 3.0 × average gross salary"><img src="Untitled design.png" alt="?" /></span> <span id="highCost">R0</span></div>
+    </div>
   </div>
 
-  <div class="advanced-settings">
-    <p>Female Incidence Rate: <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="assets/images/Untitled design.png" alt="?" /></span></p>
-    <p>Male Incidence Rate: <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="assets/images/Untitled design.png" alt="?" /></span></p>
+  <script>
+    document.getElementById('calculateBtn').addEventListener('click', function () {
+      const numEmployees = parseFloat(document.getElementById('numEmployees').value);
+      const percentWomen = parseFloat(document.getElementById('percentWomen').value);
+      const avgSalary = parseFloat(document.getElementById('avgSalary').value);
 
-    <p><strong>Severity of Cases Split:</strong></p>
-    <ul>
-      <li>Low = 75% <span class="tooltip" data-tooltip="Unreported and minor cases"><img src="assets/images/Untitled design.png" alt="?" /></span></li>
-      <li>Medium = 20% <span class="tooltip" data-tooltip="Internally reported and resolved"><img src="assets/images/Untitled design.png" alt="?" /></span></li>
-      <li>High = 5% <span class="tooltip" data-tooltip="Escalated and potential legal cases"><img src="assets/images/Untitled design.png" alt="?" /></span></li>
-    </ul>
+      const incidenceRateFemale = 0.015;
+      const incidenceRateMale = 0.0025;
 
-    <p><strong>Cost to Company per Case Type:</strong></p>
-    <ul>
-      <li>Low = 0.33 × average gross salary <span class="tooltip" data-tooltip="Low = 0.33 × average gross salary"><img src="assets/images/Untitled design.png" alt="?" /></span></li>
-      <li>Medium = 1.0 × average gross salary <span class="tooltip" data-tooltip="Medium = 1.0 × average gross salary"><img src="assets/images/Untitled design.png" alt="?" /></span></li>
-      <li>High = 3.0 × average gross salary <span class="tooltip" data-tooltip="High = 3.0 × average gross salary"><img src="assets/images/Untitled design.png" alt="?" /></span></li>
-    </ul>
-  </div>
+      const numWomen = numEmployees * (percentWomen / 100);
+      const numMen = numEmployees - numWomen;
+
+      const totalIncidents = (numWomen * incidenceRateFemale) + (numMen * incidenceRateMale);
+
+      const lowCases = Math.round(totalIncidents * 0.75);
+      const mediumCases = Math.round(totalIncidents * 0.2);
+      const highCases = Math.round(totalIncidents * 0.05);
+
+      const lowCost = Math.round(lowCases * avgSalary * 0.33);
+      const mediumCost = Math.round(mediumCases * avgSalary);
+      const highCost = Math.round(highCases * avgSalary * 3);
+
+      document.getElementById('lowCases').innerText = lowCases;
+      document.getElementById('mediumCases').innerText = mediumCases;
+      document.getElementById('highCases').innerText = highCases;
+
+      document.getElementById('lowCost').innerText = `R${lowCost}`;
+      document.getElementById('mediumCost').innerText = `R${mediumCost}`;
+      document.getElementById('highCost').innerText = `R${highCost}`;
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', function () {
+      document.getElementById('numEmployees').value = '';
+      document.getElementById('percentWomen').value = '';
+      document.getElementById('avgSalary').value = '';
+
+      document.getElementById('lowCases').innerText = '0';
+      document.getElementById('mediumCases').innerText = '0';
+      document.getElementById('highCases').innerText = '0';
+
+      document.getElementById('lowCost').innerText = 'R0';
+      document.getElementById('mediumCost').innerText = 'R0';
+      document.getElementById('highCost').innerText = 'R0';
+    });
+  </script>
 </body>
 </html>
