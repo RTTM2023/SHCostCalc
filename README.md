@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -43,10 +42,6 @@
     .results-box h2 {
       font-size: 22px;
     }
-    .results-divider {
-      border-top: 1px solid white;
-      margin: 1rem 0;
-    }
     label {
       font-weight: bold;
       display: block;
@@ -82,6 +77,13 @@
       font-size: 1.1rem;
       font-weight: bold;
     }
+    .total-line {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-top: 1rem;
+      display: flex;
+      justify-content: space-between;
+    }
     .tooltip {
       position: relative;
       cursor: pointer;
@@ -105,86 +107,157 @@
       margin-top: 0.25rem;
       z-index: 10;
     }
+    .button-group {
+      display: none;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    .download-btn, .reset-btn, .source-btn {
+      background: white;
+      color: #f10178;
+      border: 1px dashed #5b01fa;
+      font-size: 1rem;
+      font-weight: 500;
+      font-family: 'Montserrat', sans-serif;
+      padding: 0.6rem 1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      text-align: center;
+    }
+    .reset-btn {
+      background: #5b01fa;
+      color: white;
+    }
+    .advanced-toggle {
+      margin-top: 2rem;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      text-align: left;
+      padding: 0;
+      display: none;
+      text-decoration: underline;
+    }
+    .advanced-settings {
+      display: none;
+      margin-top: 1rem;
+      background: rgba(255,255,255,0.1);
+      padding: 1rem;
+      border-radius: 15px;
+    }
+    .advanced-settings p {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .advanced-settings ul {
+      padding-left: 1rem;
+      margin-top: 0.25rem;
+    }
+    .advanced-settings li {
+      margin-bottom: 0.25rem;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="calculator">
-      <h2>SH Cost Calculator</h2>
-      <label for="numEmployees">Number of Employees</label>
-      <input type="number" id="numEmployees" placeholder="e.g. 100" />
+<div class="container">
+  <div class="calculator">
+    <h2>Sexual Harassment Cost Calculator</h2>
+    <label for="women">Number of Women in Organisation <span class="tooltip" data-tooltip="Used to estimate female incidence rate (3%)">?</span></label>
+    <input type="number" id="women" />
 
-      <label for="percentWomen">% Women in the Organisation</label>
-      <input type="number" id="percentWomen" placeholder="e.g. 60" />
+    <label for="men">Number of Men in Organisation <span class="tooltip" data-tooltip="Used to estimate male incidence rate (1%)">?</span></label>
+    <input type="number" id="men" />
 
-      <label for="avgSalary">Average Monthly Gross Salary</label>
-      <input type="number" id="avgSalary" placeholder="e.g. 25000" />
+    <label for="salary">Average Gross Monthly Salary (R) <span class="tooltip" data-tooltip="Used to estimate cost impact of each case">?</span></label>
+    <input type="number" id="salary" />
 
-      <button id="calculateBtn">Calculate</button>
-      <button id="resetBtn" class="reset-btn">Reset Calculator</button>
-    </div>
-
-    <div class="results-box">
-      <h2>Estimated Sexual Harassment Cost</h2>
-
-      <div class="results-line-item bold">Estimated Cases:</div>
-      <div class="results-line-item">Low Severity Cases (75% of X): <span class="tooltip" data-tooltip="Unreported and minor cases"><img src="Untitled design.png" alt="?" /></span> <span id="lowCases">0</span></div>
-      <div class="results-line-item">Medium Severity Cases (20% of X): <span class="tooltip" data-tooltip="Internally reported and resolved"><img src="Untitled design.png" alt="?" /></span> <span id="mediumCases">0</span></div>
-      <div class="results-line-item">High Severity Cases (5% of X): <span class="tooltip" data-tooltip="Escalated and potential legal cases"><img src="Untitled design.png" alt="?" /></span> <span id="highCases">0</span></div>
-
-      <div class="results-divider"></div>
-
-      <div class="results-line-item bold">Estimated Costs:</div>
-      <div class="results-line-item">Low Severity Cost (75% of Y): <span class="tooltip" data-tooltip="Low = 0.33 × average gross salary"><img src="Untitled design.png" alt="?" /></span> <span id="lowCost">R0</span></div>
-      <div class="results-line-item">Medium Severity Cost (20% of Y): <span class="tooltip" data-tooltip="Medium = 1.0 × average gross salary"><img src="Untitled design.png" alt="?" /></span> <span id="mediumCost">R0</span></div>
-      <div class="results-line-item">High Severity Cost (5% of Y): <span class="tooltip" data-tooltip="High = 3.0 × average gross salary"><img src="Untitled design.png" alt="?" /></span> <span id="highCost">R0</span></div>
-    </div>
+    <button onclick="calculateCost()">Calculate</button>
   </div>
 
-  <script>
-    document.getElementById('calculateBtn').addEventListener('click', function () {
-      const numEmployees = parseFloat(document.getElementById('numEmployees').value);
-      const percentWomen = parseFloat(document.getElementById('percentWomen').value);
-      const avgSalary = parseFloat(document.getElementById('avgSalary').value);
+  <div class="results-box">
+    <h2>Estimated Sexual Harassment Cost</h2>
+    <div id="resultsContent"></div>
 
-      const incidenceRateFemale = 0.015;
-      const incidenceRateMale = 0.0025;
+    <button class="advanced-toggle" id="toggleBtn" onclick="toggleAdvanced()">Show/Hide Assumptions</button>
+    <div class="advanced-settings" id="advancedSettings">
+      <p><strong>Female Incidence Rate:</strong><span>3% <span class="tooltip" data-tooltip="Rate based on international benchmarks">?</span></span></p>
+      <p><strong>Male Incidence Rate:</strong><span>1% <span class="tooltip" data-tooltip="Rate based on international benchmarks">?</span></span></p>
+      <p><strong>Severity Split:</strong> based on the likelihood of cases within a year</p>
+      <ul>
+        <li>Low = 75% <span class="tooltip" data-tooltip="Unreported/minor cases">?</span></li>
+        <li>Medium = 20% <span class="tooltip" data-tooltip="Internally reported and resolved">?</span></li>
+        <li>High = 5% <span class="tooltip" data-tooltip="Escalated/legal matters">?</span></li>
+      </ul>
+      <p><strong>Cost per Case:</strong></p>
+      <ul>
+        <li>Low = 0.33 × salary <span class="tooltip" data-tooltip="Low = absenteeism, presenteeism, minor team disruption">?</span></li>
+        <li>Medium = 1.43 × salary <span class="tooltip" data-tooltip="Medium = HR case involvement, exit risk, longer disruption">?</span></li>
+        <li>High = 6.43 × salary <span class="tooltip" data-tooltip="High = legal risk, reputational damage, settlement costs">?</span></li>
+      </ul>
+    </div>
 
-      const numWomen = numEmployees * (percentWomen / 100);
-      const numMen = numEmployees - numWomen;
+    <div class="button-group" id="resultButtons">
+      <button class="download-btn" onclick="downloadPDF()">Download as PDF</button>
+      <button class="source-btn">View Research Sources</button>
+      <button class="reset-btn" onclick="window.location.reload()">Reset Calculator</button>
+    </div>
+  </div>
+</div>
 
-      const totalIncidents = (numWomen * incidenceRateFemale) + (numMen * incidenceRateMale);
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+  function calculateCost() {
+    const women = parseInt(document.getElementById('women').value) || 0;
+    const men = parseInt(document.getElementById('men').value) || 0;
+    const salary = parseFloat(document.getElementById('salary').value) || 0;
 
-      const lowCases = Math.round(totalIncidents * 0.75);
-      const mediumCases = Math.round(totalIncidents * 0.2);
-      const highCases = Math.round(totalIncidents * 0.05);
+    const totalEmployees = women + men;
+    const femaleRate = 0.03;
+    const maleRate = 0.01;
+    const totalCases = (women * femaleRate) + (men * maleRate);
 
-      const lowCost = Math.round(lowCases * avgSalary * 0.33);
-      const mediumCost = Math.round(mediumCases * avgSalary);
-      const highCost = Math.round(highCases * avgSalary * 3);
+    const low = totalCases * 0.75;
+    const med = totalCases * 0.2;
+    const high = totalCases * 0.05;
 
-      document.getElementById('lowCases').innerText = lowCases;
-      document.getElementById('mediumCases').innerText = mediumCases;
-      document.getElementById('highCases').innerText = highCases;
+    const lowCost = low * 0.33 * salary;
+    const medCost = med * 1.43 * salary;
+    const highCost = high * 6.43 * salary;
+    const totalCost = lowCost + medCost + highCost;
 
-      document.getElementById('lowCost').innerText = `R${lowCost}`;
-      document.getElementById('mediumCost').innerText = `R${mediumCost}`;
-      document.getElementById('highCost').innerText = `R${highCost}`;
-    });
+    document.getElementById('resultsContent').innerHTML = `
+      <div class='results-line-item bold'><span>Estimated Cases:</span><span>${Math.round(totalCases)}</span></div>
+      <div class='results-line-item'><span>Low Severity Cost (75% of ${Math.round(totalCases)}):<span class="tooltip" data-tooltip="Low = absenteeism, presenteeism, minor team disruption">?</span></span><span>R${Math.round(lowCost).toLocaleString()}</span></div>
+      <div class='results-line-item'><span>Medium Severity Cost (20% of ${Math.round(totalCases)}):<span class="tooltip" data-tooltip="Medium = HR case involvement, exit risk, longer disruption">?</span></span><span>R${Math.round(medCost).toLocaleString()}</span></div>
+      <div class='results-line-item'><span>High Severity Cost (5% of ${Math.round(totalCases)}):<span class="tooltip" data-tooltip="High = legal risk, reputational damage, settlement costs">?</span></span><span>R${Math.round(highCost).toLocaleString()}</span></div>
+      <div class="total-line"><span>Total Annual Cost:</span><span>R${Math.round(totalCost).toLocaleString()}</span></div>
+    `;
 
-    document.getElementById('resetBtn').addEventListener('click', function () {
-      document.getElementById('numEmployees').value = '';
-      document.getElementById('percentWomen').value = '';
-      document.getElementById('avgSalary').value = '';
+    document.getElementById('resultButtons').style.display = 'flex';
+    document.getElementById('toggleBtn').style.display = 'inline-block';
+  }
 
-      document.getElementById('lowCases').innerText = '0';
-      document.getElementById('mediumCases').innerText = '0';
-      document.getElementById('highCases').innerText = '0';
+  function downloadPDF() {
+    const element = document.querySelector('.container');
+    const opt = {
+      margin: 0.5,
+      filename: 'Sexual_Harassment_Cost_Estimate.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 3, useCORS: true },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
+    };
+    html2pdf().set(opt).from(element).save();
+  }
 
-      document.getElementById('lowCost').innerText = 'R0';
-      document.getElementById('mediumCost').innerText = 'R0';
-      document.getElementById('highCost').innerText = 'R0';
-    });
-  </script>
+  function toggleAdvanced() {
+    const section = document.getElementById('advancedSettings');
+    section.style.display = section.style.display === 'none' || section.style.display === '' ? 'block' : 'none';
+  }
+</script>
 </body>
 </html>
