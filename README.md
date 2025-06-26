@@ -37,7 +37,7 @@
     }
     .results-box {
       flex: 1;
-      background-color: #F75D36;
+      background-color: #f10178;
       color: white;
     }
     label {
@@ -58,7 +58,7 @@
       width: 100%;
       padding: 1rem;
       font-size: 1.2rem;
-      background-color: #F75D36;
+      background-color: #f10178;
       color: white;
       border: none;
       border-radius: 30px;
@@ -84,8 +84,10 @@
     }
     .tooltip {
       position: relative;
-      cursor: help;
-      text-decoration: underline dotted white;
+      cursor: pointer;
+      font-weight: bold;
+      margin-left: 0.5rem;
+      color: #fff;
     }
     .tooltip:hover::after {
       content: attr(data-tooltip);
@@ -102,7 +104,7 @@
       z-index: 10;
     }
     .button-group {
-      display: flex;
+      display: none;
       flex-direction: column;
       gap: 0.5rem;
       margin-top: 1.5rem;
@@ -129,6 +131,7 @@
       border: none;
       color: #fff;
       font-size: 1rem;
+      font-weight: bold;
       cursor: pointer;
       text-align: left;
       padding: 0;
@@ -140,19 +143,26 @@
       padding: 1rem;
       border-radius: 15px;
     }
+    .more-info {
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
+      background: rgba(255,255,255,0.2);
+      padding: 0.5rem;
+      border-radius: 10px;
+    }
   </style>
 </head>
 <body>
 <div class="container">
   <div class="calculator">
     <h2>Sexual Harassment Cost Calculator</h2>
-    <label for="women">Number of Women in Organisation: <span class="tooltip" data-tooltip="Used to estimate female incidence rate (3%)">?</span></label>
+    <label for="women">Number of Women in Organisation: <span class="tooltip" data-tooltip="Used to estimate female incidence rate (3%)">i</span></label>
     <input type="number" id="women" />
 
-    <label for="men">Number of Men in Organisation: <span class="tooltip" data-tooltip="Used to estimate male incidence rate (1%)">?</span></label>
+    <label for="men">Number of Men in Organisation: <span class="tooltip" data-tooltip="Used to estimate male incidence rate (1%)">i</span></label>
     <input type="number" id="men" />
 
-    <label for="salary">Average Gross Monthly Salary (R): <span class="tooltip" data-tooltip="Used to estimate cost impact of each case">?</span></label>
+    <label for="salary">Average Gross Monthly Salary (R): <span class="tooltip" data-tooltip="Used to estimate cost impact of each case">i</span></label>
     <input type="number" id="salary" />
 
     <button onclick="calculateCost()">Calculate</button>
@@ -170,7 +180,7 @@
       <p><strong>Cost per Case:</strong> Low = 0.33 × salary, Medium = 1.43 × salary, High = 6.43 × salary</p>
     </div>
 
-    <div class="button-group">
+    <div class="button-group" id="resultButtons">
       <button class="download-btn" onclick="downloadPDF()">Download as PDF</button>
       <button class="reset-btn" onclick="window.location.reload()">Reset Calculator</button>
     </div>
@@ -200,11 +210,16 @@
 
     document.getElementById('resultsContent').innerHTML = `
       <div class='results-line-item bold'><span>Estimated Cases:</span><span>${totalCases.toFixed(1)}</span></div>
+      <div class="more-info">Low severity is defined as...</div>
       <div class='results-line-item'><span>Low Severity Cost (75% of ${totalCases.toFixed(1)}):</span><span>R${lowCost.toLocaleString()}</span></div>
+      <div class="more-info">Medium severity is defined as...</div>
       <div class='results-line-item'><span>Medium Severity Cost (20% of ${totalCases.toFixed(1)}):</span><span>R${medCost.toLocaleString()}</span></div>
+      <div class="more-info">High severity is defined as...</div>
       <div class='results-line-item'><span>High Severity Cost (5% of ${totalCases.toFixed(1)}):</span><span>R${highCost.toLocaleString()}</span></div>
       <div class="total-line"><span>Total Annual Cost:</span><span>R${totalCost.toLocaleString()}</span></div>
     `;
+
+    document.getElementById('resultButtons').style.display = 'flex';
   }
 
   function downloadPDF() {
