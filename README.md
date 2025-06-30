@@ -70,7 +70,7 @@
     .results-line-item {
       display: flex;
       justify-content: space-between;
-      margin: 0.25rem 0;
+      margin: 0.15rem 0;
       font-size: 0.75rem;
     }
     .results-line-item.bold {
@@ -80,15 +80,19 @@
 .half-line {
   border-top: 1px solid white;
   margin: 1rem auto;   
-  width: 50%;              
+  width: 50%;
+  text-align: left;
 }
-    .total-line {
-      font-size: 1.2rem;
-      font-weight: bold;
-      margin-top: 1rem;
-      display: flex;
-      justify-content: space-between;
-    }
+.total-line {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px dotted white;
+  border-bottom: 1px dotted white;
+  padding: 0.5rem 0;
+}
     .tooltip {
       position: relative;
       cursor: pointer;
