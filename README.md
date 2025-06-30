@@ -17,6 +17,11 @@ body {
       max-width: 1600px;
       margin: 0 auto;
     }
+    .container,
+.calculator,
+.results-box {
+  box-sizing: border-box;
+}
     @media (min-width: 1024px) {
       .container {
         flex-direction: row;
@@ -192,30 +197,6 @@ body {
     .advanced-settings strong {
   text-decoration: underline;
 }
-.pdf-export {
-  padding-top: 0 !important;
-  margin-top: 0 !important;
-}
-.pdf-export .container {
-  padding-top: 0.2rem !important;
-  margin-top: 0 !important;
-}
-
-body.pdf-export {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-.container.pdf-export {
-  margin-top: 0 !important;
-  padding-top: 0.2rem !important;
-}
-
-.pdf-export .calculator,
-.pdf-export .results-box {
-  padding-top: 0.5rem !important;
-  padding-bottom: 0.5rem !important;
-}
 
   </style>
 </head>
@@ -313,26 +294,17 @@ const formatCurrency = (num) => 'R' + num.toFixed(2).replace(/\B(?=(\d{3})+(?!\d
     document.getElementById('toggleBtn').style.display = 'inline-block';
 }
 function downloadPDF() {
-  const body = document.body;
   const container = document.querySelector('.container');
 
-  // Add temporary PDF classes
-  body.classList.add('pdf-export');
-  container.classList.add('pdf-export');
-
   const opt = {
-    margin: [0, 0.3, 0.2, 0.3], // top, left, bottom, right in inches
+    margin: 0.5,  // Use standard margin
     filename: 'Sexual_Harassment_Cost_Estimate.pdf',
     image: { type: 'jpeg', quality: 0.98 },
     html2canvas: { scale: 3, useCORS: true },
     jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
   };
 
-  html2pdf().set(opt).from(container).save().then(() => {
-    // Clean up classes
-    body.classList.remove('pdf-export');
-    container.classList.remove('pdf-export');
-  });
+  html2pdf().set(opt).from(container).save();
 }
 
   function toggleAdvanced() {
