@@ -344,7 +344,7 @@ calculator.style.marginRight = '1rem';
 
   const opt = {
     margin: [0.2, 0.4, 0.2, 0.4],
-    filename: 'Sexual_Harassment_Cost_Estimate.pdf',
+    filename: 'How Much Does Sexual Harassment Cost Us? (Run to the Monster).pdf',
     image: { type: 'jpeg', quality: 1 },
     html2canvas: {
       scale: 4,
