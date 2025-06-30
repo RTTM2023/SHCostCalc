@@ -314,7 +314,7 @@ function downloadPDF() {
 
   const opt = {
     margin: [0.2, 0.4, 0.2, 0.4],
-    filename: 'Sexual_Harassment_Cost_Estimate.pdf',
+    filename: 'Sexual_Harassment_Cost_Estimate (Run to the Monster).pdf',
     image: { type: 'jpeg', quality: 1 },
     html2canvas: {
       scale: 4,
@@ -327,7 +327,7 @@ function downloadPDF() {
     jsPDF: {
       unit: 'cm',
       format: 'a4',
-      orientation: 'portrait'
+      orientation: 'landscape'
     }
   };
 
