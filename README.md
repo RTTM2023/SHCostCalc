@@ -302,11 +302,22 @@ function downloadPDF() {
   const container = document.querySelector('.container');
 
   const opt = {
-    margin: [0.1, 0.2, 0.2, 0.2],
+    margin: [0.2, 0.4, 0.2, 0.4], // top, right, bottom, left
     filename: 'Sexual_Harassment_Cost_Estimate.pdf',
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 3, useCORS: true },
-    jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
+    image: { type: 'jpeg', quality: 1 },
+    html2canvas: {
+      scale: 4, // sharpness
+      useCORS: true,
+      scrollX: 0,
+      scrollY: 0,
+      windowWidth: document.body.scrollWidth,
+      windowHeight: document.body.scrollHeight
+    },
+    jsPDF: {
+      unit: 'cm',
+      format: 'a4',
+      orientation: 'portrait'
+    }
   };
 
   html2pdf().set(opt).from(container).save();
