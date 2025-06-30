@@ -212,7 +212,7 @@
 <p><strong>Male Incidence Rate:</strong><span>1% <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span></span></p>
 <p>
   <strong>Severity of Cases Split (75/20/5):</strong><br>
-  <span class="assumption-description">These percentages are based on assumptions about how common each severity level is likely to be.These percentages are based on assumptions about how common each severity level is likely to be.</span>
+  <span class="assumption-description">These percentages are based on assumptions about how common each severity level is likely to be.</span>
 </p>
       <p><strong>Assumed Cost of Severity:</strong></p>
       <ul>
