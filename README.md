@@ -314,6 +314,8 @@ const formatCurrency = (num) => 'R' + num.toFixed(2).replace(/\B(?=(\d{3})+(?!\d
 
     document.getElementById('resultButtons').style.display = 'flex';
     document.getElementById('toggleBtn').style.display = 'inline-block';
+}
+  
 function downloadPDF() {
   const container = document.querySelector('.container');
   const assumptions = document.getElementById('advancedSettings');
@@ -322,8 +324,8 @@ function downloadPDF() {
   const resultsBox = document.querySelector('.results-box');
 
   // Save current styles
-  const previousAssumptionDisplay = assumptions.style.display;
-  const previousToggleDisplay = toggleBtn.style.display;
+  const prevAssumptionDisplay = assumptions.style.display;
+  const prevToggleDisplay = toggleBtn.style.display;
   const prevCalculatorMargin = calculator.style.marginRight;
   const prevCalculatorWidth = calculator.style.width;
   const prevResultsBoxWidth = resultsBox.style.width;
@@ -332,7 +334,7 @@ function downloadPDF() {
   assumptions.style.display = 'block';
   toggleBtn.style.display = 'none';
 
-  // Resize boxes for PDF only
+  // Resize layout for PDF only
   calculator.style.width = '35%';
   calculator.style.marginRight = '1rem';
   resultsBox.style.width = '52%';
@@ -349,8 +351,8 @@ function downloadPDF() {
       useCORS: true,
       scrollX: 0,
       scrollY: 0,
-      windowWidth: document.body.scrollWidth,
-      windowHeight: document.body.scrollHeight
+      windowWidth: container.scrollWidth,
+      windowHeight: container.scrollHeight
     },
     jsPDF: {
       unit: 'cm',
@@ -361,11 +363,12 @@ function downloadPDF() {
 
   html2pdf().set(opt).from(container).save().then(() => {
     // Restore original layout
-    assumptions.style.display = previousAssumptionDisplay;
-    toggleBtn.style.display = previousToggleDisplay;
+    assumptions.style.display = prevAssumptionDisplay;
+    toggleBtn.style.display = prevToggleDisplay;
     calculator.style.marginRight = prevCalculatorMargin;
     calculator.style.width = prevCalculatorWidth;
     resultsBox.style.width = prevResultsBoxWidth;
+
     document.querySelectorAll('.results-box button').forEach(btn => btn.style.display = '');
   });
 }
