@@ -178,6 +178,12 @@
     .tooltip img {
   background-color: transparent !important;
 }
+    .assumption-description {
+  font-weight: normal;
+  font-size: 0.85rem;
+  display: block;
+  margin-top: 0.25rem;
+}
   </style>
 </head>
 <body>
@@ -204,7 +210,9 @@
     <div class="advanced-settings" id="advancedSettings">
       <p><strong>Female Incidence Rate:</strong><span>3% <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span>
       <p><strong>Male Incidence Rate:</strong><span>1% <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span>
-<p><strong>Severity of Cases Split (75/20/5):</strong> These percentages are based on assumptions about how common each severity level is likely to be.</p>
+  <strong>Severity of Cases Split (75/20/5):</strong><br>
+  <span class="assumption-description">Based on assumed likelihood of each severity level occurring annually</span>
+</p>
       <p><strong>Assumed Cost of Severity:</strong></p>
       <ul>
         <li>Low = 0.33 × average gross salary <span class="tooltip" data-tooltip="Absenteeism, presenteeism, minor team disruption"><img src="whiteback.png" alt="info icon" /></span></li>
