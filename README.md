@@ -201,13 +201,8 @@
     <div class="advanced-settings" id="advancedSettings">
       <p><strong>Female Incidence Rate:</strong><span>3% <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span>
       <p><strong>Male Incidence Rate:</strong><span>1% <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span>
-      <p><strong>Severity of Cases Split:</strong>
-      <ul>
-        <li>Low = 75% <span class="tooltip" data-tooltip="Unreported and minor cases"><img src="whiteback.png" alt="info icon" /></span></li>
-        <li>Medium = 20% <span class="tooltip" data-tooltip="Internally reported and resolved"><img src="whiteback.png" alt="info icon" /></span></li>
-        <li>High = 5% <span class="tooltip" data-tooltip="Escalated and potential legal cases"><img src="whiteback.png" alt="info icon" /></span></li>
-      </ul>
-      <p><strong>Cost to Company per Case Type:</strong></p>
+<p><strong>Severity of Cases Split (75/20/5):</strong> These percentages are based on assumptions about how common each severity level is likely to be.</p>
+      <p><strong>Assumed Cost of Severity:</strong></p>
       <ul>
         <li>Low = 0.33 × average gross salary <span class="tooltip" data-tooltip="Absenteeism, presenteeism, minor team disruption"><img src="whiteback.png" alt="info icon" /></span></li>
         <li>Medium = 1.43 × average gross salary <span class="tooltip" data-tooltip="HR case involvement, exit risk, longer disruption"><img src="whiteback.png" alt="info icon" /></span></li>
