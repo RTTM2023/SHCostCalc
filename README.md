@@ -285,14 +285,34 @@ document.getElementById('resultsContent').innerHTML = `
     </span>
     <span>${high.toFixed(2)}</span>
   </div>
+  <div class="half-line"></div>
+<div class='results-line-item'>
+  <span>Low Severity Cost (0.33 of Average Gross Salary):
+    <span class="tooltip" data-tooltip="Absenteeism, presenteeism, minor team disruption">
+      <img src="whiteback.png" alt="info icon" />
+    </span>
+  </span>
+  <span>R${Number(lowCost.toFixed(2)).toLocaleString()}</span>
+</div>
+
+<div class='results-line-item'>
+  <span>Medium Severity Cost (1.43 of Average Gross Salary):
+    <span class="tooltip" data-tooltip="HR case involvement, exit risk, longer disruption">
+      <img src="whiteback.png" alt="info icon" />
+    </span>
+  </span>
+  <span>R${Number(medCost.toFixed(2)).toLocaleString()}</span>
+</div>
+
+<div class='results-line-item'>
+  <span>High Severity Cost (6.43 of Average Gross Salary):
+    <span class="tooltip" data-tooltip="Legal risk, reputational damage, settlement costs">
+      <img src="whiteback.png" alt="info icon" />
+    </span>
+  </span>
+  <span>R${Number(highCost.toFixed(2)).toLocaleString()}</span>
+</div>
 `;
-      <div class="half-line"></div>
-      <div class='results-line-item bold'><span>Estimated Costs:</span></div>
-      <div class='results-line-item'><span>Low Severity Cost (0.33 of Average Gross Salary):<span class="tooltip" data-tooltip="Absenteeism, presenteeism, minor team disruption"><img src="whiteback.png" alt="info icon" /></span></span><span>${Math.round(lowCost).toLocaleString()}</span></div>
-      <div class='results-line-item'><span>Medium Severity Cost (1.43 of Average Gross Salary):<span class="tooltip" data-tooltip="HR case involvement, exit risk, longer disruption"><img src="whiteback.png" alt="info icon" /></span></span><span>${Math.round(medCost).toLocaleString()}</span></div>
-      <div class='results-line-item'><span>High Severity Cost (6.43 of Average Gross Salary):<span class="tooltip" data-tooltip="Legal risk, reputational damage, settlement costs"><img src="whiteback.png" alt="info icon" /></span></span><span>${Math.round(highCost).toLocaleString()}</span></div>
-      <div class="total-line"><span>Total Annual Cost:</span><span>R${Math.round(totalCost).toLocaleString()}</span></div>
-    `;
 
     document.getElementById('resultButtons').style.display = 'flex';
     document.getElementById('toggleBtn').style.display = 'inline-block';
