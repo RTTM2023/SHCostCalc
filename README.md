@@ -202,6 +202,23 @@ body {
     padding-top: 0 !important;
   }
 }
+@media print {
+  .button-group,
+  .advanced-toggle,
+  button {
+    display: none !important;
+  }
+}
+@media print {
+  .calculator {
+    flex: 0.8 !important;
+    margin-right: 1rem !important;
+  }
+
+  .results-box {
+    flex: 2 !important;
+  }
+}
 
   </style>
 </head>
