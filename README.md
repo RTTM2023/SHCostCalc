@@ -335,8 +335,8 @@ const prevCalculatorMargin = calculator.style.marginRight;
   toggleBtn.style.display = 'none';
 
   // Resize boxes for PDF
-calculator.style.flex = '0.8';
-resultsBox.style.flex = '2';
+calculator.style.flex = '1.2';
+resultsBox.style.flex = '1.6';
 calculator.style.marginRight = '1rem';
 
   // Hide buttons
