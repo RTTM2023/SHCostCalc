@@ -223,7 +223,7 @@
       <p><strong>Assumed Cost of Severity:</strong></p>
       <ul>
         <li>Low = 0.33 × ave. gross monthly salary <span class="tooltip" data-tooltip="Absenteeism, presenteeism, minor team disruption"><img src="whiteback.png" alt="info icon" /></span></li>
-        <li>Medium = 1.43 × ave. gross monthly salary <span class="tooltip" data-tooltip="HR case involvement, exit risk, longer disruption"><img src="whiteback.png" alt="info icon" /></span></li>
+        <li>Med. = 1.43 × ave. gross monthly salary <span class="tooltip" data-tooltip="HR case involvement, exit risk, longer disruption"><img src="whiteback.png" alt="info icon" /></span></li>
         <li>High = 6.43 × ave. gross monthly salary <span class="tooltip" data-tooltip="Legal risk, reputational damage, settlement costs"><img src="whiteback.png" alt="info icon" /></span></li>
       </ul>
     </div>
