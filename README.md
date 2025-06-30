@@ -211,12 +211,12 @@ body {
 }
 @media print {
   .calculator {
-    flex: 0.8 !important;
+    flex: 1 !important;
     margin-right: 1rem !important;
   }
 
   .results-box {
-    flex: 2 !important;
+    flex: 1.8 !important;
   }
 }
 
