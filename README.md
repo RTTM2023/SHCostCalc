@@ -238,7 +238,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
- function calculateCost() {
+function calculateCost() {
     const women = parseInt(document.getElementById('women').value) || 0;
     const men = parseInt(document.getElementById('men').value) || 0;
     const salary = parseFloat(document.getElementById('salary').value) || 0;
@@ -254,14 +254,8 @@
     const highCases = totalCases * 0.05;
 
     // Calculate cost per severity level (matches Excel 'Severity Case Table' sheet)
-    // Low severity cost = (salary/21.5) + (salary/21.5) + 500
     const lowSeverityCost = (salary / 21.5) + (salary / 21.5) + 500;
-    
-    // Medium severity cost = (C2*5) + (D2*5) + (20%*50%*salary*12) + 10000
-    // Where C2 = salary/21.5 and D2 = salary/21.5 from low severity
     const medSeverityCost = ((salary / 21.5) * 5) + ((salary / 21.5) * 5) + (0.20 * 0.50 * salary * 12) + 10000;
-    
-    // High severity cost = (C2*20) + (D2*20) + (50%*salary*12) + 200000
     const highSeverityCost = ((salary / 21.5) * 20) + ((salary / 21.5) * 20) + (0.50 * salary * 12) + 200000;
 
     // Calculate total costs (matches Excel formula =B6*E4+B7*E5+B8*E6)
@@ -270,21 +264,25 @@
     const totalHighCost = highCases * highSeverityCost;
     const totalCost = totalLowCost + totalMedCost + totalHighCost;
 
+    // Formatting functions
+    const formatNumber = (num) => Math.round(num).toLocaleString('en-US');
+    const formatCurrency = (num) => 'R' + Math.round(num).toLocaleString('en-US');
+
     document.getElementById('resultsContent').innerHTML = `
-        <div class='results-line-item bold'><span>Estimated Cases:</span><span>${totalCases.toFixed(2)}</span></div>
-        <div class='results-line-item'><span>Low Severity Cases (75% of ${totalCases.toFixed(2)}):<span class="tooltip" data-tooltip="Unreported and minor cases"><img src="whiteback.png" alt="info icon" /></span></span><span>${lowCases.toFixed(2)}</span></div>
-        <div class='results-line-item'><span>Medium Severity Cases (20% of ${totalCases.toFixed(2)}):<span class="tooltip" data-tooltip="Internally reported and resolved"><img src="whiteback.png" alt="info icon" /></span></span><span>${medCases.toFixed(2)}</span></div>
-        <div class='results-line-item'><span>High Severity Cases (5% of ${totalCases.toFixed(2)}):<span class="tooltip" data-tooltip="Escalated and potential legal cases"><img src="whiteback.png" alt="info icon" /></span></span><span>${highCases.toFixed(2)}</span></div>
+        <div class='results-line-item bold'><span>Estimated Cases:</span><span>${formatNumber(totalCases)}</span></div>
+        <div class='results-line-item'><span>Low Severity Cases (75% of ${formatNumber(totalCases)}):<span class="tooltip" data-tooltip="Unreported and minor cases"><img src="whiteback.png" alt="info icon" /></span></span><span>${formatNumber(lowCases)}</span></div>
+        <div class='results-line-item'><span>Medium Severity Cases (20% of ${formatNumber(totalCases)}):<span class="tooltip" data-tooltip="Internally reported and resolved"><img src="whiteback.png" alt="info icon" /></span></span><span>${formatNumber(medCases)}</span></div>
+        <div class='results-line-item'><span>High Severity Cases (5% of ${formatNumber(totalCases)}):<span class="tooltip" data-tooltip="Escalated and potential legal cases"><img src="whiteback.png" alt="info icon" /></span></span><span>${formatNumber(highCases)}</span></div>
         <div class="half-line"></div>
         <div class='results-line-item bold'><span>Estimated Costs:</span></div>
-        <div class='results-line-item'><span>Low Severity Cost (per case):<span class="tooltip" data-tooltip="Absenteeism, presenteeism, minor team disruption"><img src="whiteback.png" alt="info icon" /></span></span><span>R${lowSeverityCost.toFixed(2)}</span></div>
-        <div class='results-line-item'><span>Medium Severity Cost (per case):<span class="tooltip" data-tooltip="HR case involvement, exit risk, longer disruption"><img src="whiteback.png" alt="info icon" /></span></span><span>R${medSeverityCost.toFixed(2)}</span></div>
-        <div class='results-line-item'><span>High Severity Cost (per case):<span class="tooltip" data-tooltip="Legal risk, reputational damage, settlement costs"><img src="whiteback.png" alt="info icon" /></span></span><span>R${highSeverityCost.toFixed(2)}</span></div>
+        <div class='results-line-item'><span>Low Severity Cost (per case):<span class="tooltip" data-tooltip="Absenteeism, presenteeism, minor team disruption"><img src="whiteback.png" alt="info icon" /></span></span><span>${formatCurrency(lowSeverityCost)}</span></div>
+        <div class='results-line-item'><span>Medium Severity Cost (per case):<span class="tooltip" data-tooltip="HR case involvement, exit risk, longer disruption"><img src="whiteback.png" alt="info icon" /></span></span><span>${formatCurrency(medSeverityCost)}</span></div>
+        <div class='results-line-item'><span>High Severity Cost (per case):<span class="tooltip" data-tooltip="Legal risk, reputational damage, settlement costs"><img src="whiteback.png" alt="info icon" /></span></span><span>${formatCurrency(highSeverityCost)}</span></div>
         <div class="half-line"></div>
-        <div class='results-line-item'><span>Total Low Severity Cost:</span><span>R${totalLowCost.toFixed(2)}</span></div>
-        <div class='results-line-item'><span>Total Medium Severity Cost:</span><span>R${totalMedCost.toFixed(2)}</span></div>
-        <div class='results-line-item'><span>Total High Severity Cost:</span><span>R${totalHighCost.toFixed(2)}</span></div>
-        <div class="total-line"><span>Total Annual Cost:</span><span>R${totalCost.toFixed(2)}</span></div>
+        <div class='results-line-item'><span>Total Low Severity Cost:</span><span>${formatCurrency(totalLowCost)}</span></div>
+        <div class='results-line-item'><span>Total Medium Severity Cost:</span><span>${formatCurrency(totalMedCost)}</span></div>
+        <div class='results-line-item'><span>Total High Severity Cost:</span><span>${formatCurrency(totalHighCost)}</span></div>
+        <div class="total-line"><span>Total Annual Cost:</span><span>${formatCurrency(totalCost)}</span></div>
     `;
 
     document.getElementById('resultButtons').style.display = 'flex';
