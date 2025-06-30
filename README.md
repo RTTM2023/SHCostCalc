@@ -259,37 +259,37 @@ const totalCost = lowCostRaw + medCostRaw + highCostRaw;
 document.getElementById('resultsContent').innerHTML = `
   <div class='results-line-item bold'>
     <span>Estimated Cases:</span>
-    <span>${totalCases.toFixed(2)}</span>
+    <span>${totalCasesRaw.toFixed(2)}</span>
   </div>
 
   <div class='results-line-item'>
     <span>
-      Low Severity Cases (75% of ${totalCases.toFixed(2)})
+      Low Severity Cases (75% of ${totalCasesRaw.toFixed(2)})
       <span class="tooltip" data-tooltip="Unreported and minor cases">
         <img src="whiteback.png" alt="info icon" />
       </span>
     </span>
-    <span>${low.toFixed(2)}</span>
+    <span>${lowRaw.toFixed(2)}</span>
   </div>
 
   <div class='results-line-item'>
     <span>
-      Medium Severity Cases (20% of ${totalCases.toFixed(2)})
+      Medium Severity Cases (20% of ${totalCasesRaw.toFixed(2)})
       <span class="tooltip" data-tooltip="Internally reported and resolved">
         <img src="whiteback.png" alt="info icon" />
       </span>
     </span>
-    <span>${med.toFixed(2)}</span>
+    <span>${medRaw.toFixed(2)}</span>
   </div>
 
   <div class='results-line-item'>
     <span>
-      High Severity Cases (5% of ${totalCases.toFixed(2)})
+      High Severity Cases (5% of ${totalCasesRaw.toFixed(2)})
       <span class="tooltip" data-tooltip="Escalated and potential legal cases">
         <img src="whiteback.png" alt="info icon" />
       </span>
     </span>
-    <span>${high.toFixed(2)}</span>
+    <span>${highRaw.toFixed(2)}</span>
   </div>
 
   <div class="half-line"></div>
@@ -301,7 +301,7 @@ document.getElementById('resultsContent').innerHTML = `
         <img src="whiteback.png" alt="info icon" />
       </span>
     </span>
-    <span>R${lowCost.toLocaleString('en-ZA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+    <span>R${lowCostRaw.toLocaleString('en-ZA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
   </div>
 
   <div class='results-line-item'>
@@ -311,7 +311,7 @@ document.getElementById('resultsContent').innerHTML = `
         <img src="whiteback.png" alt="info icon" />
       </span>
     </span>
-    <span>R${medCost.toLocaleString('en-ZA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+    <span>R${medCostRaw.toLocaleString('en-ZA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
   </div>
 
   <div class='results-line-item'>
@@ -321,7 +321,7 @@ document.getElementById('resultsContent').innerHTML = `
         <img src="whiteback.png" alt="info icon" />
       </span>
     </span>
-    <span>R${highCost.toLocaleString('en-ZA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+    <span>R${highCostRaw.toLocaleString('en-ZA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
   </div>
 
   <div class="total-line">
@@ -330,9 +330,9 @@ document.getElementById('resultsContent').innerHTML = `
   </div>
 `;
 
-  document.getElementById('resultButtons').style.display = 'flex';
-  document.getElementById('toggleBtn').style.display = 'inline-block';
-}
+document.getElementById('resultButtons').style.display = 'flex';
+document.getElementById('toggleBtn').style.display = 'inline-block';
+
     
   function downloadPDF() {
     const element = document.querySelector('.container');
