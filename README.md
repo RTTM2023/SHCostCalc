@@ -356,7 +356,7 @@ function downloadPDF() {
     jsPDF: {
       unit: 'cm',
       format: 'a4',
-      orientation: 'portrait'
+      orientation: 'landscape'
     }
   };
 
