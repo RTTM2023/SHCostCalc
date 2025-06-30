@@ -220,7 +220,7 @@
 <p><strong>Female Incidence Rate:</strong><span>3% <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span></span></p>
 <p><strong>Male Incidence Rate:</strong><span>1% <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span></span></p>
 <p><strong>Severity of Cases Split (75/20/5):</strong></p>
-<p style="font-size: inherit; font-weight: normal; margin-bottom: 0.1rem;">These percentages are based on assumptions about how common each severity level is likely to be.</p>
+<p style="font-size: inherit; font-weight: normal; margin-bottom: 1rem;">These percentages are based on assumptions about how common each severity level is likely to be.</p>
       <p><strong>Assumed Cost of Severity:</strong></p>
       <ul>
         <li>Low = 0.33 × average gross salary <span class="tooltip" data-tooltip="Absenteeism, presenteeism, minor team disruption"><img src="whiteback.png" alt="info icon" /></span></li>
