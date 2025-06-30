@@ -222,9 +222,9 @@
 <p style="font-size: inherit; font-weight: normal; margin-bottom: 0.1rem; margin-left: 1rem;">These percentages are based on assumptions about how common each severity level is likely to be.</p>
       <p><strong>Assumed Cost of Severity:</strong></p>
       <ul>
-        <li>Low = 0.33 × average gross monthly salary <span class="tooltip" data-tooltip="Absenteeism, presenteeism, minor team disruption"><img src="whiteback.png" alt="info icon" /></span></li>
-        <li>Medium = 1.43 × average gross monthly salary <span class="tooltip" data-tooltip="HR case involvement, exit risk, longer disruption"><img src="whiteback.png" alt="info icon" /></span></li>
-        <li>High = 6.43 × average gross monthly salary <span class="tooltip" data-tooltip="Legal risk, reputational damage, settlement costs"><img src="whiteback.png" alt="info icon" /></span></li>
+        <li>Low = 0.33 × ave. gross monthly salary <span class="tooltip" data-tooltip="Absenteeism, presenteeism, minor team disruption"><img src="whiteback.png" alt="info icon" /></span></li>
+        <li>Medium = 1.43 × ave. gross monthly salary <span class="tooltip" data-tooltip="HR case involvement, exit risk, longer disruption"><img src="whiteback.png" alt="info icon" /></span></li>
+        <li>High = 6.43 × ave. gross monthly salary <span class="tooltip" data-tooltip="Legal risk, reputational damage, settlement costs"><img src="whiteback.png" alt="info icon" /></span></li>
       </ul>
     </div>
 
@@ -266,7 +266,7 @@ function calculateCost() {
 
     // Formatting functions
     const formatNumber = (num) => Math.round(num).toLocaleString('en-US');
-    const formatCurrency = (num) => 'R' + Math.round(num).toLocaleString('en-US');
+const formatCurrency = (num) => 'R' + num.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
     document.getElementById('resultsContent').innerHTML = `
         <div class='results-line-item bold'><span>Estimated Cases:</span><span>${formatNumber(totalCases)}</span></div>
