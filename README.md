@@ -198,10 +198,10 @@
 <div class="container">
   <div class="calculator">
     <h2>Sexual Harassment Cost Calculator</h2>
-    <label for="women">Number of Women in Organisation <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span></label>
+    <label for="women">Number of Women in Organisation <span class="tooltip" data-tooltip="Conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span></label>
     <input type="number" id="women" />
 
-    <label for="men">Number of Men in Organisation <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span></label>
+    <label for="men">Number of Men in Organisation <span class="tooltip" data-tooltip="Conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span></label>
     <input type="number" id="men" />
 
     <label for="salary">Average Gross Monthly Salary (ZAR) <span class="tooltip" data-tooltip="Used to estimate cost impact of each case"><img src="whiteback.png" alt="info icon" /></span></label>
@@ -216,15 +216,15 @@
 
     <button class="advanced-toggle" id="toggleBtn" onclick="toggleAdvanced()">Show/Hide Assumptions</button>
     <div class="advanced-settings" id="advancedSettings">
-<p><strong>Female Incidence Rate:</strong><span>3% <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span></span></p>
-<p><strong>Male Incidence Rate:</strong><span>1% <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span></span></p>
+<p><strong>Female Incidence Rate:</strong><span>3% <span class="tooltip" data-tooltip="Conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span></span></p>
+<p><strong>Male Incidence Rate:</strong><span>1% <span class="tooltip" data-tooltip="Conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span></span></p>
 <p><strong>Severity of Cases Split (75/20/5):</strong></p>
 <p style="font-size: inherit; font-weight: normal; margin-bottom: 0.1rem; margin-left: 1rem;">These percentages are based on assumptions about how common each severity level is likely to be.</p>
       <p><strong>Assumed Cost of Severity:</strong></p>
       <ul>
-        <li>Low = 0.33 × average gross salary <span class="tooltip" data-tooltip="Absenteeism, presenteeism, minor team disruption"><img src="whiteback.png" alt="info icon" /></span></li>
-        <li>Medium = 1.43 × average gross salary <span class="tooltip" data-tooltip="HR case involvement, exit risk, longer disruption"><img src="whiteback.png" alt="info icon" /></span></li>
-        <li>High = 6.43 × average gross salary <span class="tooltip" data-tooltip="Legal risk, reputational damage, settlement costs"><img src="whiteback.png" alt="info icon" /></span></li>
+        <li>Low = 0.33 × average gross monthly salary <span class="tooltip" data-tooltip="Absenteeism, presenteeism, minor team disruption"><img src="whiteback.png" alt="info icon" /></span></li>
+        <li>Medium = 1.43 × average gross monthly salary <span class="tooltip" data-tooltip="HR case involvement, exit risk, longer disruption"><img src="whiteback.png" alt="info icon" /></span></li>
+        <li>High = 6.43 × average gross monthly salary <span class="tooltip" data-tooltip="Legal risk, reputational damage, settlement costs"><img src="whiteback.png" alt="info icon" /></span></li>
       </ul>
     </div>
 
@@ -275,9 +275,9 @@ function calculateCost() {
         <div class='results-line-item'><span>High Severity Cases (5% of ${formatNumber(totalCases)}):<span class="tooltip" data-tooltip="Escalated and potential legal cases"><img src="whiteback.png" alt="info icon" /></span></span><span>${formatNumber(highCases)}</span></div>
         <div class="half-line"></div>
         <div class='results-line-item bold'><span>Estimated Costs:</span></div>
-        <div class='results-line-item'><span>Low Severity Cost (per case):<span class="tooltip" data-tooltip="Absenteeism, presenteeism, minor team disruption"><img src="whiteback.png" alt="info icon" /></span></span><span>${formatCurrency(lowSeverityCost)}</span></div>
-        <div class='results-line-item'><span>Medium Severity Cost (per case):<span class="tooltip" data-tooltip="HR case involvement, exit risk, longer disruption"><img src="whiteback.png" alt="info icon" /></span></span><span>${formatCurrency(medSeverityCost)}</span></div>
-        <div class='results-line-item'><span>High Severity Cost (per case):<span class="tooltip" data-tooltip="Legal risk, reputational damage, settlement costs"><img src="whiteback.png" alt="info icon" /></span></span><span>${formatCurrency(highSeverityCost)}</span></div>
+        <div class='results-line-item'><span>Low Severity Cost (per case):<span class="tooltip" data-tooltip="Absenteeism, presenteeism, minor team disruption @ 33% of Average Gross Monthly Salary"><img src="whiteback.png" alt="info icon" /></span></span><span>${formatCurrency(lowSeverityCost)}</span></div>
+        <div class='results-line-item'><span>Medium Severity Cost (per case):<span class="tooltip" data-tooltip="HR case involvement, exit risk, longer disruption @ 143% of Average Gross Monthly Salary"><img src="whiteback.png" alt="info icon" /></span></span><span>${formatCurrency(medSeverityCost)}</span></div>
+        <div class='results-line-item'><span>High Severity Cost (per case):<span class="tooltip" data-tooltip="Legal risk, reputational damage, settlement costs @ 643% of Average Gross Monthly Salary"><img src="whiteback.png" alt="info icon" /></span></span><span>${formatCurrency(highSeverityCost)}</span></div>
         <div class="half-line"></div>
         <div class='results-line-item'><span>Total Low Severity Cost:</span><span>${formatCurrency(totalLowCost)}</span></div>
         <div class='results-line-item'><span>Total Medium Severity Cost:</span><span>${formatCurrency(totalMedCost)}</span></div>
