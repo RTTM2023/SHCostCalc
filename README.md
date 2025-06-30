@@ -288,17 +288,17 @@ const formatCurrency = (num) => 'R' + num.toFixed(2).replace(/\B(?=(\d{3})+(?!\d
     document.getElementById('resultButtons').style.display = 'flex';
     document.getElementById('toggleBtn').style.display = 'inline-block';
 }
-  function downloadPDF() {
-    const element = document.querySelector('.container');
-const opt = {
-  margin: [0.2, 0.5, 0.2, 0.5],
-  filename: 'Sexual_Harassment_Cost_Estimate.pdf',
-  image: { type: 'jpeg', quality: 0.98 },
-  html2canvas: { scale: 3, useCORS: true },
-  jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
-};
-    html2pdf().set(opt).from(element).save();
-  }
+function downloadPDF() {
+  const element = document.querySelector('.container');
+  const opt = {
+    margin: [0.2, 0.5, 0.5, 0.5], // top, left, bottom, right (in inches)
+    filename: 'Sexual_Harassment_Cost_Estimate.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 3, useCORS: true },
+    jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
+  };
+  html2pdf().set(opt).from(element).save();
+}
 
   function toggleAdvanced() {
     const section = document.getElementById('advancedSettings');
