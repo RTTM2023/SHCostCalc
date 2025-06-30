@@ -245,16 +245,16 @@ function calculateCost() {
 
   const femaleRate = 0.03;
   const maleRate = 0.01;
-  const totalCases = (women * femaleRate) + (men * maleRate);
+const totalCasesRaw = (women * femaleRate) + (men * maleRate);
 
-  const low = totalCases * 0.75;
-  const med = totalCases * 0.2;
-  const high = totalCases * 0.05;
+const lowRaw = totalCasesRaw * 0.75;
+const medRaw = totalCasesRaw * 0.2;
+const highRaw = totalCasesRaw * 0.05;
 
-  const lowCost = low * 0.33 * salary;
-  const medCost = med * 1.43 * salary;
-  const highCost = high * 6.43 * salary;
-  const totalCost = lowCost + medCost + highCost;
+const lowCostRaw = lowRaw * 0.33 * salary;
+const medCostRaw = medRaw * 1.43 * salary;
+const highCostRaw = highRaw * 6.43 * salary;
+const totalCost = lowCostRaw + medCostRaw + highCostRaw;
 
 document.getElementById('resultsContent').innerHTML = `
   <div class='results-line-item bold'>
