@@ -334,9 +334,9 @@ function downloadPDF() {
   toggleBtn.style.display = 'none';
 
   // Resize boxes
-  calculator.style.flex = '0.8';
+  calculator.style.flex = '1.2';
   calculator.style.marginRight = '1rem';
-  resultsBox.style.flex = '2';
+  resultsBox.style.flex = '1.6';
 
   // Hide buttons
   document.querySelectorAll('.results-box button').forEach(btn => btn.style.display = 'none');
