@@ -300,13 +300,24 @@ const formatCurrency = (num) => 'R' + num.toFixed(2).replace(/\B(?=(\d{3})+(?!\d
 }
 function downloadPDF() {
   const container = document.querySelector('.container');
+  const assumptions = document.getElementById('advancedSettings');
+  const toggleBtn = document.getElementById('toggleBtn');
+
+  // 1. Save current display state
+  const previousDisplay = assumptions.style.display;
+
+  // 2. Temporarily show the assumptions section
+  assumptions.style.display = 'block';
+
+  // 3. Optionally hide the toggle button in PDF
+  toggleBtn.style.display = 'none';
 
   const opt = {
-    margin: [0.2, 0.4, 0.2, 0.4], // top, right, bottom, left
+    margin: [0.2, 0.4, 0.2, 0.4],
     filename: 'Sexual_Harassment_Cost_Estimate.pdf',
     image: { type: 'jpeg', quality: 1 },
     html2canvas: {
-      scale: 4, // sharpness
+      scale: 4,
       useCORS: true,
       scrollX: 0,
       scrollY: 0,
@@ -316,11 +327,15 @@ function downloadPDF() {
     jsPDF: {
       unit: 'cm',
       format: 'a4',
-      orientation: 'landscape'
+      orientation: 'portrait'
     }
   };
 
-  html2pdf().set(opt).from(container).save();
+  html2pdf().set(opt).from(container).save().then(() => {
+    // 4. Restore the original display state
+    assumptions.style.display = previousDisplay;
+    toggleBtn.style.display = 'inline-block';
+  });
 }
 
   function toggleAdvanced() {
