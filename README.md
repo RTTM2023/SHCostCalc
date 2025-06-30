@@ -192,6 +192,10 @@
     .advanced-settings strong {
   text-decoration: underline;
 }
+    .pdf-export {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
   </style>
 </head>
 <body>
@@ -290,14 +294,22 @@ const formatCurrency = (num) => 'R' + num.toFixed(2).replace(/\B(?=(\d{3})+(?!\d
 }
 function downloadPDF() {
   const element = document.querySelector('.container');
+
+  // Add temporary PDF class
+  element.classList.add('pdf-export');
+
   const opt = {
-    margin: [0.2, 0.5, 0.5, 0.5], // top, left, bottom, right (in inches)
+    margin: [0.2, 0.5, 0.2, 0.5], // top, left, bottom, right in inches
     filename: 'Sexual_Harassment_Cost_Estimate.pdf',
     image: { type: 'jpeg', quality: 0.98 },
     html2canvas: { scale: 3, useCORS: true },
     jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
   };
-  html2pdf().set(opt).from(element).save();
+
+  html2pdf().set(opt).from(element).save().then(() => {
+    // Remove the class after PDF generation
+    element.classList.remove('pdf-export');
+  });
 }
 
   function toggleAdvanced() {
