@@ -197,14 +197,14 @@
   margin-top: 0 !important;
 }
 .pdf-export .container {
-  padding-top: 0.2rem !important;
+  padding-top: 0 !important;
   margin-top: 0 !important;
 }
-    
+
 .pdf-export .calculator,
 .pdf-export .results-box {
-  padding-top: 1rem !important;
-  padding-bottom: 1rem !important;
+  padding-top: 0.5rem !important; /* Reduced from 1rem */
+  padding-bottom: 0.5rem !important;
 }
   </style>
 </head>
