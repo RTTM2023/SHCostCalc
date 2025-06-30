@@ -8,7 +8,6 @@
     body {
       font-family: 'Montserrat', sans-serif;
       margin: 0;
-      padding: 0;
       background-color: #f8f8f8;
     }
     .container {
@@ -35,14 +34,14 @@
       margin-right: 2rem;
       border: 2px solid #f10178;
     }
-    .results-box {
-      flex: 1;
-      background-color: #f10178;
-      color: white;
-      height: auto;
-      min-height: 300px; 
-      align-self: flex-start;
-    }
+.results-box {
+  flex: 1;
+  background-color: #f10178;
+  color: white;
+  height: auto;
+  min-height: 300px; 
+  align-self: flex-start;
+}
     .results-box h2 {
       font-size: 22px;
     }
@@ -193,38 +192,20 @@
     .advanced-settings strong {
   text-decoration: underline;
 }
-/* PDF Export Specific Styles */
 .pdf-export {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-}
-    .pdf-export body {
-      padding: 0 !important;
-      margin: 0 !important;
-    }
-.pdf-export .container {
-  padding: 0.25rem !important; /* Reduced from 0.5rem */
-}
-    .pdf-export .calculator,
-    .pdf-export .results-box {
-      padding: 0.5rem 1rem !important;
-      margin: 0 !important;
-      box-shadow: none !important;
-      border-radius: 0 !important;
-      border: none !important;
-    }
-.pdf-export h2 {
-  margin-top: 0 !important;
   padding-top: 0 !important;
+  margin-top: 0 !important;
 }
-    .pdf-export .results-line-item,
-    .pdf-export .half-line,
-    .pdf-export .total-line {
-      margin-top: 0.2rem !important;
-      margin-bottom: 0.2rem !important;
-    }
+.pdf-export .container {
+  padding-top: 0.2rem !important;
+  margin-top: 0 !important;
+}
+    
+.pdf-export .calculator,
+.pdf-export .results-box {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
   </style>
 </head>
 <body>
@@ -321,57 +302,23 @@ const formatCurrency = (num) => 'R' + num.toFixed(2).replace(/\B(?=(\d{3})+(?!\d
     document.getElementById('toggleBtn').style.display = 'inline-block';
 }
 function downloadPDF() {
-  // Create a temporary container with just the content we want
-  const element = document.querySelector('.container');
-  const tempDiv = document.createElement('div');
-  tempDiv.style.width = '100%';
-  tempDiv.style.padding = '0';
-  tempDiv.style.margin = '0';
-  tempDiv.appendChild(element.cloneNode(true));
-  document.body.appendChild(tempDiv);
-  
-  // Add PDF export class to the temp container
-  tempDiv.classList.add('pdf-export');
+const element = document.body;
+
+  // Add temporary PDF class
+element.classList.add('pdf-export');
 
   const opt = {
-    margin: 0, // Zero margin on all sides
+    margin: [0.2, 0.5, 0.2, 0.5], // top, left, bottom, right in inches
     filename: 'Sexual_Harassment_Cost_Estimate.pdf',
-    image: { 
-      type: 'jpeg', 
-      quality: 0.98 
-    },
-    html2canvas: { 
-      scale: 2,
-      scrollY: 0,
-      windowHeight: element.offsetHeight,
-      ignoreElements: (el) => {
-        // Ignore any elements that might add space
-        return el.tagName === 'HEADER' || 
-               el.classList.contains('hidden') ||
-               window.getComputedStyle(el).position === 'fixed';
-      }
-    },
-    jsPDF: { 
-      unit: 'in', 
-      format: 'letter', 
-      orientation: 'landscape',
-      // Optional: Try a custom size if needed
-      // format: [11, 7.5] // width, height in inches
-    },
-    pagebreak: { 
-      mode: 'avoid-all' // Prevent unwanted page breaks
-    }
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 3, useCORS: true },
+    jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
   };
 
-  // Generate the PDF
-  html2pdf()
-    .set(opt)
-    .from(tempDiv)
-    .save()
-    .then(() => {
-      // Clean up
-      tempDiv.remove();
-    });
+  html2pdf().set(opt).from(element).save().then(() => {
+    // Remove the class after PDF generation
+    element.classList.remove('pdf-export');
+  });
 }
 
   function toggleAdvanced() {
