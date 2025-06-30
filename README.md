@@ -326,18 +326,18 @@ function downloadPDF() {
   // Save current styles
   const previousAssumptionDisplay = assumptions.style.display;
   const previousToggleDisplay = toggleBtn.style.display;
-  const prevCalculatorMargin = calculator.style.marginRight;
-  const prevCalculatorWidth = calculator.style.width;
-  const prevResultsBoxWidth = resultsBox.style.width;
+const prevCalculatorFlex = calculator.style.flex;
+const prevResultsFlex = resultsBox.style.flex;
+const prevCalculatorMargin = calculator.style.marginRight;
 
   // Show assumptions and hide toggle
   assumptions.style.display = 'block';
   toggleBtn.style.display = 'none';
 
   // Resize boxes for PDF
-  calculator.style.width = '30%';
-  calculator.style.marginRight = '1rem';
-  resultsBox.style.width = '65%';
+calculator.style.flex = '0.8';
+resultsBox.style.flex = '2';
+calculator.style.marginRight = '1rem';
 
   // Hide buttons
   document.querySelectorAll('.results-box button').forEach(btn => btn.style.display = 'none');
@@ -365,9 +365,9 @@ function downloadPDF() {
     // Restore original layout
     assumptions.style.display = previousAssumptionDisplay;
     toggleBtn.style.display = previousToggleDisplay;
-    calculator.style.marginRight = prevCalculatorMargin;
-    calculator.style.width = prevCalculatorWidth;
-    resultsBox.style.width = prevResultsBoxWidth;
+calculator.style.flex = prevCalculatorFlex;
+resultsBox.style.flex = prevResultsFlex;
+calculator.style.marginRight = prevCalculatorMargin;
     document.querySelectorAll('.results-box button').forEach(btn => btn.style.display = '');
   });
 }
