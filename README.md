@@ -82,14 +82,13 @@
     }
 .half-line {
   border-top: 1px solid white;
-  margin: 1rem auto;   
+  margin: 1rem 0;
   width: 50%;
-  text-align: left;
 }
 .total-line {
   font-size: 1.2rem;
   font-weight: bold;
-  margin: 1rem 0;
+  margin: 2rem 0;
   display: flex;
   justify-content: space-between;
   border-top: 1px dotted white;
