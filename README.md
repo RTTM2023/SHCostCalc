@@ -159,6 +159,7 @@
       background: rgba(255,255,255,0.1);
       padding: 1rem;
       border-radius: 15px;
+      font-size: 0.75rem;
     }
     .advanced-settings p {
       display: flex;
@@ -171,6 +172,7 @@
     }
     .advanced-settings li {
       margin-bottom: 0.25rem;
+      font-size: inherit;
     }
     .tooltip img {
   background-color: transparent !important;
