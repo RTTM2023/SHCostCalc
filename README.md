@@ -314,7 +314,6 @@ const formatCurrency = (num) => 'R' + num.toFixed(2).replace(/\B(?=(\d{3})+(?!\d
 
     document.getElementById('resultButtons').style.display = 'flex';
     document.getElementById('toggleBtn').style.display = 'inline-block';
-}
 function downloadPDF() {
   const container = document.querySelector('.container');
   const assumptions = document.getElementById('advancedSettings');
@@ -325,18 +324,18 @@ function downloadPDF() {
   // Save current styles
   const previousAssumptionDisplay = assumptions.style.display;
   const previousToggleDisplay = toggleBtn.style.display;
-  const prevCalculatorFlex = calculator.style.flex;
   const prevCalculatorMargin = calculator.style.marginRight;
-  const prevResultsFlex = resultsBox.style.flex;
+  const prevCalculatorWidth = calculator.style.width;
+  const prevResultsBoxWidth = resultsBox.style.width;
 
   // Show assumptions and hide toggle
   assumptions.style.display = 'block';
   toggleBtn.style.display = 'none';
 
-  // Resize boxes
-  calculator.style.flex = '1.2';
+  // Resize boxes for PDF only
+  calculator.style.width = '35%';
   calculator.style.marginRight = '1rem';
-  resultsBox.style.flex = '1.6';
+  resultsBox.style.width = '52%';
 
   // Hide buttons
   document.querySelectorAll('.results-box button').forEach(btn => btn.style.display = 'none');
@@ -364,9 +363,9 @@ function downloadPDF() {
     // Restore original layout
     assumptions.style.display = previousAssumptionDisplay;
     toggleBtn.style.display = previousToggleDisplay;
-    calculator.style.flex = prevCalculatorFlex;
     calculator.style.marginRight = prevCalculatorMargin;
-    resultsBox.style.flex = prevResultsFlex;
+    calculator.style.width = prevCalculatorWidth;
+    resultsBox.style.width = prevResultsBoxWidth;
     document.querySelectorAll('.results-box button').forEach(btn => btn.style.display = '');
   });
 }
