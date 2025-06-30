@@ -70,17 +70,18 @@
     .results-line-item {
       display: flex;
       justify-content: space-between;
-      margin: 0.5rem 0;
-      font-size: 0.9rem;
+      margin: 0.25rem 0;
+      font-size: 0.75rem;
     }
     .results-line-item.bold {
-      font-size: 1.1rem;
+      font-size: 0.9rem;
       font-weight: bold;
     }
-    .half-line {
-      border-top: 1px solid white;
-      margin: 1rem 0;
-    }
+.half-line {
+  border-top: 1px solid white;
+  margin: 1rem auto;   
+  width: 50%;              
+}
     .total-line {
       font-size: 1.2rem;
       font-weight: bold;
