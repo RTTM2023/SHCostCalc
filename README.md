@@ -319,19 +319,31 @@ function downloadPDF() {
   const container = document.querySelector('.container');
   const assumptions = document.getElementById('advancedSettings');
   const toggleBtn = document.getElementById('toggleBtn');
+  const calculator = document.querySelector('.calculator');
+  const resultsBox = document.querySelector('.results-box');
 
-  // 1. Save current display state
-  const previousDisplay = assumptions.style.display;
+  // Save current styles
+  const previousAssumptionDisplay = assumptions.style.display;
+  const previousToggleDisplay = toggleBtn.style.display;
+  const prevCalculatorFlex = calculator.style.flex;
+  const prevCalculatorMargin = calculator.style.marginRight;
+  const prevResultsFlex = resultsBox.style.flex;
 
-  // 2. Temporarily show the assumptions section
+  // Show assumptions and hide toggle
   assumptions.style.display = 'block';
-
-  // 3. Optionally hide the toggle button in PDF
   toggleBtn.style.display = 'none';
+
+  // Resize boxes
+  calculator.style.flex = '0.8';
+  calculator.style.marginRight = '1rem';
+  resultsBox.style.flex = '2';
+
+  // Hide buttons
+  document.querySelectorAll('.results-box button').forEach(btn => btn.style.display = 'none');
 
   const opt = {
     margin: [0.2, 0.4, 0.2, 0.4],
-    filename: 'Sexual_Harassment_Cost_Estimate (Run to the Monster).pdf',
+    filename: 'Sexual_Harassment_Cost_Estimate.pdf',
     image: { type: 'jpeg', quality: 1 },
     html2canvas: {
       scale: 4,
@@ -344,14 +356,18 @@ function downloadPDF() {
     jsPDF: {
       unit: 'cm',
       format: 'a4',
-      orientation: 'landscape'
+      orientation: 'portrait'
     }
   };
 
   html2pdf().set(opt).from(container).save().then(() => {
-    // 4. Restore the original display state
-    assumptions.style.display = previousDisplay;
-    toggleBtn.style.display = 'inline-block';
+    // Restore original layout
+    assumptions.style.display = previousAssumptionDisplay;
+    toggleBtn.style.display = previousToggleDisplay;
+    calculator.style.flex = prevCalculatorFlex;
+    calculator.style.marginRight = prevCalculatorMargin;
+    resultsBox.style.flex = prevResultsFlex;
+    document.querySelectorAll('.results-box button').forEach(btn => btn.style.display = '');
   });
 }
 
