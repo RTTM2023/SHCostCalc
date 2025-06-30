@@ -34,11 +34,14 @@
       margin-right: 2rem;
       border: 2px solid #f10178;
     }
-    .results-box {
-      flex: 1;
-      background-color: #f10178;
-      color: white;
-    }
+.results-box {
+  flex: 1;
+  background-color: #f10178;
+  color: white;
+  height: auto;
+  min-height: 300px; 
+  align-self: flex-start;
+}
     .results-box h2 {
       font-size: 22px;
     }
@@ -184,6 +187,9 @@
   display: block;
   margin-top: 0.25rem;
 }
+    header, h1 {
+  display: none !important;
+}
   </style>
 </head>
 <body>
@@ -212,7 +218,7 @@
 <p><strong>Male Incidence Rate:</strong><span>1% <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span></span></p>
 <p>
 <p><strong>Severity of Cases Split (75/20/5):</strong></p>
-<p class="assumption-description">These percentages are based on assumptions about how common each severity level is likely to be.</p>
+<p style="font-size: inherit; font-weight: normal; margin-bottom: 0.1rem;">These percentages are based on assumptions about how common each severity level is likely to be.</p>
       <p><strong>Assumed Cost of Severity:</strong></p>
       <ul>
         <li>Low = 0.33 × average gross salary <span class="tooltip" data-tooltip="Absenteeism, presenteeism, minor team disruption"><img src="whiteback.png" alt="info icon" /></span></li>
