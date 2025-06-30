@@ -192,7 +192,7 @@
     .advanced-settings strong {
   text-decoration: underline;
 }
-    .pdf-export {
+.pdf-export {
   padding-top: 0 !important;
   margin-top: 0 !important;
 }
