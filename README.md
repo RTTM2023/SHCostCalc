@@ -203,7 +203,7 @@ body {
     
 .pdf-export .calculator,
 .pdf-export .results-box {
-  padding-top: 1rem !important;
+  padding-top: 0rem !important;
   padding-bottom: 1rem !important;
 }
   </style>
@@ -308,7 +308,7 @@ const element = document.body;
 element.classList.add('pdf-export');
 
   const opt = {
-    margin: [0.2, 0.5, 0.2, 0.5], // top, left, bottom, right in inches
+    margin: [0, 0.5, 0.2, 0.5], // top, left, bottom, right in inches
     filename: 'Sexual_Harassment_Cost_Estimate.pdf',
     image: { type: 'jpeg', quality: 0.98 },
     html2canvas: { scale: 3, useCORS: true },
