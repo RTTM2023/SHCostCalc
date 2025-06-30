@@ -196,6 +196,16 @@
   padding-top: 0 !important;
   margin-top: 0 !important;
 }
+.pdf-export .container {
+  padding-top: 0.2rem !important;
+  margin-top: 0 !important;
+}
+    
+.pdf-export .calculator,
+.pdf-export .results-box {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
   </style>
 </head>
 <body>
@@ -293,10 +303,10 @@ const formatCurrency = (num) => 'R' + num.toFixed(2).replace(/\B(?=(\d{3})+(?!\d
     document.getElementById('toggleBtn').style.display = 'inline-block';
 }
 function downloadPDF() {
-  const element = document.querySelector('.container');
+const element = document.body;
 
   // Add temporary PDF class
-  element.classList.add('pdf-export');
+element.classList.add('pdf-export');
 
   const opt = {
     margin: [0.2, 0.5, 0.2, 0.5], // top, left, bottom, right in inches
