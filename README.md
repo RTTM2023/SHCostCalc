@@ -30,7 +30,7 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
     .calculator {
-      flex: 1;
+      flex: 1.3;
       margin-right: 2rem;
       border: 2px solid #f10178;
     }
@@ -176,37 +176,37 @@
 <div class="container">
   <div class="calculator">
     <h2>Sexual Harassment Cost Calculator</h2>
-    <label for="women">Number of Women in Organisation <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="blue back2.png" alt="info icon" /></span></label>
+    <label for="women">Number of Women in Organisation <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span></label>
     <input type="number" id="women" />
 
-    <label for="men">Number of Men in Organisation <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="blue back2.png" alt="info icon" /></span></label>
+    <label for="men">Number of Men in Organisation <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span></label>
     <input type="number" id="men" />
 
-    <label for="salary">Average Gross Monthly Salary (R) <span class="tooltip" data-tooltip="Used to estimate cost impact of each case"><img src="blue back2.png" alt="info icon" /></span></label>
+    <label for="salary">Average Gross Monthly Salary (ZAR) <span class="tooltip" data-tooltip="Used to estimate cost impact of each case"><img src="whiteback.png" alt="info icon" /></span></label>
     <input type="number" id="salary" />
 
     <button onclick="calculateCost()">Calculate</button>
   </div>
 
   <div class="results-box">
-    <h2>Estimated Sexual Harassment Cost</h2>
+    <h2>Estimated Cost of Sexual Harassment</h2>
     <div id="resultsContent"></div>
 
     <button class="advanced-toggle" id="toggleBtn" onclick="toggleAdvanced()">Show/Hide Assumptions</button>
     <div class="advanced-settings" id="advancedSettings">
-      <p><strong>Female Incidence Rate:</strong><span>3% <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="blue back2.png" alt="info icon" /></span>
-      <p><strong>Male Incidence Rate:</strong><span>1% <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="blue back2.png" alt="info icon" /></span>
+      <p><strong>Female Incidence Rate:</strong><span>3% <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span>
+      <p><strong>Male Incidence Rate:</strong><span>1% <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span>
       <p><strong>Severity of Cases Split:</strong>
       <ul>
-        <li>Low = 75% <span class="tooltip" data-tooltip="Unreported and minor cases"><img src="blue back2.png" alt="info icon" /></span></li>
-        <li>Medium = 20% <span class="tooltip" data-tooltip="Internally reported and resolved"><img src="blue back2.png" alt="info icon" /></span></li>
-        <li>High = 5% <span class="tooltip" data-tooltip="Escalated and potential legal cases"><img src="blue back2.png" alt="info icon" /></span></li>
+        <li>Low = 75% <span class="tooltip" data-tooltip="Unreported and minor cases"><img src="whiteback.png" alt="info icon" /></span></li>
+        <li>Medium = 20% <span class="tooltip" data-tooltip="Internally reported and resolved"><img src="whiteback.png" alt="info icon" /></span></li>
+        <li>High = 5% <span class="tooltip" data-tooltip="Escalated and potential legal cases"><img src="whiteback.png" alt="info icon" /></span></li>
       </ul>
       <p><strong>Cost to Company per Case Type:</strong></p>
       <ul>
-        <li>Low = 0.33 × average gross salary <span class="tooltip" data-tooltip="absenteeism, presenteeism, minor team disruption"><img src="blue back2.png" alt="info icon" /></span></li>
-        <li>Medium = 1.43 × average gross salary <span class="tooltip" data-tooltip="HR case involvement, exit risk, longer disruption"><img src="blue back2.png" alt="info icon" /></span></li>
-        <li>High = 6.43 × average gross salary <span class="tooltip" data-tooltip="legal risk, reputational damage, settlement costs"><img src="blue back2.png" alt="info icon" /></span></li>
+        <li>Low = 0.33 × average gross salary <span class="tooltip" data-tooltip="Absenteeism, presenteeism, minor team disruption"><img src="whiteback.png" alt="info icon" /></span></li>
+        <li>Medium = 1.43 × average gross salary <span class="tooltip" data-tooltip="HR case involvement, exit risk, longer disruption"><img src="whiteback.png" alt="info icon" /></span></li>
+        <li>High = 6.43 × average gross salary <span class="tooltip" data-tooltip="Legal risk, reputational damage, settlement costs"><img src="whiteback.png" alt="info icon" /></span></li>
       </ul>
     </div>
 
@@ -240,14 +240,16 @@
 
     document.getElementById('resultsContent').innerHTML = `
       <div class='results-line-item bold'><span>Estimated Cases:</span><span>${Math.round(totalCases)}</span></div>
-      <div class='results-line-item'><span>Low Severity Cases (75% of ${Math.round(totalCases)}):<span class="tooltip" data-tooltip="Unreported and minor cases"><img src="blue back2.png" alt="info icon" /></span></span><span>${Math.round(low)}</span></div>
-      <div class='results-line-item'><span>Medium Severity Cases (20% of ${Math.round(totalCases)}):<span class="tooltip" data-tooltip="Internally reported and resolved"><img src="blue back2.png" alt="info icon" /></span></span><span>${Math.round(med)}</span></div>
-      <div class='results-line-item'><span>High Severity Cases (5% of ${Math.round(totalCases)}):<span class="tooltip" data-tooltip="Escalated and potential legal cases"><img src="blue back2.png" alt="info icon" /></span></span><span>${Math.round(high)}</span></div>
+      <div class='results-line-item'><span>Low Severity Cases (75% of ${Math.round(totalCases)}):<span class="tooltip" data-tooltip="Unreported and minor cases"><img src="whiteback.png" alt="info icon" /></span></span><span>${Math.round(low)}</span></div>
+      <div class='results-line-item'><span>Medium Severity Cases (20% of ${Math.round(totalCases)}):<span class="tooltip" data-tooltip="Internally reported and resolved"><img src="whiteback.png" alt="info icon" /></span></span><span>${Math.round(med)}</span></div>
+      <div class='results-line-item'><span>High Severity Cases (5% of ${Math.round(totalCases)}):<span class="tooltip" data-tooltip="Escalated and potential legal cases"><img src="whiteback.png" alt="info icon" /></span></span><span>${Math.round(high)}</span></div>
       <div class="half-line"></div>
       <div class='results-line-item bold'><span>Estimated Costs:</span></div>
-      <div class='results-line-item'><span>Low Severity Cost:<span class="tooltip" data-tooltip="absenteeism, presenteeism, minor team disruption"><img src="blue back2.png" alt="info icon" /></span></span><span>${Math.round(lowCost).toLocaleString()}</span></div>
-      <div class='results-line-item'><span>Medium Severity Cost:<span class="tooltip" data-tooltip="HR case involvement, exit risk, longer disruption"><img src="blue back2.png" alt="info icon" /></span></span><span>${Math.round(medCost).toLocaleString()}</span></div>
-      <div class='results-line-item'><span>High Severity Cost:<span class="tooltip" data-tooltip="legal risk, reputational damage, settlement costs"><img src="blue back2.png" alt="info icon" /></span></span><span>${Math.round(highCost).toLocaleString()}</span></div>
+      <div class='results-line-item'><span>Low Severity Cost (0.33 of Average Gross Salary):<span class="tooltip" data-tooltip="Absenteeism, presenteeism, minor team disruption"><img src="whiteback.png" alt="info icon" /></span></span><span>${Math.round(lowCost).toLocaleString()}</span></div>
+      <div class='results-line-item'><span>Medium Severity Cost (1.43 of Average Gross salary)
+:<span class="tooltip" data-tooltip="HR case involvement, exit risk, longer disruption"><img src="whiteback.png" alt="info icon" /></span></span><span>${Math.round(medCost).toLocaleString()}</span></div>
+      <div class='results-line-item'><span>High Severity Cost (6.43 of Average Gross salary)
+:<span class="tooltip" data-tooltip="Legal risk, reputational damage, settlement costs"><img src="whiteback.png" alt="info icon" /></span></span><span>${Math.round(highCost).toLocaleString()}</span></div>
       <div class="total-line"><span>Total Annual Cost:</span><span>R${Math.round(totalCost).toLocaleString()}</span></div>
     `;
 
