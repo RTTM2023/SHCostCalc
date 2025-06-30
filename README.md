@@ -315,7 +315,6 @@ const formatCurrency = (num) => 'R' + num.toFixed(2).replace(/\B(?=(\d{3})+(?!\d
     document.getElementById('resultButtons').style.display = 'flex';
     document.getElementById('toggleBtn').style.display = 'inline-block';
 }
-  
 function downloadPDF() {
   const container = document.querySelector('.container');
   const assumptions = document.getElementById('advancedSettings');
@@ -324,20 +323,20 @@ function downloadPDF() {
   const resultsBox = document.querySelector('.results-box');
 
   // Save current styles
-  const prevAssumptionDisplay = assumptions.style.display;
-  const prevToggleDisplay = toggleBtn.style.display;
+  const previousAssumptionDisplay = assumptions.style.display;
+  const previousToggleDisplay = toggleBtn.style.display;
+  const prevCalculatorFlex = calculator.style.flex;
   const prevCalculatorMargin = calculator.style.marginRight;
-  const prevCalculatorWidth = calculator.style.width;
-  const prevResultsBoxWidth = resultsBox.style.width;
+  const prevResultsFlex = resultsBox.style.flex;
 
   // Show assumptions and hide toggle
   assumptions.style.display = 'block';
   toggleBtn.style.display = 'none';
 
-  // Resize layout for PDF only
-  calculator.style.width = '35%';
+  // Resize boxes
+  calculator.style.flex = '1.2';
   calculator.style.marginRight = '1rem';
-  resultsBox.style.width = '52%';
+  resultsBox.style.flex = '1.6';
 
   // Hide buttons
   document.querySelectorAll('.results-box button').forEach(btn => btn.style.display = 'none');
@@ -351,8 +350,8 @@ function downloadPDF() {
       useCORS: true,
       scrollX: 0,
       scrollY: 0,
-      windowWidth: container.scrollWidth,
-      windowHeight: container.scrollHeight
+      windowWidth: document.body.scrollWidth,
+      windowHeight: document.body.scrollHeight
     },
     jsPDF: {
       unit: 'cm',
@@ -363,12 +362,11 @@ function downloadPDF() {
 
   html2pdf().set(opt).from(container).save().then(() => {
     // Restore original layout
-    assumptions.style.display = prevAssumptionDisplay;
-    toggleBtn.style.display = prevToggleDisplay;
+    assumptions.style.display = previousAssumptionDisplay;
+    toggleBtn.style.display = previousToggleDisplay;
+    calculator.style.flex = prevCalculatorFlex;
     calculator.style.marginRight = prevCalculatorMargin;
-    calculator.style.width = prevCalculatorWidth;
-    resultsBox.style.width = prevResultsBoxWidth;
-
+    resultsBox.style.flex = prevResultsFlex;
     document.querySelectorAll('.results-box button').forEach(btn => btn.style.display = '');
   });
 }
