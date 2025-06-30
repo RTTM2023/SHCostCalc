@@ -190,6 +190,9 @@
     header, h1 {
   display: none !important;
 }
+    .advanced-settings strong {
+  text-decoration: underline;
+}
   </style>
 </head>
 <body>
@@ -216,7 +219,6 @@
     <div class="advanced-settings" id="advancedSettings">
 <p><strong>Female Incidence Rate:</strong><span>3% <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span></span></p>
 <p><strong>Male Incidence Rate:</strong><span>1% <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span></span></p>
-<p>
 <p><strong>Severity of Cases Split (75/20/5):</strong></p>
 <p style="font-size: inherit; font-weight: normal; margin-bottom: 0.1rem;">These percentages are based on assumptions about how common each severity level is likely to be.</p>
       <p><strong>Assumed Cost of Severity:</strong></p>
