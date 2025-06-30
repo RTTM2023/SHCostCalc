@@ -244,7 +244,6 @@
 
     <div class="button-group" id="resultButtons">
       <button class="download-btn" onclick="downloadPDF()">Download as PDF</button>
-      <button class="source-btn">View Research Sources</button>
       <button class="reset-btn" onclick="window.location.reload()">Reset Calculator</button>
     </div>
   </div>
