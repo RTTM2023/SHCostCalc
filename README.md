@@ -197,6 +197,11 @@ body {
     .advanced-settings strong {
   text-decoration: underline;
 }
+@media print {
+  .container {
+    padding-top: 0 !important;
+  }
+}
 
   </style>
 </head>
@@ -297,11 +302,11 @@ function downloadPDF() {
   const container = document.querySelector('.container');
 
   const opt = {
-    margin: 0.5,  // Use standard margin
-    filename: 'Sexual_Harassment_Cost_Estimate (Run to the Monster).pdf',
+    margin: [0.1, 0.2, 0.2, 0.2],
+    filename: 'Sexual_Harassment_Cost_Estimate.pdf',
     image: { type: 'jpeg', quality: 0.98 },
     html2canvas: { scale: 3, useCORS: true },
-    jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
+    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
   };
 
   html2pdf().set(opt).from(container).save();
