@@ -208,10 +208,11 @@
 
     <button class="advanced-toggle" id="toggleBtn" onclick="toggleAdvanced()">Show/Hide Assumptions</button>
     <div class="advanced-settings" id="advancedSettings">
-      <p><strong>Female Incidence Rate:</strong><span>3% <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span>
-      <p><strong>Male Incidence Rate:</strong><span>1% <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span>
+<p><strong>Female Incidence Rate:</strong><span>3% <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span></span></p>
+<p><strong>Male Incidence Rate:</strong><span>1% <span class="tooltip" data-tooltip="Ultra conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span></span></p>
+<p>
   <strong>Severity of Cases Split (75/20/5):</strong><br>
-  <span class="assumption-description">Based on assumed likelihood of each severity level occurring annually</span>
+  <span class="assumption-description">These percentages are based on assumptions about how common each severity level is likely to be.These percentages are based on assumptions about how common each severity level is likely to be.</span>
 </p>
       <p><strong>Assumed Cost of Severity:</strong></p>
       <ul>
