@@ -261,55 +261,69 @@ document.getElementById('resultsContent').innerHTML = `
     <span>Estimated Cases:</span>
     <span>${totalCases.toFixed(2)}</span>
   </div>
+
   <div class='results-line-item'>
-    <span>Low Severity Cases (75% of ${totalCases.toFixed(2)}):
+    <span>
+      Low Severity Cases (75% of ${totalCases.toFixed(2)})
       <span class="tooltip" data-tooltip="Unreported and minor cases">
         <img src="whiteback.png" alt="info icon" />
       </span>
     </span>
     <span>${low.toFixed(2)}</span>
   </div>
+
   <div class='results-line-item'>
-    <span>Medium Severity Cases (20% of ${totalCases.toFixed(2)}):
+    <span>
+      Medium Severity Cases (20% of ${totalCases.toFixed(2)})
       <span class="tooltip" data-tooltip="Internally reported and resolved">
         <img src="whiteback.png" alt="info icon" />
       </span>
     </span>
     <span>${med.toFixed(2)}</span>
   </div>
+
   <div class='results-line-item'>
-    <span>High Severity Cases (5% of ${totalCases.toFixed(2)}):
+    <span>
+      High Severity Cases (5% of ${totalCases.toFixed(2)})
       <span class="tooltip" data-tooltip="Escalated and potential legal cases">
         <img src="whiteback.png" alt="info icon" />
       </span>
     </span>
     <span>${high.toFixed(2)}</span>
   </div>
+
   <div class="half-line"></div>
+
   <div class='results-line-item'>
-    <span>Low Severity Cost (0.33 of Average Gross Salary):
+    <span>
+      Low Severity Cost (0.33 of Average Gross Salary)
       <span class="tooltip" data-tooltip="Absenteeism, presenteeism, minor team disruption">
         <img src="whiteback.png" alt="info icon" />
       </span>
     </span>
     <span>R${Number(lowCost.toFixed(2)).toLocaleString()}</span>
   </div>
+
   <div class='results-line-item'>
-    <span>Medium Severity Cost (1.43 of Average Gross Salary):
+    <span>
+      Medium Severity Cost (1.43 of Average Gross Salary)
       <span class="tooltip" data-tooltip="HR case involvement, exit risk, longer disruption">
         <img src="whiteback.png" alt="info icon" />
       </span>
     </span>
     <span>R${Number(medCost.toFixed(2)).toLocaleString()}</span>
   </div>
+
   <div class='results-line-item'>
-    <span>High Severity Cost (6.43 of Average Gross Salary):
+    <span>
+      High Severity Cost (6.43 of Average Gross Salary)
       <span class="tooltip" data-tooltip="Legal risk, reputational damage, settlement costs">
         <img src="whiteback.png" alt="info icon" />
       </span>
     </span>
     <span>R${Number(highCost.toFixed(2)).toLocaleString()}</span>
   </div>
+
   <div class="total-line">
     <span>Total Annual Cost:</span>
     <span>R${Number(totalCost.toFixed(2)).toLocaleString()}</span>
