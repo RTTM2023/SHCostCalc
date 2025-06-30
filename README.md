@@ -335,9 +335,9 @@ function downloadPDF() {
   toggleBtn.style.display = 'none';
 
   // Resize boxes for PDF
-  calculator.style.width = '38%';
+  calculator.style.width = '30%';
   calculator.style.marginRight = '1rem';
-  resultsBox.style.width = '58%';
+  resultsBox.style.width = '65%';
 
   // Hide buttons
   document.querySelectorAll('.results-box button').forEach(btn => btn.style.display = 'none');
