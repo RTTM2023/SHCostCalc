@@ -165,13 +165,14 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 0.1rem;
     }
     .advanced-settings ul {
       padding-left: 2rem;
       margin-top: 0.25rem;
     }
     .advanced-settings li {
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.1rem;
       font-size: inherit;
     }
     .tooltip img {
