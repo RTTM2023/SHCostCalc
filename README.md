@@ -122,9 +122,11 @@ body {
   left: 50%;
   transform: translateX(-50%);
   display: block;
-  max-width: 600px;
+  max-width: 240px;
+  width: max-content;
+  min-width: 120px;
   white-space: normal;
-  word-break: break-word;
+  word-break: normal;
   font-size: 0.8rem;
   z-index: 999;
   box-sizing: border-box;
