@@ -121,11 +121,12 @@ body {
   top: 120%;
   left: 0;
   display: block;
-  width: 400px; /* 👈 You can adjust this value */
+  max-width: 220px; /* 👈 Adjust this to desired tooltip width */
   white-space: normal;
   word-wrap: break-word;
   font-size: 0.8rem;
   z-index: 999;
+  box-sizing: border-box;
 }
     .button-group {
       display: none;
