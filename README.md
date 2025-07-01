@@ -111,20 +111,22 @@ body {
       vertical-align: middle;
       margin-left: 4px;
     }
-    .tooltip:hover::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      background: rgba(0, 0, 0, 0.8);
-      color: #fff;
-      padding: 0.5rem;
-      border-radius: 5px;
-      top: 100%;
-      left: 0;
-      white-space: nowrap;
-      font-size: 0.8rem;
-      margin-top: 0.25rem;
-      z-index: 10;
-    }
+.tooltip:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 0.5rem;
+  border-radius: 5px;
+  top: 100%;
+  left: 0;
+  white-space: normal;
+  max-width: 250px;
+  word-wrap: break-word;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  z-index: 10;
+}
     .button-group {
       display: none;
       flex-direction: column;
@@ -226,10 +228,10 @@ body {
 <div class="container">
   <div class="calculator">
     <h2>Sexual Harassment Cost Calculator</h2>
-    <label for="women">Number of Women in Organisation <span class="tooltip" data-tooltip="Conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span></label>
+    <label for="women">Number of Women in Organisation <span class="tooltip" data-tooltip="Used to estimate the number of cases using an assumed rate of harassment."><img src="whiteback.png" alt="info icon" /></span></label>
     <input type="number" id="women" />
 
-    <label for="men">Number of Men in Organisation <span class="tooltip" data-tooltip="Conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span></label>
+    <label for="men">Number of Men in Organisation <span class="tooltip" data-tooltip="Used to estimate the number of cases using an assumed rate of harassment."><img src="whiteback.png" alt="info icon" /></span></label>
     <input type="number" id="men" />
 
     <label for="salary">Average Gross Monthly Salary (ZAR) <span class="tooltip" data-tooltip="Used to estimate cost impact of each case"><img src="whiteback.png" alt="info icon" /></span></label>
