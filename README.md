@@ -114,18 +114,18 @@ body {
 .tooltip:hover::after {
   content: attr(data-tooltip);
   position: absolute;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.85);
   color: #fff;
-  padding: 0.5rem;
+  padding: 0.6rem 0.8rem;
   border-radius: 5px;
-  top: 100%;
+  top: 120%;
   left: 0;
+  display: block;
+  width: 400px; /* 👈 You can adjust this value */
   white-space: normal;
-  max-width: 800px;
   word-wrap: break-word;
   font-size: 0.8rem;
-  margin-top: 0.25rem;
-  z-index: 10;
+  z-index: 999;
 }
     .button-group {
       display: none;
