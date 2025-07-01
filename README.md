@@ -121,7 +121,7 @@ body {
   top: 120%;
   left: 0;
   display: block;
-  max-width: 400px; /* 👈 Adjust this to desired tooltip width */
+  max-width: 800px; /* 👈 Adjust this to desired tooltip width */
   white-space: normal;
   word-wrap: break-word;
   font-size: 0.8rem;
