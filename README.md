@@ -121,7 +121,7 @@ body {
   top: 100%;
   left: 0;
   white-space: normal;
-  max-width: 250px;
+  max-width: 400px;
   word-wrap: break-word;
   font-size: 0.8rem;
   margin-top: 0.25rem;
