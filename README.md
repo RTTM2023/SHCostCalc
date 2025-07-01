@@ -119,14 +119,16 @@ body {
   padding: 0.6rem 0.8rem;
   border-radius: 5px;
   top: 120%;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   display: block;
-  max-width: 800px; /* 👈 Adjust this to desired tooltip width */
+  max-width: 600px;
   white-space: normal;
-  word-wrap: break-word;
+  word-break: break-word;
   font-size: 0.8rem;
   z-index: 999;
   box-sizing: border-box;
+  text-align: left;
 }
     .button-group {
       display: none;
