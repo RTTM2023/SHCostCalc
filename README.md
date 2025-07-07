@@ -263,21 +263,36 @@ body {
       </ul>
     </div>
 
-    <div class="button-group" id="resultButtons">
-      <button class="download-btn" onclick="downloadPDF()">Download as PDF</button>
-      <button class="download-btn" onclick="toggleEnquiry()">Enquire about our solution</button>
-      <button class="reset-btn" onclick="window.location.reload()">Reset Calculator</button>
-    </div>
-    <div id="enquiryForm" style="display: none; margin-top: 1rem;">
+<div class="button-group" id="resultButtons">
+  <button class="download-btn" onclick="downloadPDF()">Download as PDF</button>
+  <button class="download-btn" onclick="toggleEnquiry()">Enquire about our solution</button>
+</div>
+
+<div id="enquiryForm" style="display: none; margin-top: 1rem;">
   <form action="https://formspree.io/f/manjzgjr" method="POST" style="display: flex; flex-direction: column; gap: 0.75rem;">
-    <input type="text" name="name" placeholder="Your Name" required style="padding: 0.6rem; border-radius: 30px; border: 1px dashed #5b01fa; font-family: 'Montserrat';" />
-    <input type="text" name="organisation" placeholder="Organisation" required style="padding: 0.6rem; border-radius: 30px; border: 1px dashed #5b01fa; font-family: 'Montserrat';" />
-    <input type="email" name="email" placeholder="Email Address" required style="padding: 0.6rem; border-radius: 30px; border: 1px dashed #5b01fa; font-family: 'Montserrat';" />
-    <textarea name="message" readonly style="padding: 0.6rem; border-radius: 20px; border: 1px dashed #5b01fa; font-family: 'Montserrat'; min-height: 100px;">
-I would like to find out more about your sexual harassment prevention programme.
-    </textarea>
-    <button type="submit" class="reset-btn" style="margin-top: 0.5rem;">Send Enquiry</button>
+    <input type="text" name="name" placeholder="Your Name" required style="..."/>
+    <input type="text" name="organisation" placeholder="Organisation" required style="..."/>
+    <input type="email" name="email" placeholder="Email Address" required style="..."/>
+    <textarea name="message" readonly style="...">I would like to find out more about your sexual harassment prevention programme.</textarea>
+<button type="submit" style="
+  margin-top: 0.5rem;
+  background-color: #ffb002;
+  color: black;
+  font-weight: bold;
+  border: none;
+  padding: 1rem;
+  border-radius: 30px;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+">
+  Send Enquiry
+</button>
   </form>
+</div>
+
+<!-- Reset Button is now outside and below both -->
+<div style="margin-top: 1.5rem;">
+  <button class="reset-btn" onclick="window.location.reload()">Reset Calculator</button>
 </div>
   </div>
 </div>
