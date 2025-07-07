@@ -270,7 +270,7 @@ body {
 
 <div id="enquiryForm" style="display: none; margin-top: 1rem;">
   <form action="https://formspree.io/f/manjzgjr" method="POST" style="display: flex; flex-direction: column; gap: 0.75rem;">
-    <input type="text" name="name" placeholder="Your Name" required style="..."/>
+    <input type="text" name="name" placeholder="Your Name" required style="padding: 0.75rem; border-radius: 30px; border: 1px dashed #5b01fa; font-family: 'Montserrat', sans-serif;"/>
     <input type="text" name="organisation" placeholder="Organisation" required style="..."/>
     <input type="email" name="email" placeholder="Email Address" required style="..."/>
     <textarea name="message" readonly style="...">I would like to find out more about your sexual harassment prevention programme.</textarea>
@@ -291,7 +291,7 @@ body {
 </div>
 
 <!-- Reset Button is now outside and below both -->
-<div style="margin-top: 1.5rem;">
+<div id="resetButton" style="display: none; margin-top: 1.5rem;">
   <button class="reset-btn" onclick="window.location.reload()">Reset Calculator</button>
 </div>
   </div>
@@ -348,6 +348,7 @@ const formatCurrency = (num) => 'R' + num.toFixed(2).replace(/\B(?=(\d{3})+(?!\d
 
     document.getElementById('resultButtons').style.display = 'flex';
     document.getElementById('toggleBtn').style.display = 'inline-block';
+  document.getElementById('resetButton').style.display = 'block'; // 👈 ADD THIS
 }
   
 function downloadPDF() {
