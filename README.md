@@ -271,14 +271,13 @@ body {
 <div id="enquiryForm" style="display: none; margin-top: 1rem;">
   <form action="https://formspree.io/f/manjzgjr" method="POST" style="display: flex; flex-direction: column; gap: 0.75rem;">
     <input type="text" name="name" placeholder="Your Name" required style="padding: 0.75rem; border-radius: 30px; border: 1px dashed #5b01fa; font-family: 'Montserrat', sans-serif;"/>
-    <input type="text" name="organisation" placeholder="Organisation" required style="..."/>
-    <input type="email" name="email" placeholder="Email Address" required style="..."/>
-    <textarea name="message" readonly style="...">I would like to find out more about your sexual harassment prevention programme.</textarea>
+<input type="text" name="organisation" placeholder="Organisation" required style="padding: 0.75rem; border-radius: 30px; border: 1px dashed #5b01fa; font-family: 'Montserrat', sans-serif;" />
+<input type="email" name="email" placeholder="Email Address" required style="padding: 0.75rem; border-radius: 30px; border: 1px dashed #5b01fa; font-family: 'Montserrat', sans-serif;" />
+<textarea name="message" readonly style="padding: 0.75rem; border-radius: 30px; border: 1px dashed #5b01fa; font-family: 'Montserrat', sans-serif;">I would like to find out more about your sexual harassment prevention programme.</textarea>
 <button type="submit" style="
   margin-top: 0.5rem;
   background-color: #ffb002;
   color: black;
-  font-weight: bold;
   border: none;
   padding: 1rem;
   border-radius: 30px;
