@@ -265,7 +265,7 @@ body {
 
 <div class="button-group" id="resultButtons">
   <button class="download-btn" onclick="downloadPDF()">Download as PDF</button>
-  <button class="download-btn" onclick="toggleEnquiry()">Enquire about our solution</button>
+  <button class="download-btn" onclick="toggleEnquiry()">Enquire about our Solution</button>
 </div>
 
 <div id="enquiryForm" style="display: none; margin-top: 1rem;">
