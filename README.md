@@ -265,8 +265,20 @@ body {
 
     <div class="button-group" id="resultButtons">
       <button class="download-btn" onclick="downloadPDF()">Download as PDF</button>
+      <button class="download-btn" onclick="toggleEnquiry()">Enquire about our solution</button>
       <button class="reset-btn" onclick="window.location.reload()">Reset Calculator</button>
     </div>
+    <div id="enquiryForm" style="display: none; margin-top: 1rem;">
+  <form action="https://formspree.io/f/manjzgjr" method="POST" style="display: flex; flex-direction: column; gap: 0.75rem;">
+    <input type="text" name="name" placeholder="Your Name" required style="padding: 0.6rem; border-radius: 30px; border: 1px dashed #5b01fa; font-family: 'Montserrat';" />
+    <input type="text" name="organisation" placeholder="Organisation" required style="padding: 0.6rem; border-radius: 30px; border: 1px dashed #5b01fa; font-family: 'Montserrat';" />
+    <input type="email" name="email" placeholder="Email Address" required style="padding: 0.6rem; border-radius: 30px; border: 1px dashed #5b01fa; font-family: 'Montserrat';" />
+    <textarea name="message" readonly style="padding: 0.6rem; border-radius: 20px; border: 1px dashed #5b01fa; font-family: 'Montserrat'; min-height: 100px;">
+I would like to find out more about your sexual harassment prevention programme.
+    </textarea>
+    <button type="submit" class="reset-btn" style="margin-top: 0.5rem;">Send Enquiry</button>
+  </form>
+</div>
   </div>
 </div>
 
@@ -384,6 +396,10 @@ calculator.style.marginRight = prevCalculatorMargin;
     const section = document.getElementById('advancedSettings');
     section.style.display = section.style.display === 'none' || section.style.display === '' ? 'block' : 'none';
   }
+  function toggleEnquiry() {
+  const form = document.getElementById('enquiryForm');
+  form.style.display = form.style.display === 'none' ? 'block' : 'none';
+}
 </script>
 </body>
 </html>
