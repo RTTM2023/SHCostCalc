@@ -282,6 +282,7 @@ body {
   padding: 1rem;
   border-radius: 30px;
   font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
   cursor: pointer;
 ">
   Send Enquiry
