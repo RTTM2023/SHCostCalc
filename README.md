@@ -8,6 +8,7 @@
 body {
   font-family: 'Montserrat', sans-serif;
   margin: 0;
+  background-color: transparent;
 }
     .container {
       display: flex;
