@@ -1,57 +1,56 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sexual Harassment Cost Calculator</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    /* 1. NUCLEAR RESET: Stop padding from adding to width */
+    /* 1. Global Reset to prevent width leakage */
     * {
       box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
     }
 
     body {
       font-family: 'Montserrat', sans-serif;
       margin: 0;
-      padding: 0;
       background-color: transparent;
-      overflow-x: hidden; /* Force hide horizontal scroll */
-      width: 100vw;
+      overflow-x: hidden; /* Stops horizontal scrolling */
+      width: 100%;
     }
 
     .container {
       display: flex;
       flex-direction: column;
-      padding: 10px; /* Minimal padding to keep it on screen */
-      width: 100%;
+      padding: 1rem;
+      max-width: 1600px;
       margin: 0 auto;
-      gap: 20px;
+      gap: 1.5rem;
     }
 
-    /* 2. DESKTOP LOGIC: Proportions restored only for large screens */
+    /* 2. Desktop Layout (Restores side-by-side proportions) */
     @media (min-width: 1024px) {
       .container {
         flex-direction: row;
-        padding: 40px;
-        max-width: 1600px;
+        justify-content: space-between;
+        padding: 2rem;
+        gap: 0;
       }
       .calculator {
         flex: 1.3;
-        margin-right: 40px;
+        margin-right: 2rem;
       }
       .results-box {
         flex: 1;
-        align-self: flex-start; /* Keeps box short on desktop */
+        align-self: flex-start; /* Keeps it short on desktop until needed */
       }
     }
 
     .calculator, .results-box {
-      background-color: #ffffff;
-      padding: 20px;
+      background-color: white;
+      padding: 1.5rem;
       border-radius: 20px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      width: 100%; /* Full width on mobile */
+      width: 100%;
     }
 
     .calculator {
@@ -61,135 +60,139 @@
     .results-box {
       background-color: #f10178;
       color: white;
+      min-height: auto;
     }
 
     h2 {
-      font-size: 1.5rem;
+      font-size: 22px;
       margin-top: 0;
-      line-height: 1.2;
     }
 
     label {
       font-weight: bold;
       display: block;
-      margin-top: 20px;
-      font-size: 0.9rem;
+      margin-top: 1.5rem;
+      font-size: 0.95rem;
     }
 
     input[type="number"] {
       width: 100%;
-      padding: 12px;
-      margin-top: 8px;
+      padding: 0.6rem;
+      margin-top: 5px;
+      font-size: 1rem;
       border-radius: 30px;
       border: 1px dashed #5b01fa;
       font-family: 'Montserrat', sans-serif;
-      font-size: 16px; /* Prevents iPhone zoom-in */
     }
 
     button {
-      margin-top: 20px;
+      margin-top: 1.5rem;
       width: 100%;
-      padding: 15px;
-      font-size: 1.1rem;
-      font-weight: bold;
+      padding: 1rem;
+      font-size: 1.2rem;
       background-color: #f10178;
       color: white;
       border: none;
       border-radius: 30px;
       cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
     }
 
-    /* 3. THE MOBILE FIX: Stack results vertically so they can't overflow */
+    /* 3. The Mobile Wrap Fix for Results */
     .results-line-item {
       display: flex;
-      flex-direction: column; /* Stack on mobile */
-      margin-bottom: 12px;
-      border-bottom: 1px solid rgba(255,255,255,0.2);
-      padding-bottom: 8px;
+      justify-content: space-between;
+      flex-wrap: wrap; /* Allows text to drop to next line if screen is too narrow */
+      margin: 0.5rem 0;
+      font-size: 0.8rem;
+      gap: 10px;
     }
 
-    @media (min-width: 600px) {
-      .results-line-item {
-        flex-direction: row;
-        justify-content: space-between;
-        border-bottom: none;
-      }
-    }
-
-    .results-line-item span:first-child {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      opacity: 0.9;
-    }
-
-    .results-line-item span:last-child {
-      font-size: 1.1rem;
+    .results-line-item.bold {
+      font-size: 0.95rem;
       font-weight: bold;
     }
 
     .total-line {
-      margin-top: 20px;
-      padding: 15px 0;
-      border-top: 2px dotted white;
-      border-bottom: 2px dotted white;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-top: 1.5rem;
       display: flex;
-      flex-direction: column;
-      gap: 5px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      border-top: 1px dotted white;
+      border-bottom: 1px dotted white;
+      padding: 0.8rem 0;
     }
 
-    @media (min-width: 600px) {
-      .total-line {
-        flex-direction: row;
-        justify-content: space-between;
-      }
+    .half-line {
+      border-top: 1px solid white;
+      margin: 1rem 0;
+      width: 50%;
     }
 
-    /* Tooltip Mobile Safety */
+    /* 4. Restore Info Tooltips */
     .tooltip {
+      position: relative;
+      cursor: pointer;
       display: inline-block;
-      margin-left: 5px;
     }
+
     .tooltip img {
-      width: 14px;
-      height: 14px;
+      width: 16px;
+      height: 16px;
+      vertical-align: middle;
+      margin-left: 4px;
       background: transparent !important;
+    }
+
+    .tooltip:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      background: rgba(0, 0, 0, 0.9);
+      color: #fff;
+      padding: 0.6rem;
+      border-radius: 5px;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      font-size: 0.75rem;
+      z-index: 1000;
+      text-align: left;
     }
 
     .button-group {
       display: none;
       flex-direction: column;
-      gap: 10px;
-      margin-top: 20px;
+      gap: 0.8rem;
+      margin-top: 1.5rem;
     }
 
     .download-btn, .reset-btn {
-      width: 100%;
-      padding: 12px;
-      border-radius: 30px;
-      border: 1px dashed #5b01fa;
       background: white;
       color: #f10178;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .reset-btn {
-      background: #5b01fa;
-      color: white;
-    }
-
-    #enquiryForm form {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    #enquiryForm input {
-      width: 100%;
-      padding: 12px;
+      border: 1px dashed #5b01fa;
+      padding: 0.7rem;
       border-radius: 30px;
-      border: none;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+    }
+
+    .reset-btn { background: #5b01fa; color: white; }
+
+    #enquiryForm form input, #enquiryForm textarea {
+      width: 100%;
+      padding: 0.7rem;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+    }
+
+    @media print {
+      .container { flex-direction: row !important; }
+      .button-group, button { display: none !important; }
     }
   </style>
 </head>
@@ -199,33 +202,39 @@
   <div class="calculator">
     <h2>Sexual Harassment Cost Calculator</h2>
     
-    <label>Number of Women</label>
-    <input type="number" id="women" placeholder="0" />
+    <label for="women">Number of Women in Organisation 
+      <span class="tooltip" data-tooltip="Used to estimate cases based on assumed rate."><img src="whiteback.png" /></span>
+    </label>
+    <input type="number" id="women" placeholder="Enter number" />
 
-    <label>Number of Men</label>
-    <input type="number" id="men" placeholder="0" />
+    <label for="men">Number of Men in Organisation 
+      <span class="tooltip" data-tooltip="Used to estimate cases based on assumed rate."><img src="whiteback.png" /></span>
+    </label>
+    <input type="number" id="men" placeholder="Enter number" />
 
-    <label>Avg Monthly Salary (ZAR)</label>
-    <input type="number" id="salary" placeholder="0" />
+    <label for="salary">Average Gross Monthly Salary (ZAR) 
+      <span class="tooltip" data-tooltip="Used to calculate the impact cost per case."><img src="whiteback.png" /></span>
+    </label>
+    <input type="number" id="salary" placeholder="Enter amount" />
 
     <button onclick="calculateCost()">Calculate</button>
   </div>
 
   <div class="results-box">
-    <h2>Estimated Cost</h2>
-    <div id="resultsContent">Enter details to see results.</div>
+    <h2>Estimated Cost of Sexual Harassment</h2>
+    <div id="resultsContent">Results will appear here after calculation.</div>
 
     <div class="button-group" id="resultButtons">
-      <button class="download-btn" onclick="downloadPDF()">Download PDF</button>
-      <button class="download-btn" onclick="toggleEnquiry()">Enquire Now</button>
-      <button class="reset-btn" onclick="window.location.reload()">Reset</button>
+      <button class="download-btn" onclick="downloadPDF()">Download as PDF</button>
+      <button class="download-btn" onclick="toggleEnquiry()">Enquire about Solution</button>
+      <button class="reset-btn" onclick="window.location.reload()">Reset Calculator</button>
     </div>
 
-    <div id="enquiryForm" style="display: none;">
+    <div id="enquiryForm" style="display: none; margin-top: 1.5rem;">
       <form action="https://formspree.io/f/manjzgjr" method="POST">
-        <input type="text" name="name" placeholder="Name" required />
-        <input type="email" name="email" placeholder="Email" required />
-        <button type="submit" style="background-color: #ffb002; color: #000;">Send</button>
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Email Address" required />
+        <button type="submit" style="background-color: #ffb002; color: #000; padding: 0.8rem;">Send Enquiry</button>
       </form>
     </div>
   </div>
@@ -248,15 +257,16 @@ function calculateCost() {
     const highCost = (salary * 6.43) * highCases;
     const total = lowCost + medCost + highCost;
 
-    const formatNum = (n) => Math.round(n).toLocaleString();
+    const formatNum = (n) => Math.round(n).toLocaleString('en-US');
     const formatCur = (n) => 'R' + n.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
 
     document.getElementById('resultsContent').innerHTML = `
-        <div class="results-line-item"><span>Est. Total Cases</span><span>${formatNum(totalCases)}</span></div>
-        <div class="results-line-item"><span>Low Severity (75%)</span><span>${formatNum(lowCases)}</span></div>
-        <div class="results-line-item"><span>Med Severity (20%)</span><span>${formatNum(medCases)}</span></div>
-        <div class="results-line-item"><span>High Severity (5%)</span><span>${formatNum(highCases)}</span></div>
-        <div class="total-line"><span>TOTAL ANNUAL COST</span><span>${formatCur(total)}</span></div>
+        <div class="results-line-item bold"><span>Estimated Cases:</span><span>${formatNum(totalCases)}</span></div>
+        <div class="results-line-item"><span>Low Severity (75%):</span><span>${formatNum(lowCases)}</span></div>
+        <div class="results-line-item"><span>Med Severity (20%):</span><span>${formatNum(medCases)}</span></div>
+        <div class="results-line-item"><span>High Severity (5%):</span><span>${formatNum(highCases)}</span></div>
+        <div class="half-line"></div>
+        <div class="total-line"><span>Total Annual Cost:</span><span>${formatCur(total)}</span></div>
     `;
 
     document.getElementById('resultButtons').style.display = 'flex';
@@ -268,10 +278,9 @@ function downloadPDF() {
 }
 
 function toggleEnquiry() {
-  const f = document.getElementById('enquiryForm');
-  f.style.display = f.style.display === 'none' ? 'block' : 'none';
+  const form = document.getElementById('enquiryForm');
+  form.style.display = form.style.display === 'none' ? 'block' : 'none';
 }
 </script>
-
 </body>
 </html>
