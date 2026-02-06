@@ -10,6 +10,18 @@
       box-sizing: border-box;
       max-width: 100%; 
     }
+    /* Removes the GitHub auto-generated header and title line */
+header, 
+#header,
+.site-header,
+h1:first-of-type {
+  display: none !important;
+}
+
+/* If the blue text is wrapped in a specific GitHub ID */
+#title-with-line {
+  display: none !important;
+}
 
     body {
       font-family: 'Montserrat', sans-serif;
