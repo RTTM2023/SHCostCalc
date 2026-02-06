@@ -4,230 +4,216 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sexual Harassment Cost Calculator</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
-  <style>
 body {
   font-family: 'Montserrat', sans-serif;
   margin: 0;
   background-color: transparent;
+  overflow-x: hidden; /* Prevents tiny side-scrolls */
 }
-    .container {
-      display: flex;
-      flex-direction: column;
-      padding: 2rem;
-      max-width: 1600px;
-      margin: 0 auto;
-    }
-    .container,
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem; /* Reduced for mobile */
+  max-width: 1600px;
+  margin: 0 auto;
+  gap: 1.5rem; /* Gap between boxes when stacked */
+}
+
+.container,
 .calculator,
 .results-box {
   box-sizing: border-box;
 }
-    @media (min-width: 1024px) {
-      .container {
-        flex-direction: row;
-        justify-content: space-between;
-      }
-    }
-    .calculator, .results-box {
-      background-color: white;
-      padding: 2rem;
-      border-radius: 20px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    .calculator {
-      flex: 1.3;
-      margin-right: 2rem;
-      border: 2px solid #f10178;
-    }
+
+/* Desktop Layout */
+@media (min-width: 1024px) {
+  .container {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem;
+  }
+  .calculator {
+    flex: 1.3;
+    margin-right: 2rem;
+  }
+  .results-box {
+    flex: 1;
+  }
+}
+
+.calculator, .results-box {
+  background-color: white;
+  padding: 1.5rem; /* Slightly smaller padding for mobile */
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Ensure full width on mobile */
+}
+
+.calculator {
+  border: 2px solid #f10178;
+}
+
 .results-box {
-  flex: 1;
   background-color: #f10178;
   color: white;
   height: auto;
   min-height: 300px; 
   align-self: flex-start;
 }
-    .results-box h2 {
-      font-size: 22px;
-    }
-    label {
-      font-weight: bold;
-      display: block;
-      margin-top: 1.5rem;
-    }
-    input[type="number"] {
-      width: 100%;
-      padding: 0.6rem;
-      font-size: 1rem;
-      border-radius: 30px;
-      border: 1px dashed #5b01fa;
-      font-family: 'Montserrat', sans-serif;
-    }
-    button {
-      margin-top: 1rem;
-      width: 100%;
-      padding: 1rem;
-      font-size: 1.2rem;
-      background-color: #f10178;
-      color: white;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      font-family: 'Montserrat', sans-serif;
-    }
-    .results-line-item {
-      display: flex;
-      justify-content: space-between;
-      margin: 0.15rem 0;
-      font-size: 0.75rem;
-    }
-    .results-line-item.bold {
-      font-size: 0.9rem;
-      font-weight: bold;
-    }
+
+.results-box h2 {
+  font-size: 22px;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-top: 1.5rem;
+}
+
+input[type="number"], 
+input[type="text"], 
+input[type="email"], 
+textarea {
+  width: 100%;
+  box-sizing: border-box; /* Crucial for mobile */
+  padding: 0.6rem;
+  font-size: 1rem;
+  border-radius: 30px;
+  border: 1px dashed #5b01fa;
+  font-family: 'Montserrat', sans-serif;
+}
+
+button {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.2rem;
+  background-color: #f10178;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.results-line-item {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.25rem 0;
+  font-size: 0.75rem;
+  gap: 10px; /* Prevents text from touching */
+}
+
+.results-line-item.bold {
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
 .half-line {
   border-top: 1px solid white;
   margin: 1rem 0;
   width: 50%;
 }
+
 .total-line {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: bold;
-  margin: 2rem 0 1rem 0;
+  margin: 1.5rem 0 1rem 0;
   display: flex;
   justify-content: space-between;
   border-top: 1px dotted white;
   border-bottom: 1px dotted white;
   padding: 0.5rem 0;
 }
-    .tooltip {
-      position: relative;
-      cursor: pointer;
-      vertical-align: super;
-    }
-    .tooltip img {
-      width: 16px;
-      height: 16px;
-      vertical-align: middle;
-      margin-left: 4px;
-    }
+
+/* Tooltip mobile fix */
+.tooltip {
+  position: relative;
+  cursor: pointer;
+}
+
+.tooltip img {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+/* Prevent tooltip from breaking layout on small screens */
 .tooltip:hover::after {
   content: attr(data-tooltip);
   position: absolute;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.9);
   color: #fff;
-  padding: 0.6rem 0.8rem;
+  padding: 0.6rem;
   border-radius: 5px;
   top: 120%;
   left: 50%;
   transform: translateX(-50%);
   display: block;
-  max-width: 240px;
-  width: max-content;
-  min-width: 120px;
-  white-space: normal;
-  word-break: normal;
-  font-size: 0.8rem;
+  width: 200px;
+  font-size: 0.75rem;
   z-index: 999;
-  box-sizing: border-box;
-  text-align: left;
 }
-    .button-group {
-      display: none;
-      flex-direction: column;
-      gap: 0.5rem;
-      margin-top: 1.5rem;
-    }
-    .download-btn, .reset-btn, .source-btn {
-      background: white;
-      color: #f10178;
-      border: 1px dashed #5b01fa;
-      font-size: 1rem;
-      font-weight: 500;
-      font-family: 'Montserrat', sans-serif;
-      padding: 0.6rem 1rem;
-      border-radius: 30px;
-      cursor: pointer;
-      text-align: center;
-    }
-    .reset-btn {
-      background: #5b01fa;
-      color: white;
-    }
-    .advanced-toggle {
-      margin-top: 2rem;
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      text-align: left;
-      padding: 0;
-      display: none;
-      text-decoration: underline;
-    }
-    .advanced-settings {
-      display: none;
-      margin-top: 1rem;
-      background: rgba(255,255,255,0.1);
-      padding: 1rem;
-      border-radius: 15px;
-      font-size: 0.75rem;
-    }
-    .advanced-settings p {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.1rem;
-    }
-    .advanced-settings ul {
-      padding-left: 2rem;
-      margin-top: 0.25rem;
-    }
-    .advanced-settings li {
-      margin-bottom: 0.1rem;
-      font-size: inherit;
-    }
-    .tooltip img {
-  background-color: transparent !important;
+
+.button-group {
+  display: none;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
 }
-    .assumption-description {
-  font-weight: normal;
-  font-size: 0.85rem;
-  display: block;
-  margin-top: 0.25rem;
+
+.download-btn, .reset-btn, .source-btn {
+  background: white;
+  color: #f10178;
+  border: 1px dashed #5b01fa;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.6rem 1rem;
+  border-radius: 30px;
+  width: 100%;
+  cursor: pointer;
 }
-    header, h1 {
-  display: none !important;
+
+.reset-btn {
+  background: #5b01fa;
+  color: white;
 }
-    .advanced-settings strong {
+
+.advanced-toggle {
+  margin-top: 2rem;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: bold;
   text-decoration: underline;
-}
-@media print {
-  .container {
-    padding-top: 0 !important;
-  }
-}
-@media print {
-  .button-group,
-  .advanced-toggle,
-  button {
-    display: none !important;
-  }
-}
-@media print {
-  .calculator {
-    flex: 1 !important;
-    margin-right: 1rem !important;
-  }
-
-  .results-box {
-    flex: 1.8 !important;
-  }
+  cursor: pointer;
 }
 
-  </style>
+.advanced-settings {
+  display: none;
+  margin-top: 1rem;
+  background: rgba(255,255,255,0.1);
+  padding: 1rem;
+  border-radius: 15px;
+  font-size: 0.7rem;
+}
+
+/* Form Styles */
+#enquiryForm form {
+  display: flex; 
+  flex-direction: column; 
+  gap: 0.75rem;
+}
+
+/* Print Overrides */
+@media print {
+  .container { flex-direction: row !important; }
+  .button-group, .advanced-toggle, button { display: none !important; }
+}
 </head>
 <body>
 <div class="container">
