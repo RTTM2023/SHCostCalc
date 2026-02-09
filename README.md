@@ -87,9 +87,6 @@
     .tooltip img { width: 16px; height: 16px; vertical-align: middle; margin-left: 4px; }
     .tooltip img {
   background-color: transparent !important;
-  border: none !important;
-  mix-blend-mode: multiply; /* Optional: Helps blend the image into the background */
-  display: inline-block;
 }
     
     .tooltip:hover::after {
