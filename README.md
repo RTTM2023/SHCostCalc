@@ -5,12 +5,9 @@
   <title>Sexual Harassment Cost Calculator</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    /* Mobile-First Responsive Styles */
+    /* Mobile-First Responsive Shell */
     * { box-sizing: border-box; max-width: 100%; }
-    
-    header, #header, .site-header, h1:first-of-type, #title-with-line {
-      display: none !important;
-    }
+    header, #header, .site-header, h1:first-of-type, #title-with-line { display: none !important; }
 
     body {
       font-family: 'Montserrat', sans-serif;
@@ -50,20 +47,9 @@
     }
 
     .calculator { border: 2px solid #f10178; }
-
-    .results-box {
-      background-color: #f10178;
-      color: white;
-      min-height: 300px;
-    }
-
+    .results-box { background-color: #f10178; color: white; min-height: 300px; }
     h2 { font-size: 22px; margin-top: 0; }
-
-    label {
-      font-weight: bold;
-      display: block;
-      margin-top: 1.5rem;
-    }
+    label { font-weight: bold; display: block; margin-top: 1.5rem; }
 
     input[type="number"], input[type="text"], input[type="email"], textarea {
       width: 100%;
@@ -88,33 +74,17 @@
       font-family: 'Montserrat', sans-serif;
     }
 
-    /* Results Items */
-    .results-line-item {
-      display: flex;
-      justify-content: space-between;
-      margin: 0.15rem 0;
-      font-size: 0.75rem;
-      gap: 8px;
-    }
-
+    .results-line-item { display: flex; justify-content: space-between; margin: 0.15rem 0; font-size: 0.75rem; gap: 8px; }
     .results-line-item.bold { font-size: 0.9rem; font-weight: bold; }
-
     .total-line {
-      font-size: 1.2rem;
-      font-weight: bold;
-      margin: 2rem 0 1rem 0;
-      display: flex;
-      justify-content: space-between;
-      border-top: 1px dotted white;
-      border-bottom: 1px dotted white;
-      padding: 0.5rem 0;
+      font-size: 1.2rem; font-weight: bold; margin: 2rem 0 1rem 0;
+      display: flex; justify-content: space-between;
+      border-top: 1px dotted white; border-bottom: 1px dotted white; padding: 0.5rem 0;
     }
-
     .half-line { border-top: 1px solid white; margin: 1rem 0; width: 50%; }
 
-    /* Tooltips */
     .tooltip { position: relative; cursor: pointer; vertical-align: middle; }
-    .tooltip img { width: 16px; height: 16px; vertical-align: middle; margin-left: 4px; background-color: transparent !important;}
+    .tooltip img { width: 16px; height: 16px; vertical-align: middle; margin-left: 4px; }
     
     .tooltip:hover::after {
       content: attr(data-tooltip);
@@ -136,7 +106,6 @@
     }
 
     .button-group { display: none; flex-direction: column; gap: 0.5rem; margin-top: 1.5rem; }
-    
     .download-btn, .reset-btn {
       background: white; color: #f10178; border: 1px dashed #5b01fa;
       padding: 0.6rem 1rem; border-radius: 30px; font-weight: 500; cursor: pointer; text-align: center;
@@ -155,6 +124,7 @@
     .advanced-settings p { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.1rem; }
     .advanced-settings strong { text-decoration: underline; }
     .advanced-settings ul { padding-left: 2rem; margin-top: 0.25rem; }
+    .advanced-settings li { margin-bottom: 0.1rem; font-size: inherit; }
   </style>
 </head>
 <body>
@@ -162,7 +132,6 @@
 <div class="container">
   <div class="calculator">
     <h2>Sexual Harassment Cost Calculator</h2>
-    
     <label for="women">Number of Women in Organisation <span class="tooltip" data-tooltip="Used to estimate the number of cases using an assumed rate of harassment."><img src="whiteback.png" alt="info icon" /></span></label>
     <input type="number" id="women" />
 
@@ -205,7 +174,7 @@
         <input type="text" name="organisation" placeholder="Organisation" required />
         <input type="email" name="email" placeholder="Email Address" required />
         <textarea name="message" readonly>I would like to find out more about your sexual harassment prevention programme.</textarea>
-        <button type="submit" style="background-color: #ffb002; color: black; border-radius: 30px; padding: 1rem; border:none; cursor:pointer;">Send Enquiry</button>
+        <button type="submit" style="background-color: #ffb002; color: black; border-radius: 30px; padding: 1rem; border:none; cursor:pointer; font-weight: bold;">Send Enquiry</button>
       </form>
     </div>
 
@@ -217,6 +186,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
+// Logic exactly from original code
 function calculateCost() {
     const women = parseInt(document.getElementById('women').value) || 0;
     const men = parseInt(document.getElementById('men').value) || 0;
