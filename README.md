@@ -5,7 +5,7 @@
   <title>Sexual Harassment Cost Calculator</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    /* 1. Global Mobile Fixes */
+    /* Mobile-First Responsive Styles */
     * { box-sizing: border-box; max-width: 100%; }
     
     header, #header, .site-header, h1:first-of-type, #title-with-line {
@@ -30,7 +30,6 @@
       gap: 20px;
     }
 
-    /* 2. Desktop Layout (1024px+) */
     @media (min-width: 1024px) {
       .container {
         flex-direction: row;
@@ -44,7 +43,7 @@
 
     .calculator, .results-box {
       background-color: white;
-      padding: 20px;
+      padding: 2rem;
       border-radius: 20px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       width: 100%;
@@ -55,104 +54,107 @@
     .results-box {
       background-color: #f10178;
       color: white;
-      word-wrap: break-word;
       min-height: 300px;
     }
 
-    h2 { font-size: 1.4rem; margin-top: 0; line-height: 1.2; }
+    h2 { font-size: 22px; margin-top: 0; }
 
     label {
       font-weight: bold;
       display: block;
       margin-top: 1.5rem;
-      font-size: 0.9rem;
     }
 
     input[type="number"], input[type="text"], input[type="email"], textarea {
       width: 100%;
-      padding: 12px;
-      margin-top: 8px;
+      padding: 0.6rem;
       font-size: 16px; 
       border-radius: 30px;
       border: 1px dashed #5b01fa;
       font-family: 'Montserrat', sans-serif;
+      margin-top: 5px;
     }
 
     button {
-      margin-top: 1.5rem;
+      margin-top: 1rem;
       width: 100%;
       padding: 1rem;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       background-color: #f10178;
       color: white;
       border: none;
       border-radius: 30px;
       cursor: pointer;
-      font-weight: bold;
+      font-family: 'Montserrat', sans-serif;
     }
 
-    /* 3. Results List Styles */
+    /* Results Items */
     .results-line-item {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      margin: 8px 0;
+      margin: 0.15rem 0;
       font-size: 0.75rem;
-      gap: 10px;
+      gap: 8px;
     }
 
     .results-line-item.bold { font-size: 0.9rem; font-weight: bold; }
 
     .total-line {
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       font-weight: bold;
-      margin: 20px 0;
+      margin: 2rem 0 1rem 0;
       display: flex;
       justify-content: space-between;
       border-top: 1px dotted white;
       border-bottom: 1px dotted white;
-      padding: 10px 0;
+      padding: 0.5rem 0;
     }
 
-    .half-line { border-top: 1px solid white; margin: 15px 0; width: 50%; }
+    .half-line { border-top: 1px solid white; margin: 1rem 0; width: 50%; }
 
-    /* 4. Tooltips - Mobile Friendly */
-    .tooltip { position: relative; cursor: pointer; display: inline-block; }
-    .tooltip img { width: 16px; height: 16px; vertical-align: middle; margin-left: 4px; }
+    /* Tooltips */
+    .tooltip { position: relative; cursor: pointer; vertical-align: middle; }
+    .tooltip img { width: 16px; height: 16px; vertical-align: middle; margin-left: 4px; background-color: transparent !important;}
     
     .tooltip:hover::after {
       content: attr(data-tooltip);
       position: absolute;
       background: rgba(0, 0, 0, 0.9);
       color: #fff;
-      padding: 10px;
-      border-radius: 8px;
+      padding: 0.6rem 0.8rem;
+      border-radius: 5px;
       bottom: 125%;
       left: 50%;
       transform: translateX(-50%);
-      width: 200px;
-      font-size: 0.75rem;
+      display: block;
+      max-width: 240px;
+      width: max-content;
+      min-width: 120px;
+      font-size: 0.8rem;
       z-index: 999;
+      text-align: left;
     }
 
-    .button-group { display: none; flex-direction: column; gap: 10px; margin-top: 20px; }
+    .button-group { display: none; flex-direction: column; gap: 0.5rem; margin-top: 1.5rem; }
     
     .download-btn, .reset-btn {
       background: white; color: #f10178; border: 1px dashed #5b01fa;
-      padding: 12px; border-radius: 30px; font-weight: bold; text-align: center;
+      padding: 0.6rem 1rem; border-radius: 30px; font-weight: 500; cursor: pointer; text-align: center;
     }
     .reset-btn { background: #5b01fa; color: white; }
 
     .advanced-toggle {
       background: none; border: none; color: #fff; text-decoration: underline;
-      font-weight: bold; cursor: pointer; display: none; margin-top: 15px; padding: 0;
+      font-weight: bold; cursor: pointer; display: none; margin-top: 2rem; padding: 0; text-align: left;
     }
 
     .advanced-settings {
       display: none; background: rgba(255,255,255,0.1);
-      padding: 15px; border-radius: 15px; font-size: 0.75rem; margin-top: 10px;
+      padding: 1rem; border-radius: 15px; font-size: 0.75rem; margin-top: 1rem;
     }
-    .advanced-settings p { display: flex; justify-content: space-between; margin: 5px 0; }
+    .advanced-settings p { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.1rem; }
+    .advanced-settings strong { text-decoration: underline; }
+    .advanced-settings ul { padding-left: 2rem; margin-top: 0.25rem; }
   </style>
 </head>
 <body>
@@ -161,39 +163,34 @@
   <div class="calculator">
     <h2>Sexual Harassment Cost Calculator</h2>
     
-    <label for="women">Number of Women in Organisation 
-      <span class="tooltip" data-tooltip="Used to estimate the number of cases using an assumed rate of harassment."><img src="whiteback.png" /></span>
-    </label>
-    <input type="number" id="women" placeholder="0" />
+    <label for="women">Number of Women in Organisation <span class="tooltip" data-tooltip="Used to estimate the number of cases using an assumed rate of harassment."><img src="whiteback.png" alt="info icon" /></span></label>
+    <input type="number" id="women" />
 
-    <label for="men">Number of Men in Organisation 
-      <span class="tooltip" data-tooltip="Used to estimate the number of cases using an assumed rate of harassment."><img src="whiteback.png" /></span>
-    </label>
-    <input type="number" id="men" placeholder="0" />
+    <label for="men">Number of Men in Organisation <span class="tooltip" data-tooltip="Used to estimate the number of cases using an assumed rate of harassment."><img src="whiteback.png" alt="info icon" /></span></label>
+    <input type="number" id="men" />
 
-    <label for="salary">Average Gross Monthly Salary (ZAR) 
-      <span class="tooltip" data-tooltip="Used to estimate cost impact of each case"><img src="whiteback.png" /></span>
-    </label>
-    <input type="number" id="salary" placeholder="0" />
+    <label for="salary">Average Gross Monthly Salary (ZAR) <span class="tooltip" data-tooltip="Used to estimate cost impact of each case"><img src="whiteback.png" alt="info icon" /></span></label>
+    <input type="number" id="salary" />
 
     <button onclick="calculateCost()">Calculate</button>
   </div>
 
   <div class="results-box">
     <h2>Estimated Cost of Sexual Harassment</h2>
-    <div id="resultsContent">Enter details to see calculations.</div>
+    <div id="resultsContent"></div>
 
     <button class="advanced-toggle" id="toggleBtn" onclick="toggleAdvanced()">Show/Hide Assumptions</button>
     
     <div class="advanced-settings" id="advancedSettings">
-      <p><strong>Female Incidence Rate:</strong> <span>3%</span></p>
-      <p><strong>Male Incidence Rate:</strong> <span>1%</span></p>
-      <p><strong>Severity Split:</strong> 75 / 20 / 5 %</p>
-      <p><strong>Assumed Costs:</strong></p>
-      <ul style="padding-left: 15px; margin: 5px 0;">
-        <li>Low: 0.33 × Salary</li>
-        <li>Med: 1.43 × Salary</li>
-        <li>High: 6.43 × Salary</li>
+      <p><strong>Female Incidence Rate:</strong><span>3% <span class="tooltip" data-tooltip="Conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span></span></p>
+      <p><strong>Male Incidence Rate:</strong><span>1% <span class="tooltip" data-tooltip="Conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span></span></p>
+      <p><strong>Severity of Cases Split (75/20/5):</strong></p>
+      <p style="font-size: inherit; font-weight: normal; margin-bottom: 0.1rem; margin-left: 1rem;">These percentages are based on assumptions about how common each severity level is likely to be.</p>
+      <p><strong>Assumed Cost of Severity:</strong></p>
+      <ul>
+        <li>Low = 0.33 × ave. gross monthly salary <span class="tooltip" data-tooltip="Absenteeism, presenteeism, minor team disruption"><img src="whiteback.png" alt="info icon" /></span></li>
+        <li>Med. = 1.43 × ave. gross monthly salary <span class="tooltip" data-tooltip="HR case involvement, exit risk, longer disruption"><img src="whiteback.png" alt="info icon" /></span></li>
+        <li>High = 6.43 × ave. gross monthly salary <span class="tooltip" data-tooltip="Legal risk, reputational damage, settlement costs"><img src="whiteback.png" alt="info icon" /></span></li>
       </ul>
     </div>
 
@@ -202,17 +199,17 @@
       <button class="download-btn" onclick="toggleEnquiry()">Enquire about our Solution</button>
     </div>
 
-    <div id="enquiryForm" style="display: none; margin-top: 15px;">
-      <form action="https://formspree.io/f/manjzgjr" method="POST" style="display: flex; flex-direction: column; gap: 10px;">
+    <div id="enquiryForm" style="display: none; margin-top: 1rem;">
+      <form action="https://formspree.io/f/manjzgjr" method="POST" style="display: flex; flex-direction: column; gap: 0.75rem;">
         <input type="text" name="name" placeholder="Your Name" required />
         <input type="text" name="organisation" placeholder="Organisation" required />
         <input type="email" name="email" placeholder="Email Address" required />
-        <textarea name="message" readonly style="height: 80px; border-radius: 15px;">I would like to find out more about your sexual harassment prevention programme.</textarea>
-        <button type="submit" style="background-color: #ffb002; color: black; margin-top: 5px;">Send Enquiry</button>
+        <textarea name="message" readonly>I would like to find out more about your sexual harassment prevention programme.</textarea>
+        <button type="submit" style="background-color: #ffb002; color: black; border-radius: 30px; padding: 1rem; border:none; cursor:pointer;">Send Enquiry</button>
       </form>
     </div>
 
-    <div id="resetButton" style="display: none; margin-top: 15px;">
+    <div id="resetButton" style="display: none; margin-top: 1.5rem;">
       <button class="reset-btn" onclick="window.location.reload()">Reset Calculator</button>
     </div>
   </div>
@@ -225,7 +222,6 @@ function calculateCost() {
     const men = parseInt(document.getElementById('men').value) || 0;
     const salary = parseFloat(document.getElementById('salary').value) || 0;
 
-    // RESTORED ORIGINAL FORMULAS
     const totalCases = (women * 0.03) + (men * 0.01);
     const lowCases = totalCases * 0.75;
     const medCases = totalCases * 0.20;
@@ -245,19 +241,23 @@ function calculateCost() {
 
     document.getElementById('resultsContent').innerHTML = `
         <div class='results-line-item bold'><span>Estimated Cases:</span><span>${formatNumber(totalCases)}</span></div>
-        <div class='results-line-item'><span>Low Severity (75%):</span><span>${formatNumber(lowCases)}</span></div>
-        <div class='results-line-item'><span>Med Severity (20%):</span><span>${formatNumber(medCases)}</span></div>
-        <div class='results-line-item'><span>High Severity (5%):</span><span>${formatNumber(highCases)}</span></div>
+        <div class='results-line-item'><span>Low Severity Cases (75% of ${formatNumber(totalCases)}):<span class="tooltip" data-tooltip="Unreported and minor cases"><img src="whiteback.png" alt="info icon" /></span></span><span>${formatNumber(lowCases)}</span></div>
+        <div class='results-line-item'><span>Medium Severity Cases (20% of ${formatNumber(totalCases)}):<span class="tooltip" data-tooltip="Internally reported and resolved"><img src="whiteback.png" alt="info icon" /></span></span><span>${formatNumber(medCases)}</span></div>
+        <div class='results-line-item'><span>High Severity Cases (5% of ${formatNumber(totalCases)}):<span class="tooltip" data-tooltip="Escalated and potential legal cases"><img src="whiteback.png" alt="info icon" /></span></span><span>${formatNumber(highCases)}</span></div>
         <div class="half-line"></div>
-        <div class='results-line-item bold'><span>Costs Per Case:</span></div>
-        <div class='results-line-item'><span>Low:</span><span>${formatCurrency(lowSeverityCost)}</span></div>
-        <div class='results-line-item'><span>Med:</span><span>${formatCurrency(medSeverityCost)}</span></div>
-        <div class='results-line-item'><span>High:</span><span>${formatCurrency(highSeverityCost)}</span></div>
+        <div class='results-line-item bold'><span>Estimated Costs:</span></div>
+        <div class='results-line-item'><span>Low Severity Cost (per case):<span class="tooltip" data-tooltip="Absenteeism, presenteeism, minor team disruption @ 33% of Average Gross Monthly Salary"><img src="whiteback.png" alt="info icon" /></span></span><span>${formatCurrency(lowSeverityCost)}</span></div>
+        <div class='results-line-item'><span>Medium Severity Cost (per case):<span class="tooltip" data-tooltip="HR case involvement, exit risk, longer disruption @ 143% of Average Gross Monthly Salary"><img src="whiteback.png" alt="info icon" /></span></span><span>${formatCurrency(medSeverityCost)}</span></div>
+        <div class='results-line-item'><span>High Severity Cost (per case):<span class="tooltip" data-tooltip="Legal risk, reputational damage, settlement costs @ 643% of Average Gross Monthly Salary"><img src="whiteback.png" alt="info icon" /></span></span><span>${formatCurrency(highSeverityCost)}</span></div>
+        <div class="half-line"></div>
+        <div class='results-line-item'><span>Total Low Severity Cost:</span><span>${formatCurrency(totalLowCost)}</span></div>
+        <div class='results-line-item'><span>Total Medium Severity Cost:</span><span>${formatCurrency(totalMedCost)}</span></div>
+        <div class='results-line-item'><span>Total High Severity Cost:</span><span>${formatCurrency(totalHighCost)}</span></div>
         <div class="total-line"><span>Total Annual Cost:</span><span>${formatCurrency(totalCost)}</span></div>
     `;
 
     document.getElementById('resultButtons').style.display = 'flex';
-    document.getElementById('toggleBtn').style.display = 'block';
+    document.getElementById('toggleBtn').style.display = 'inline-block';
     document.getElementById('resetButton').style.display = 'block';
 }
 
@@ -274,10 +274,10 @@ function toggleEnquiry() {
 function downloadPDF() {
     const element = document.querySelector('.container');
     const opt = {
-        margin: [0.5, 0.5],
-        filename: 'Harassment_Cost_Report.pdf',
+        margin: [0.3, 0.3],
+        filename: 'SH_Cost_Report.pdf',
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true },
+        html2canvas: { scale: 3, useCORS: true },
         jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
     html2pdf().set(opt).from(element).save();
