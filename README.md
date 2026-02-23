@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -54,7 +55,7 @@
     input[type="number"], input[type="text"], input[type="email"], textarea {
       width: 100%;
       padding: 0.6rem;
-      font-size: 16px; 
+      font-size: 16px;
       border-radius: 30px;
       border: 1px dashed #5b01fa;
       font-family: 'Montserrat', sans-serif;
@@ -84,11 +85,8 @@
     .half-line { border-top: 1px solid white; margin: 1rem 0; width: 50%; }
 
     .tooltip { position: relative; cursor: pointer; vertical-align: middle; }
-    .tooltip img { width: 16px; height: 16px; vertical-align: middle; margin-left: 4px; }
-    .tooltip img {
-  background-color: transparent !important;
-}
-    
+    .tooltip img { width: 16px; height: 16px; vertical-align: middle; margin-left: 4px; background-color: transparent !important; }
+
     .tooltip:hover::after {
       content: attr(data-tooltip);
       position: absolute;
@@ -128,6 +126,50 @@
     .advanced-settings strong { text-decoration: underline; }
     .advanced-settings ul { padding-left: 2rem; margin-top: 0.25rem; }
     .advanced-settings li { margin-bottom: 0.1rem; font-size: inherit; }
+
+    /* =========================
+       PDF Export Mode (fixes padding + 2-page split)
+       ========================= */
+    .pdf-export body { background: #fff !important; }
+
+    /* Hide everything except results in the PDF */
+    .pdf-export .calculator,
+    .pdf-export .button-group,
+    .pdf-export #enquiryForm,
+    .pdf-export #resetButton,
+    .pdf-export .advanced-toggle,
+    .pdf-export .advanced-settings {
+      display: none !important;
+    }
+
+    /* Remove outer padding/gaps so PDF uses the page efficiently */
+    .pdf-export .container {
+      padding: 0 !important;
+      gap: 0 !important;
+    }
+
+    /* Make results clean for PDF */
+    .pdf-export .results-box {
+      width: 100% !important;
+      padding: 1rem !important;      /* reduce padding */
+      border-radius: 0 !important;   /* remove rounded corners */
+      box-shadow: none !important;   /* remove shadow */
+      min-height: auto !important;
+    }
+
+    /* Prevent awkward page breaks inside the results */
+    .pdf-export .results-box,
+    .pdf-export #resultsContent,
+    .pdf-export .results-line-item,
+    .pdf-export .total-line {
+      page-break-inside: avoid !important;
+      break-inside: avoid !important;
+    }
+
+    /* Optional: tiny shrink in PDF to guarantee one-page fit */
+    .pdf-export .results-line-item { font-size: 0.7rem !important; }
+    .pdf-export .results-line-item.bold { font-size: 0.85rem !important; }
+    .pdf-export .total-line { font-size: 1.05rem !important; margin-top: 1.25rem !important; }
   </style>
 </head>
 <body>
@@ -135,13 +177,29 @@
 <div class="container">
   <div class="calculator">
     <h2>Sexual Harassment Cost Calculator</h2>
-    <label for="women">Number of Women in Organisation <span class="tooltip" data-tooltip="Used to estimate the number of cases using an assumed rate of harassment."><img src="whiteback.png" alt="info icon" /></span></label>
+
+    <label for="women">
+      Number of Women in Organisation
+      <span class="tooltip" data-tooltip="Used to estimate the number of cases using an assumed rate of harassment.">
+        <img src="whiteback.png" alt="info icon" />
+      </span>
+    </label>
     <input type="number" id="women" />
 
-    <label for="men">Number of Men in Organisation <span class="tooltip" data-tooltip="Used to estimate the number of cases using an assumed rate of harassment."><img src="whiteback.png" alt="info icon" /></span></label>
+    <label for="men">
+      Number of Men in Organisation
+      <span class="tooltip" data-tooltip="Used to estimate the number of cases using an assumed rate of harassment.">
+        <img src="whiteback.png" alt="info icon" />
+      </span>
+    </label>
     <input type="number" id="men" />
 
-    <label for="salary">Average Gross MONTHLY Salary (ZAR) <span class="tooltip" data-tooltip="Used to estimate cost impact of each case"><img src="whiteback.png" alt="info icon" /></span></label>
+    <label for="salary">
+      Average Gross MONTHLY Salary (ZAR)
+      <span class="tooltip" data-tooltip="Used to estimate cost impact of each case">
+        <img src="whiteback.png" alt="info icon" />
+      </span>
+    </label>
     <input type="number" id="salary" />
 
     <button onclick="calculateCost()">Calculate</button>
@@ -152,7 +210,7 @@
     <div id="resultsContent"></div>
 
     <button class="advanced-toggle" id="toggleBtn" onclick="toggleAdvanced()">Show/Hide Assumptions</button>
-    
+
     <div class="advanced-settings" id="advancedSettings">
       <p><strong>Female Incidence Rate:</strong><span>3% <span class="tooltip" data-tooltip="Conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span></span></p>
       <p><strong>Male Incidence Rate:</strong><span>1% <span class="tooltip" data-tooltip="Conservative rate based on international benchmarks"><img src="whiteback.png" alt="info icon" /></span></span></p>
@@ -189,71 +247,89 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
-// Logic exactly from original code
 function calculateCost() {
-    const women = parseInt(document.getElementById('women').value) || 0;
-    const men = parseInt(document.getElementById('men').value) || 0;
-    const salary = parseFloat(document.getElementById('salary').value) || 0;
+  const women = parseInt(document.getElementById('women').value) || 0;
+  const men = parseInt(document.getElementById('men').value) || 0;
+  const salary = parseFloat(document.getElementById('salary').value) || 0;
 
-    const totalCases = (women * 0.03) + (men * 0.01);
-    const lowCases = totalCases * 0.75;
-    const medCases = totalCases * 0.20;
-    const highCases = totalCases * 0.05;
+  const totalCases = (women * 0.03) + (men * 0.01);
+  const lowCases = totalCases * 0.75;
+  const medCases = totalCases * 0.20;
+  const highCases = totalCases * 0.05;
 
-    const lowSeverityCost = (salary / 21.5) + (salary / 21.5) + 500;
-    const medSeverityCost = ((salary / 21.5) * 5) + ((salary / 21.5) * 5) + (0.20 * 0.50 * salary * 12) + 10000;
-    const highSeverityCost = ((salary / 21.5) * 20) + ((salary / 21.5) * 20) + (0.50 * salary * 12) + 200000;
+  const lowSeverityCost = (salary / 21.5) + (salary / 21.5) + 500;
+  const medSeverityCost = ((salary / 21.5) * 5) + ((salary / 21.5) * 5) + (0.20 * 0.50 * salary * 12) + 10000;
+  const highSeverityCost = ((salary / 21.5) * 20) + ((salary / 21.5) * 20) + (0.50 * salary * 12) + 200000;
 
-    const totalLowCost = lowCases * lowSeverityCost;
-    const totalMedCost = medCases * medSeverityCost;
-    const totalHighCost = highCases * highSeverityCost;
-    const totalCost = totalLowCost + totalMedCost + totalHighCost;
+  const totalLowCost = lowCases * lowSeverityCost;
+  const totalMedCost = medCases * medSeverityCost;
+  const totalHighCost = highCases * highSeverityCost;
+  const totalCost = totalLowCost + totalMedCost + totalHighCost;
 
-    const formatNumber = (num) => Math.round(num).toLocaleString('en-US');
-    const formatCurrency = (num) => 'R' + num.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const formatNumber = (num) => Math.round(num).toLocaleString('en-US');
+  const formatCurrency = (num) => 'R' + num.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-    document.getElementById('resultsContent').innerHTML = `
-        <div class='results-line-item bold'><span>Estimated Cases:</span><span>${formatNumber(totalCases)}</span></div>
-        <div class='results-line-item'><span>Low Severity Cases (75% of ${formatNumber(totalCases)}):<span class="tooltip" data-tooltip="Unreported and minor cases"><img src="whiteback.png" alt="info icon" /></span></span><span>${formatNumber(lowCases)}</span></div>
-        <div class='results-line-item'><span>Medium Severity Cases (20% of ${formatNumber(totalCases)}):<span class="tooltip" data-tooltip="Internally reported and resolved"><img src="whiteback.png" alt="info icon" /></span></span><span>${formatNumber(medCases)}</span></div>
-        <div class='results-line-item'><span>High Severity Cases (5% of ${formatNumber(totalCases)}):<span class="tooltip" data-tooltip="Escalated and potential legal cases"><img src="whiteback.png" alt="info icon" /></span></span><span>${formatNumber(highCases)}</span></div>
-        <div class="half-line"></div>
-        <div class='results-line-item bold'><span>Estimated Costs:</span></div>
-        <div class='results-line-item'><span>Low Severity Cost (per case):<span class="tooltip" data-tooltip="Absenteeism, presenteeism, minor team disruption"><img src="whiteback.png" alt="info icon" /></span></span><span>${formatCurrency(lowSeverityCost)}</span></div>
-        <div class='results-line-item'><span>Medium Severity Cost (per case):<span class="tooltip" data-tooltip="HR case involvement, exit risk, longer disruption"><img src="whiteback.png" alt="info icon" /></span></span><span>${formatCurrency(medSeverityCost)}</span></div>
-        <div class='results-line-item'><span>High Severity Cost (per case):<span class="tooltip" data-tooltip="Legal risk, reputational damage, settlement costs"><img src="whiteback.png" alt="info icon" /></span></span><span>${formatCurrency(highSeverityCost)}</span></div>
-        <div class="half-line"></div>
-        <div class='results-line-item'><span>Total Low Severity Cost:</span><span>${formatCurrency(totalLowCost)}</span></div>
-        <div class='results-line-item'><span>Total Medium Severity Cost:</span><span>${formatCurrency(totalMedCost)}</span></div>
-        <div class='results-line-item'><span>Total High Severity Cost:</span><span>${formatCurrency(totalHighCost)}</span></div>
-        <div class="total-line"><span>Total Annual Cost:</span><span>${formatCurrency(totalCost)}</span></div>
-    `;
+  document.getElementById('resultsContent').innerHTML = `
+    <div class='results-line-item bold'><span>Estimated Cases:</span><span>${formatNumber(totalCases)}</span></div>
+    <div class='results-line-item'><span>Low Severity Cases (75% of ${formatNumber(totalCases)}):<span class="tooltip" data-tooltip="Unreported and minor cases"><img src="whiteback.png" alt="info icon" /></span></span><span>${formatNumber(lowCases)}</span></div>
+    <div class='results-line-item'><span>Medium Severity Cases (20% of ${formatNumber(totalCases)}):<span class="tooltip" data-tooltip="Internally reported and resolved"><img src="whiteback.png" alt="info icon" /></span></span><span>${formatNumber(medCases)}</span></div>
+    <div class='results-line-item'><span>High Severity Cases (5% of ${formatNumber(totalCases)}):<span class="tooltip" data-tooltip="Escalated and potential legal cases"><img src="whiteback.png" alt="info icon" /></span></span><span>${formatNumber(highCases)}</span></div>
+    <div class="half-line"></div>
+    <div class='results-line-item bold'><span>Estimated Costs:</span></div>
+    <div class='results-line-item'><span>Low Severity Cost (per case):<span class="tooltip" data-tooltip="Absenteeism, presenteeism, minor team disruption"><img src="whiteback.png" alt="info icon" /></span></span><span>${formatCurrency(lowSeverityCost)}</span></div>
+    <div class='results-line-item'><span>Medium Severity Cost (per case):<span class="tooltip" data-tooltip="HR case involvement, exit risk, longer disruption"><img src="whiteback.png" alt="info icon" /></span></span><span>${formatCurrency(medSeverityCost)}</span></div>
+    <div class='results-line-item'><span>High Severity Cost (per case):<span class="tooltip" data-tooltip="Legal risk, reputational damage, settlement costs"><img src="whiteback.png" alt="info icon" /></span></span><span>${formatCurrency(highSeverityCost)}</span></div>
+    <div class="half-line"></div>
+    <div class='results-line-item'><span>Total Low Severity Cost:</span><span>${formatCurrency(totalLowCost)}</span></div>
+    <div class='results-line-item'><span>Total Medium Severity Cost:</span><span>${formatCurrency(totalMedCost)}</span></div>
+    <div class='results-line-item'><span>Total High Severity Cost:</span><span>${formatCurrency(totalHighCost)}</span></div>
+    <div class="total-line"><span>Total Annual Cost:</span><span>${formatCurrency(totalCost)}</span></div>
+  `;
 
-    document.getElementById('resultButtons').style.display = 'flex';
-    document.getElementById('toggleBtn').style.display = 'inline-block';
-    document.getElementById('resetButton').style.display = 'block';
+  document.getElementById('resultButtons').style.display = 'flex';
+  document.getElementById('toggleBtn').style.display = 'inline-block';
+  document.getElementById('resetButton').style.display = 'block';
 }
 
 function toggleAdvanced() {
-    const section = document.getElementById('advancedSettings');
-    section.style.display = (section.style.display === 'none' || section.style.display === '') ? 'block' : 'none';
+  const section = document.getElementById('advancedSettings');
+  section.style.display = (section.style.display === 'none' || section.style.display === '') ? 'block' : 'none';
 }
 
 function toggleEnquiry() {
-    const form = document.getElementById('enquiryForm');
-    form.style.display = (form.style.display === 'none') ? 'block' : 'none';
+  const form = document.getElementById('enquiryForm');
+  form.style.display = (form.style.display === 'none') ? 'block' : 'none';
 }
 
 function downloadPDF() {
-    const element = document.querySelector('.container');
-    const opt = {
-        margin: [0.3, 0.3],
-        filename: 'SH_Cost_Report.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 3, useCORS: true },
-        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-    };
-    html2pdf().set(opt).from(element).save();
+  // Turn on PDF mode (tight layout; results-only)
+  document.documentElement.classList.add('pdf-export');
+
+  // Export ONLY the results panel to avoid the big container padding
+  const element = document.querySelector('.results-box');
+
+  const opt = {
+    margin: 0,
+    filename: 'SH_Cost_Report.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: '#f10178'
+    },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  };
+
+  html2pdf()
+    .set(opt)
+    .from(element)
+    .save()
+    .then(() => {
+      document.documentElement.classList.remove('pdf-export');
+    })
+    .catch(() => {
+      document.documentElement.classList.remove('pdf-export');
+    });
 }
 </script>
 </body>
