@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -114,6 +115,16 @@
       padding: 0.6rem 1rem; border-radius: 30px; font-weight: 500; cursor: pointer; text-align: center;
     }
     .reset-btn { background: #5b01fa; color: white; }
+
+    /* ===== PDF MODE: hide UI controls from PDF capture ===== */
+    html.pdf-mode #resultButtons,
+    html.pdf-mode #resetButton,
+    html.pdf-mode #enquiryForm {
+      display: none !important;
+    }
+    html.pdf-mode .results-box button {
+      display: none !important;
+    }
   </style>
 </head>
 <body>
@@ -322,41 +333,34 @@ function toggleEnquiry() {
 }
 
 function downloadPDF() {
-  // Hide buttons just for PDF
-  const buttons = document.getElementById('resultButtons');
-  const reset = document.getElementById('resetButton');
-  const enquiry = document.getElementById('enquiryForm');
+  // Add a class that hides buttons via CSS (more reliable than inline display:none)
+  document.documentElement.classList.add('pdf-mode');
 
-  const prevButtons = buttons ? buttons.style.display : '';
-  const prevReset = reset ? reset.style.display : '';
-  const prevEnquiry = enquiry ? enquiry.style.display : '';
+  // Let the browser repaint before html2canvas captures
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      const element = document.querySelector('.container');
 
-  if (buttons) buttons.style.display = 'none';
-  if (reset) reset.style.display = 'none';
-  if (enquiry) enquiry.style.display = 'none';
+      const opt = {
+        margin: [0.3, 0.3],
+        filename: 'SH_Cost_Report.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 3, useCORS: true, backgroundColor: null },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
 
-  const element = document.querySelector('.container');
-  const opt = {
-    margin: [0.3, 0.3],
-    filename: 'SH_Cost_Report.pdf',
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 3, useCORS: true },
-    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-  };
-
-  html2pdf().set(opt).from(element).save()
-    .then(() => {
-      // Restore UI after saving
-      if (buttons) buttons.style.display = prevButtons || 'flex';
-      if (reset) reset.style.display = prevReset || 'block';
-      if (enquiry) enquiry.style.display = prevEnquiry || 'none';
-    })
-    .catch(() => {
-      // Restore UI if something fails
-      if (buttons) buttons.style.display = prevButtons || 'flex';
-      if (reset) reset.style.display = prevReset || 'block';
-      if (enquiry) enquiry.style.display = prevEnquiry || 'none';
-    });
+      html2pdf()
+        .set(opt)
+        .from(element)
+        .save()
+        .then(() => {
+          document.documentElement.classList.remove('pdf-mode');
+        })
+        .catch(() => {
+          document.documentElement.classList.remove('pdf-mode');
+        });
+    }, 150);
+  });
 }
 </script>
 </body>
